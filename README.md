@@ -13,3 +13,21 @@
 yarn add apoc-calendar
 npm i apoc-calendar
 ```
+
+## Usage
+
+### HTML
+
+```
+<script src="path/to/apoc-calendar.js></script>
+<script>
+
+const calendar = new ApocCalendar({
+  target: document.getElementById('calendar'),
+  data: {
+    month: 5
+  },
+});
+
+</script>
+```
