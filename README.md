@@ -18,7 +18,7 @@ npm i apoc-calendar
 
 ### HTML
 
-```
+```html
 <script src="path/to/apoc-calendar.js></script>
 <script>
 
@@ -30,4 +30,18 @@ const calendar = new ApocCalendar({
 });
 
 </script>
+```
+
+### ES
+
+```javascript
+import ApocCalendar from 'apoc-calendar';
+
+const calendar = new ApocCalendar({
+  target: document.getElementById('calendar'),
+  data: {
+    month: 5,
+  },
+});
+
 ```
