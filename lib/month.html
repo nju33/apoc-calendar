@@ -1,0 +1,45 @@
+<ul>
+	{{#each dates as date @date}}
+		<li>
+			<DateCell date="{{date}}"/>
+		</li>
+	{{/each}}
+</ul>
+
+<script>
+import DateCell from './date-cell.html';
+import {range} from './helpers';
+
+export default {
+	components: {DateCell},
+	data() {
+		return {
+			dates: [],
+		};
+	},
+	oncreate() {
+		const today = (() => {
+			const todayDate = new Date();
+			return {
+				year: todayDate.getFullYear(),
+				month: todayDate.getMonth(),
+			};
+		})();
+
+		const dates = range(
+			new Date(today.year, today.month, 1).getDate(),
+			new Date(today.year, today.month + 1, 0).getDate(),
+		);
+
+		this.dates = dates.map(date => {
+			const thatDate = new Date(today.year, today.month, date);
+			return {
+				year: thatDate.getFullYear(),
+				month: thatDate.getMonth(),
+				date: thatDate.getDate(),
+				day: thatDate.getDay(),
+			};
+		});
+	}
+}
+</script>

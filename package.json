@@ -1,0 +1,75 @@
+{
+  "name": "apoc-calendar",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/apoc-calendar.umd.js",
+  "jsnext:main": "dist/apoc-calendar.es.js",
+  "scripts": {
+    "start": "node dev-server.js",
+    "prepare": "yarn prod",
+    "preprod": "mkdir -p dist; NODE_ENV='production' node prod.js",
+    "prod": "babili dist/apoc-calendar.js -o dist/apoc-calendar.min.js",
+    "test": "jest",
+    "test:ci": "yarn test -- --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "repository": "nju33/apoc-calendar",
+  "keywords": [],
+  "author": "nju33 <nju33.ki@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nju33/apoc-calendar/issues"
+  },
+  "homepage": "https://github.com/nju33/apoc-calendar#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.3",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.1.2",
+    "babel-jest": "^22.0.4",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "babili": "^0.1.4",
+    "browser-sync": "^2.21.0",
+    "casual": "^1.5.19",
+    "coveralls": "^3.0.0",
+    "cssnano": "^3.10.0",
+    "eslint": "^4.14.0",
+    "eslint-config-xo-space": "^0.17.0",
+    "eslint-plugin-flowtype": "^2.40.1",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.4.0",
+    "gulp-postcss": "^7.0.0",
+    "jest": "^22.0.4",
+    "jsdom": "^11.5.1",
+    "postcss-easings": "^1.0.1",
+    "postcss-modules": "^1.1.0",
+    "prettier": "^1.9.2",
+    "puppeteer": "^0.13.0",
+    "regenerator-runtime": "^0.11.1",
+    "rollup": "^0.53.0",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-string": "^2.0.2",
+    "rollup-plugin-svelte": "^4.0.0",
+    "svelte": "^1.49.3"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  },
+  "dependencies": {
+    "instantify": "^0.0.1",
+    "node-sass": "^4.7.2",
+    "postcss": "^6.0.14"
+  }
+}
