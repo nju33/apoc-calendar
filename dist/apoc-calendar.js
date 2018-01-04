@@ -6027,9 +6027,7 @@ var CalendarStore = function (_Store) {
   }, {
     key: 'selectDay',
     value: function selectDay(day) {
-      var _get = this.get(),
-          data = _get.data;
-
+      var data = this.get('data');
       var dates = lodash_get(data, this.key);
 
       dates.filter(function (date) {
@@ -6039,9 +6037,20 @@ var CalendarStore = function (_Store) {
         return date;
       });
 
-      this.set({
-        data: data
+      this.set({ data: data });
+    }
+  }, {
+    key: 'selectDate',
+    value: function selectDate(targetDate) {
+      var data = this.get('data');
+      var dates = lodash_get(data, this.key);
+
+      var target = dates.find(function (date) {
+        return date.date === targetDate.date;
       });
+      target.selected = !target.selected;
+
+      this.set({ data: data });
     }
   }, {
     key: 'setDates',
@@ -6087,28 +6096,28 @@ var CalendarStore = function (_Store) {
   }, {
     key: 'prev',
     value: function prev() {
-      var _get2 = this.get(),
-          year = _get2.year,
-          month = _get2.month;
+      var _get = this.get(),
+          year = _get.year,
+          month = _get.month;
 
       this.setDates(year, month - 1);
     }
   }, {
     key: 'next',
     value: function next() {
-      var _get3 = this.get(),
-          year = _get3.year,
-          month = _get3.month;
+      var _get2 = this.get(),
+          year = _get2.year,
+          month = _get2.month;
 
       this.setDates(year, month + 1);
     }
   }, {
     key: 'padHeadDate',
     value: function padHeadDate() {
-      var _get4 = this.get(),
-          data = _get4.data,
-          year = _get4.year,
-          month = _get4.month;
+      var _get3 = this.get(),
+          data = _get3.data,
+          year = _get3.year,
+          month = _get3.month;
 
       var dates = lodash_get(data, this.key);
 
@@ -6136,10 +6145,10 @@ var CalendarStore = function (_Store) {
   }, {
     key: 'padLastDate',
     value: function padLastDate() {
-      var _get5 = this.get(),
-          data = _get5.data,
-          year = _get5.year,
-          month = _get5.month;
+      var _get4 = this.get(),
+          data = _get4.data,
+          year = _get4.year,
+          month = _get4.month;
 
       var dates = lodash_get(data, this.key);
 
@@ -6167,9 +6176,9 @@ var CalendarStore = function (_Store) {
   }, {
     key: 'key',
     get: function get() {
-      var _get6 = this.get(),
-          year = _get6.year,
-          month = _get6.month;
+      var _get5 = this.get(),
+          year = _get5.year,
+          month = _get5.month;
 
       return year + '.' + month;
     }
@@ -6457,6 +6466,9 @@ function getDateCellClass(selected) {
 var methods = {
 	selectDay(day) {
 		this.options.data.store.selectDay(day);
+	},
+	selectDate(date) {
+		this.options.data.store.selectDate(date);
 	}
 };
 
@@ -6485,18 +6497,18 @@ function oncreate$1() {
 }
 
 function encapsulateStyles$1(node) {
-	setAttribute(node, "svelte-548291367", "");
+	setAttribute(node, "svelte-2216739697", "");
 }
 
 function add_css$1() {
 	var style = createElement("style");
-	style.id = 'svelte-548291367-style';
-	style.textContent = "[svelte-548291367].apocCalendar-Component_DateTable,[svelte-548291367] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}[svelte-548291367].apocCalendar-Component_DateCell,[svelte-548291367] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer}[svelte-548291367].apocCalendar-Component_DateCell.apocCalendar-Is_Selected,[svelte-548291367] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected{background:#cb1b45}[svelte-548291367].apocCalendar-Component_DateCell:hover,[svelte-548291367] .apocCalendar-Component_DateCell:hover{background:#ccc}";
+	style.id = 'svelte-2216739697-style';
+	style.textContent = "[svelte-2216739697].apocCalendar-Component_DateTable,[svelte-2216739697] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}[svelte-2216739697].apocCalendar-Component_DateCell,[svelte-2216739697] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer}[svelte-2216739697].apocCalendar-Component_DateCell.apocCalendar-Is_Selected,[svelte-2216739697] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected{background:#cb1b45}[svelte-2216739697].apocCalendar-Component_DateCell:hover,[svelte-2216739697] .apocCalendar-Component_DateCell:hover{background:#ccc}";
 	appendNode(style, document.head);
 }
 
 function create_main_fragment$1(state, component) {
-	var ul, each_lookup = blankObject(), each_head, each_last, each_anchor, text;
+	var ul, each_lookup = blankObject(), each_head, each_last, each_anchor;
 
 	var dates = state.dates;
 
@@ -6540,8 +6552,6 @@ function create_main_fragment$1(state, component) {
 			for (var i = 0; i < each_1_blocks.length; i += 1) {
 				each_1_blocks[i].c();
 			}
-
-			text = createText("\n\n\n#cb1b45");
 			this.h();
 		},
 
@@ -6564,8 +6574,6 @@ function create_main_fragment$1(state, component) {
 			for (var i = 0; i < each_1_blocks.length; i += 1) {
 				each_1_blocks[i].m(ul, null);
 			}
-
-			insertNode(text, target, anchor);
 		},
 
 		p: function update(changed, state) {
@@ -6670,8 +6678,6 @@ function create_main_fragment$1(state, component) {
 			for (var i = 0; i < each_1_blocks.length; i += 1) {
 				each_1_blocks[i].u();
 			}
-
-			detachNode(text);
 		},
 
 		d: function destroy$$1() {
@@ -6750,7 +6756,7 @@ function create_each_block(state, dates, date, date_index, component, key) {
 
 // (7:1) {{#each dates as date}}
 function create_each_block_1(state, dates_1, date_1, date_index_1, component) {
-	var li, text_value = date_1.selected, text, text_1, li_class_value;
+	var li, li_class_value;
 
 	var datecell = new Date_cell({
 		root: component.root,
@@ -6760,28 +6766,27 @@ function create_each_block_1(state, dates_1, date_1, date_index_1, component) {
 	return {
 		c: function create() {
 			li = createElement("li");
-			text = createText(text_value);
-			text_1 = createText("\n\t\t\t");
 			datecell._fragment.c();
 			this.h();
 		},
 
 		h: function hydrate() {
 			li.className = li_class_value = getDateCellClass(date_1.selected);
+			addListener(li, "click", click_handler_1);
+
+			li._svelte = {
+				component: component,
+				dates_1: dates_1,
+				date_index_1: date_index_1
+			};
 		},
 
 		m: function mount(target, anchor) {
 			insertNode(li, target, anchor);
-			appendNode(text, li);
-			appendNode(text_1, li);
 			datecell._mount(li, null);
 		},
 
 		p: function update(changed, state, dates_1, date_1, date_index_1) {
-			if ((changed.dates) && text_value !== (text_value = date_1.selected)) {
-				text.data = text_value;
-			}
-
 			var datecell_changes = {};
 			if (changed.dates) datecell_changes.date = date_1;
 			datecell._set(datecell_changes);
@@ -6789,6 +6794,9 @@ function create_each_block_1(state, dates_1, date_1, date_index_1, component) {
 			if ((changed.dates) && li_class_value !== (li_class_value = getDateCellClass(date_1.selected))) {
 				li.className = li_class_value;
 			}
+
+			li._svelte.dates_1 = dates_1;
+			li._svelte.date_index_1 = date_index_1;
 		},
 
 		u: function unmount() {
@@ -6797,6 +6805,7 @@ function create_each_block_1(state, dates_1, date_1, date_index_1, component) {
 
 		d: function destroy$$1() {
 			datecell.destroy(false);
+			removeListener(li, "click", click_handler_1);
 		}
 	};
 }
@@ -6807,11 +6816,17 @@ function click_handler(event) {
 	component.selectDay(date.day);
 }
 
+function click_handler_1(event) {
+	var component = this._svelte.component;
+	var dates_1 = this._svelte.dates_1, date_index_1 = this._svelte.date_index_1, date_1 = dates_1[date_index_1];
+	component.selectDate(date_1);
+}
+
 function Month(options) {
 	init(this, options);
 	this._state = assign(data$1(), options.data);
 
-	if (!document.getElementById("svelte-548291367-style")) add_css$1();
+	if (!document.getElementById("svelte-2216739697-style")) add_css$1();
 
 	var _oncreate = oncreate$1.bind(this);
 

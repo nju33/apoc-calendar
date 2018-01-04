@@ -5,8 +5,7 @@
 		</li>
 	{{/each}}
 	{{#each dates as date}}
-		<li class="{{getDateCellClass(date.selected)}}">
-			{{date.selected}}
+		<li class="{{getDateCellClass(date.selected)}}" on:click="selectDate(date)">
 			<DateCell :date />
 		</li>
 	{{/each}}
@@ -36,6 +35,9 @@ export default {
 	methods: {
 		selectDay(day) {
 			this.options.data.store.selectDay(day);
+		},
+		selectDate(date) {
+			this.options.data.store.selectDate(date);
 		}
 	},
 	oncreate() {
@@ -63,7 +65,7 @@ export default {
 	}
 }
 </script>
-#cb1b45
+
 <style>
 .apocCalendar-Component_DateTable {
 	display: grid;
