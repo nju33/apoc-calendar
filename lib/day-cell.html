@@ -1,0 +1,42 @@
+{{#if date}}
+	<div class="apocCalendar-Component_Date">{{convertDay(date.day)}}</div>
+{{/if}}
+
+<script>
+export default {
+	// data() {
+	// 	return {
+	// 		data: this.options.data.date
+	// 	}
+	// },
+	// computed: {
+	// 	date: options => {
+	// 		console.log(options)
+	// 		return options.data.date;
+	// 	}
+	// }
+	// data() {
+	// 	return {
+	// 		convertDay(day) {
+	// 			console.log(this)
+	// 			return this.root.options.data.convertDay(day);
+	// 		},
+	// 	}
+	// },
+	methods: {
+		convertDay(day) {
+			console.log(this)
+			console.log(arguments)
+		}
+	},
+	oncreate() {
+		console.log(this)
+	}
+}
+</script>
+
+<style>
+.apocCalendar-Component_Date {
+
+}
+</style>

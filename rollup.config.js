@@ -6,11 +6,11 @@ const svelte = require('rollup-plugin-svelte');
 const replace = require('rollup-plugin-replace');
 const json = require('rollup-plugin-json');
 const string = require('rollup-plugin-string');
-// Const sass = require('node-sass');
-// const postcss = require('postcss');
-// Const autoprefixer = require('autoprefixer');
+const sass = require('node-sass');
+const postcss = require('postcss');
+const autoprefixer = require('autoprefixer');
 
-// const pSassRender = promisify(sass.render);
+const pSassRender = promisify(sass.render);
 
 const banner = `
 /*!
@@ -33,20 +33,21 @@ module.exports = {
     svelte({
       extensions: ['.html'],
       include: './lib/**/*.html',
-      // Preprocess: {
-      //   async style({content}) {
-      //     const sassResult = await pSassRender({
-      //       data: content,
-      //     });
-      //     const {css} = await postcss([
-      //       autoprefixer({
-      //         browsers: ['last 2 versions', 'not < 1% in jp', 'not < 0.5%'],
-      //         grid: true,
-      //       }),
-      //     ]).process(sassResult.css);
-      //     return css;
-      //   },
-      // },
+      preprocess: {
+        async style({content}) {
+          const sassResult = await pSassRender({
+            data: content,
+          });
+          const {css} = await postcss([
+            autoprefixer({
+              browsers: ['last 2 versions', 'not < 1% in jp', 'not < 0.5%'],
+              grid: true,
+            }),
+          ]).process(sassResult.css.toString());
+
+          return {code: css};
+        },
+      },
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(nodeEnv),

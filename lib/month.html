@@ -1,45 +1,91 @@
-<ul>
-	{{#each dates as date @date}}
-		<li>
-			<DateCell date="{{date}}"/>
+<ul class="apocCalendar-Component_DateTable">
+	{{#each dates as date @day}}
+		<li class="apocCalendar-Component_DateCell" on:click="selectDay(date.day)">
+			<DayCell :date :convertDay />
+		</li>
+	{{/each}}
+	{{#each dates as date}}
+		<li class="{{getDateCellClass(date.selected)}}">
+			{{date.selected}}
+			<DateCell :date />
 		</li>
 	{{/each}}
 </ul>
 
 <script>
+import DayCell from './day-cell.html';
 import DateCell from './date-cell.html';
 import {range} from './helpers';
 
 export default {
-	components: {DateCell},
+	components: {DayCell, DateCell},
 	data() {
 		return {
 			dates: [],
 		};
 	},
+	helpers: {
+		getDateCellClass(selected) {
+			const classnames = ['apocCalendar-Component_DateCell'];
+			if (selected) {
+				classnames.push('apocCalendar-Is_Selected');
+			}
+			return classnames.join(' ');
+		}
+	},
+	methods: {
+		selectDay(day) {
+			this.options.data.store.selectDay(day);
+		}
+	},
 	oncreate() {
-		const today = (() => {
-			const todayDate = new Date();
-			return {
-				year: todayDate.getFullYear(),
-				month: todayDate.getMonth(),
-			};
-		})();
+		const todayDate = new Date();
+    const year = todayDate.getFullYear();
+    const month = todayDate.getMonth();
+		this.options.data.store.setDates(year, month);
 
-		const dates = range(
-			new Date(today.year, today.month, 1).getDate(),
-			new Date(today.year, today.month + 1, 0).getDate(),
-		);
+		this.set({
+			dates: this.options.data.store.getCurrentDates()
+		})
 
-		this.dates = dates.map(date => {
-			const thatDate = new Date(today.year, today.month, date);
-			return {
-				year: thatDate.getFullYear(),
-				month: thatDate.getMonth(),
-				date: thatDate.getDate(),
-				day: thatDate.getDay(),
-			};
+		this.options.data.store.observe('data', () => {
+			this.set({
+				dates: this.options.data.store.getCurrentDates()
+			})
 		});
+
+
+		// this.options.data.store.observe('selected', dates => {
+		// 	this.set({
+		// 		selected: this.options.data.store.getSelected()
+		// 	})
+		// });
 	}
 }
 </script>
+#cb1b45
+<style>
+.apocCalendar-Component_DateTable {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-auto-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	user-select: none;
+}
+
+.apocCalendar-Component_DateCell {
+	transition: .1s;
+	padding: 1em .5em;
+	cursor: pointer;
+
+	&.apocCalendar-Is_Selected {
+		background: #cb1b45;
+	}
+
+	&:hover {
+		background: #ccc;
+	}
+}
+</style>

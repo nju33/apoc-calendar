@@ -1,14 +1,40 @@
-<div class="">alskjdf</div>
+{{#if date}}
+	<div class="{{getClass(date)}}">{{date.date}}</div>
+{{/if}}
 
 <script>
 export default {
-	data() {
-		return {
-			data: new Date()
-		}
+	// data() {
+	// 	return {
+	// 		data: this.options.data.date
+	// 	}
+	// },
+	// computed: {
+	// 	date: options => {
+	// 		console.log(options)
+	// 		return options.data.date;
+	// 	}
+	// }
+	helpers: {
+		getClass(date) {
+			const classnames = ['apocCalendar-Component_Date']
+			if (date.prev) {
+				classnames.push('apocCalendar-Is_Prev');
+			} else if (date.next) {
+				classnames.push('apocCalendar-Is_Next');
+			}
+			return classnames.join(' ');
+		},
 	},
 	oncreate() {
-		console.log(this)
+		// console.log(this)
 	}
 }
 </script>
+
+<style>
+.apocCalendar-Is_Prev,
+.apocCalendar-Is_Next {
+	opacity: .5;
+}
+</style>

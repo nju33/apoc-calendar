@@ -1,9 +1,91 @@
-<h1>Hello <Month/></h1>
+<section class="apocCalendar-Component_Box">
+	<header class="apocCalendar-Component_Header">{{headText(headTemplate, year, month)}}</header>
+	<Month :store :convertDay />
+	<Pager :store />
+	<Pager :store type="right"/>
+</section>
 
 <script>
-import Month from './month.html';
+import pupa from 'pupa';
+import CalendarStore from './store'
+import Month from './month.html'
+import Pager from './pager.html'
+
+const store = new CalendarStore();
+if (process.env.NODE_ENV !== 'production') {
+	window.store = store;
+}
 
 export default {
-	components: {Month},
+	components: {
+		Month,
+		Pager,
+	},
+	data() {
+		return {
+			store,
+			headTemplate: '{year}.{month}',
+			convertDay: day => {
+				switch (day) {
+					case 0: {
+						return '日';
+					}
+					case 1: {
+						return '月';
+					}
+					case 2: {
+						return '火';
+					}
+					case 3: {
+						return '水';
+					}
+					case 4: {
+						return '木';
+					}
+					case 5: {
+						return '金';
+					}
+					case 6: {
+						return '土';
+					}
+					default: {
+						throw new Error('err');
+					}
+				}
+			},
+		};
+	},
+	helpers: {
+		headText(template, year, month) {
+			return pupa(template, {
+				year: year,
+				month: month + 1,
+			});
+		},
+	},
+	oncreate() {
+		store.observe('year', year => {
+			this.set({year});
+		});
+
+		store.observe('month', month => {
+			this.set({month});
+		});
+	}
 };
 </script>
+
+<style>
+.apocCalendar-Component_Box {
+	position: relative;
+	font-size: 1em;
+	padding: 0 2em;
+	box-sizing: border-box;
+}
+
+.apocCalendar-Component_Header {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 1em;
+}
+</style>

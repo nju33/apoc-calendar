@@ -1,0 +1,66 @@
+<div class="{{getClass(type)}}" on:click='move(type)'>
+	{{#if type === 'left'}}
+		<svg version="1.1" width="8" height="16" viewBox="0 0 8 16" class="octicon octicon-chevron-left" aria-hidden="true"><path fill-rule="evenodd" d="M5.5 3L7 4.5 3.25 8 7 11.5 5.5 13l-5-5z"/></svg>
+	{{/if}}
+
+	{{#if type === 'right'}}
+		<svg version="1.1" width="8" height="16" viewBox="0 0 8 16" class="octicon octicon-chevron-right" aria-hidden="true"><path fill-rule="evenodd" d="M7.5 8l-5 5L1 11.5 4.75 8 1 4.5 2.5 3z"/></svg>
+	{{/if}}
+</div>
+
+<script>
+export default {
+	data() {
+		return {
+			type: 'left',
+		};
+	},
+	helpers: {
+		getClass(type) {
+			const classnames = ['apocCalendar-Component_Pager'];
+
+			if (type === 'right') {
+				classnames.push('apocCalendar-Is_Right')
+			} else {
+				classnames.push('apocCalendar-Is_Left')
+			}
+
+			return classnames.join(' ');
+		}
+	},
+	methods: {
+		move(type) {
+			if (type === 'right') {
+				this.options.data.store.next();
+			} else {
+				this.options.data.store.prev();
+			}
+		}
+	},
+	oncreate() {
+		// console.log(this)
+	}
+}
+</script>
+
+<style>
+.apocCalendar-Component_Pager {
+	position: absolute;
+	bottom: 50%;
+	transform: translateY(50%);
+	cursor: pointer;
+
+	& svg {
+		width: 2em;
+		height: 2em;
+	}
+}
+
+.apocCalendar-Is_Left {
+	left: .05em;
+}
+
+.apocCalendar-Is_Right {
+	right: .05em;
+}
+</style>
