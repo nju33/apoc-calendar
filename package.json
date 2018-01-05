@@ -1,9 +1,15 @@
 {
   "name": "apoc-calendar",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.0",
+  "description": "calendar",
   "main": "dist/apoc-calendar.umd.js",
   "jsnext:main": "dist/apoc-calendar.es.js",
+  "files": [
+    "dist",
+    "package.json",
+    "LICENSE.md",
+    "README.md"
+  ],
   "scripts": {
     "start": "node dev-server.js",
     "prepare": "yarn prod",
