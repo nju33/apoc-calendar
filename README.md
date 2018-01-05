@@ -25,7 +25,18 @@ npm i apoc-calendar
 const calendar = new ApocCalendar({
   target: document.getElementById('calendar'),
   data: {
-    month: 5
+		head: (year, month) => `${year}.${month}`
+		day: day => switch (day) {
+			case 0: {
+				return '日';
+			}
+			case 1: {
+				return '月';
+			}
+			// ...
+		},
+		min: '2018-1-1',
+		max: '2020-12-31',
   },
 });
 
@@ -39,9 +50,7 @@ import ApocCalendar from 'apoc-calendar';
 
 const calendar = new ApocCalendar({
   target: document.getElementById('calendar'),
-  data: {
-    month: 5,
-  },
+  data: {...},
 });
 
 ```
