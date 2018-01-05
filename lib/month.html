@@ -61,10 +61,10 @@ export default {
 	},
 	methods: {
 		selectDay(day) {
-			this.options.data.store.selectDay(day);
+			this.get('store').selectDay(day);
 		},
 		selectDate(date) {
-			this.options.data.store.selectDate(date);
+			this.get('store').selectDate(date);
 		},
 		handleMousedown(date) {
 			this.set({
@@ -72,7 +72,7 @@ export default {
 				from: date,
 				to: null,
 			});
-			store.selectRangeDate(date);
+			this.get('store').selectRangeDate(date);
 		},
 		handleMousemove: throttle(function (date) {
 			if (this.get('mousedown')) {

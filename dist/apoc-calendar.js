@@ -533,9 +533,9 @@ var _arrayIncludes = function (IS_INCLUDES) {
 };
 
 var SHARED = '__core-js_shared__';
-var store$2 = _global[SHARED] || (_global[SHARED] = {});
+var store$1 = _global[SHARED] || (_global[SHARED] = {});
 var _shared = function (key) {
-  return store$2[key] || (store$2[key] = {});
+  return store$1[key] || (store$1[key] = {});
 };
 
 var id = 0;
@@ -4823,10 +4823,10 @@ function getDateCellClass(date, minDate, maxDate) {
 
 var methods$1 = {
 	selectDay(day) {
-		this.options.data.store.selectDay(day);
+		this.get('store').selectDay(day);
 	},
 	selectDate(date) {
-		this.options.data.store.selectDate(date);
+		this.get('store').selectDate(date);
 	},
 	handleMousedown(date) {
 		this.set({
@@ -4834,7 +4834,7 @@ var methods$1 = {
 			from: date,
 			to: null,
 		});
-		store.selectRangeDate(date);
+		this.get('store').selectRangeDate(date);
 	},
 	handleMousemove: lodash_throttle(function (date) {
 		if (this.get('mousedown')) {
@@ -4877,13 +4877,13 @@ function oncreate$1() {
 }
 
 function encapsulateStyles$1(node) {
-	setAttribute(node, "svelte-2048635417", "");
+	setAttribute(node, "svelte-3239578694", "");
 }
 
 function add_css$1() {
 	var style = createElement("style");
-	style.id = 'svelte-2048635417-style';
-	style.textContent = "[svelte-2048635417].apocCalendar-Component_DateTable,[svelte-2048635417] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-2048635417].apocCalendar-Component_DayCell,[svelte-2048635417] .apocCalendar-Component_DayCell,[svelte-2048635417].apocCalendar-Component_DateCell,[svelte-2048635417] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer;background:#fff}[svelte-2048635417].apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-2048635417] .apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-2048635417].apocCalendar-Component_DateCell.apocCalendar-Is_Selected,[svelte-2048635417] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected{background:#cb1b45}[svelte-2048635417].apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2048635417] .apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2048635417].apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2048635417] .apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover{background:#ccc}[svelte-2048635417].apocCalendar-Is_Prev,[svelte-2048635417] .apocCalendar-Is_Prev,[svelte-2048635417].apocCalendar-Is_Next,[svelte-2048635417] .apocCalendar-Is_Next,[svelte-2048635417].apocCalendar-Is_Disabled,[svelte-2048635417] .apocCalendar-Is_Disabled{opacity:.3}";
+	style.id = 'svelte-3239578694-style';
+	style.textContent = "[svelte-3239578694].apocCalendar-Component_DateTable,[svelte-3239578694] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-3239578694].apocCalendar-Component_DayCell,[svelte-3239578694] .apocCalendar-Component_DayCell,[svelte-3239578694].apocCalendar-Component_DateCell,[svelte-3239578694] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer;background:#fff}[svelte-3239578694].apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-3239578694] .apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-3239578694].apocCalendar-Component_DateCell.apocCalendar-Is_Selected,[svelte-3239578694] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected{background:#cb1b45}[svelte-3239578694].apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-3239578694] .apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-3239578694].apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-3239578694] .apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover{background:#ccc}[svelte-3239578694].apocCalendar-Is_Prev,[svelte-3239578694] .apocCalendar-Is_Prev,[svelte-3239578694].apocCalendar-Is_Next,[svelte-3239578694] .apocCalendar-Is_Next,[svelte-3239578694].apocCalendar-Is_Disabled,[svelte-3239578694] .apocCalendar-Is_Disabled{opacity:.3}";
 	appendNode(style, document.head);
 }
 
@@ -5238,7 +5238,7 @@ function Month(options) {
 	init(this, options);
 	this._state = assign(data$1(), options.data);
 
-	if (!document.getElementById("svelte-2048635417-style")) add_css$1();
+	if (!document.getElementById("svelte-3239578694-style")) add_css$1();
 
 	var _oncreate = oncreate$1.bind(this);
 
@@ -5499,7 +5499,7 @@ function Pager(options) {
 assign(Pager.prototype, methods$2, proto);
 
 /* lib/calendar.html generated by Svelte v1.49.3 */
-const store$1 = new CalendarStore();
+const store = new CalendarStore();
 function minDate(min) {
 	const date = new Date(min);
 	return {
@@ -5529,7 +5529,7 @@ function data() {
 	);
 
 	return {
-		store: store$1,
+		store,
 		min: todayDate,
 		max: nextYearDate,
 
@@ -5569,29 +5569,29 @@ function data() {
 
 var methods = {
 	reset() {
-		store$1.reset();
+		store.reset();
 	}
 };
 
 function oncreate() {
-	store$1.observe('year', year => {
+	store.observe('year', year => {
 		this.set({year});
 	});
 
-	store$1.observe('month', month => {
+	store.observe('month', month => {
 		this.set({month});
 	});
 
 	const handleChange = () => {
-		const data = store$1.exportData();
+		const data = store.exportData();
 		if (data.length === 0) {
 			return;
 		}
 		this.fire('change', {data});
 	};
 
-	store$1.observe('currentDates', handleChange);
-	store$1.observe('data', handleChange);
+	store.observe('currentDates', handleChange);
+	store.observe('data', handleChange);
 }
 
 function encapsulateStyles(node) {
