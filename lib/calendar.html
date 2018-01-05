@@ -63,6 +63,11 @@ export default {
 			});
 		},
 	},
+	methods: {
+		reset() {
+			store.reset();
+		}
+	},
 	oncreate() {
 		store.observe('year', year => {
 			this.set({year});
@@ -71,6 +76,17 @@ export default {
 		store.observe('month', month => {
 			this.set({month});
 		});
+
+		const handleChange = () => {
+			const data = store.exportData();
+			if (data.length === 0) {
+				return;
+			}
+			this.fire('change', {data});
+		}
+
+		store.observe('currentDates', handleChange);
+		store.observe('data', handleChange);
 	}
 };
 </script>
@@ -79,13 +95,18 @@ export default {
 .apocCalendar-Component_Box {
 	position: relative;
 	font-size: 1em;
-	padding: 0 2em;
+	/* padding: 0 2em; */
 	box-sizing: border-box;
+	background: #444;
+	border: 1px solid #444;
 }
 
 .apocCalendar-Component_Header {
 	font-size: 1.2em;
 	font-weight: bold;
-	margin-bottom: 1em;
+	line-height: 4;
+	margin-bottom: 1px;
+	background: #fff;
+	user-select: none;
 }
 </style>

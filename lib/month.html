@@ -1,17 +1,22 @@
 <ul class="apocCalendar-Component_DateTable">
-	{{#each dates as date @day}}
-		<li class="apocCalendar-Component_DateCell" on:click="selectDay(date.day)">
-			<DayCell :date :convertDay />
+	{{#each dates.slice(0, 7) as date @day}}
+		<li class="{{getDayCellClass(store, date)}}" on:click="selectDay(date.day)">
+			<DayCell :store :data :date :convertDay />
 		</li>
 	{{/each}}
 	{{#each dates as date}}
-		<li class="{{getDateCellClass(date.selected)}}" on:click="selectDate(date)">
+		<li class="{{getDateCellClass(date)}}"
+			on:click="selectDate(date)"
+			on:mousedown="handleMousedown(date)"
+			on:mousemove="handleMousemove(date)"
+			on:mouseup="handleMouseup(date)">
 			<DateCell :date />
 		</li>
 	{{/each}}
 </ul>
 
 <script>
+import throttle from 'lodash.throttle';
 import DayCell from './day-cell.html';
 import DateCell from './date-cell.html';
 import {range} from './helpers';
@@ -21,14 +26,32 @@ export default {
 	data() {
 		return {
 			dates: [],
+
+			mousedown: false,
+			from: null,
+			to: null,
 		};
 	},
 	helpers: {
-		getDateCellClass(selected) {
+		getDayCellClass(store, {day}) {
+			const classnames = ['apocCalendar-Component_DayCell'];
+			if (store.isActiveDay(day)) {
+				classnames.push('apocCalendar-Is_Selected');
+			}
+			return classnames.join(' ');
+		},
+		getDateCellClass({selected, prev, next}) {
 			const classnames = ['apocCalendar-Component_DateCell'];
 			if (selected) {
 				classnames.push('apocCalendar-Is_Selected');
 			}
+
+			if (next) {
+				classnames.push('apocCalendar-Is_Next');
+			} else if (prev) {
+				classnames.push('apocCalendar-Is_Prev');
+			}
+
 			return classnames.join(' ');
 		}
 	},
@@ -38,29 +61,56 @@ export default {
 		},
 		selectDate(date) {
 			this.options.data.store.selectDate(date);
+		},
+		handleMousedown(date) {
+			this.set({
+				mousedown: true,
+				from: date,
+				to: null,
+			});
+			store.selectRangeDate(date);
+		},
+		handleMousemove: throttle(function (date) {
+			if (this.get('mousedown')) {
+				const {store, from} = this.get();
+				this.set({to: date});
+				store.selectRangeDate(from, date);
+			}
+		}, 100),
+		handleMouseup(date) {
+			if (!this.get('mousedown')) {
+				return;
+			}
+
+			this.set({
+				mousedown: false,
+				from: null,
+				to: null,
+			});
+			this.get('store').endSelectRangeDate();
 		}
 	},
 	oncreate() {
 		const todayDate = new Date();
     const year = todayDate.getFullYear();
     const month = todayDate.getMonth();
-		this.options.data.store.setDates(year, month);
+		const store = this.get('store');
+		store.setDates(year, month, true);
 
 		this.set({
-			dates: this.options.data.store.getCurrentDates()
+			dates: this.options.data.store.currentDates,
 		})
 
-		this.options.data.store.observe('data', () => {
+		store.observe('currentDates', currentDates => {
 			this.set({
-				dates: this.options.data.store.getCurrentDates()
+				dates: currentDates
 			})
 		});
 
-
-		// this.options.data.store.observe('selected', dates => {
-		// 	this.set({
-		// 		selected: this.options.data.store.getSelected()
-		// 	})
+		// store.observe('uncertainDates', uncertainDates => {
+		// 	// this.set({
+		// 	// 	dates: store.currentDates,
+		// 	// });
 		// });
 	}
 }
@@ -71,23 +121,33 @@ export default {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-auto-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-gap: 1px;
 	list-style: none;
 	padding: 0;
 	margin: 0;
 	user-select: none;
+	position: relative;
+	z-index: 2;
 }
 
+.apocCalendar-Component_DayCell,
 .apocCalendar-Component_DateCell {
 	transition: .1s;
 	padding: 1em .5em;
 	cursor: pointer;
+	background: #fff;
 
 	&.apocCalendar-Is_Selected {
 		background: #cb1b45;
 	}
 
-	&:hover {
+	&:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Selected):hover {
 		background: #ccc;
 	}
+}
+
+.apocCalendar-Is_Prev,
+.apocCalendar-Is_Next {
+	opacity: .3;
 }
 </style>

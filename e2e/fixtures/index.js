@@ -6,4 +6,12 @@
       name: 'hoge',
     },
   });
+  calendar.on('change', ({data}) => {
+    console.log(data);
+  });
+
+  document.getElementById('reset').addEventListener('click', () => {
+    console.log(calendar);
+    calendar.reset();
+  });
 })();

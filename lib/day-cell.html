@@ -1,5 +1,5 @@
-{{#if date}}
-	<div class="apocCalendar-Component_Date">{{convertDay(date.day)}}</div>
+{{#if store && date}}
+	<div class="{{getClass(store, date)}}">{{convertDay(date.day)}}</div>
 {{/if}}
 
 <script>
@@ -23,6 +23,15 @@ export default {
 	// 		},
 	// 	}
 	// },
+	helpers: {
+		getClass(store, {day}) {
+			const classnames = []
+			if (store.isActiveDay(day)) {
+				classnames.push('apocCalendar-Is_Selected');
+			}
+			return classnames.join(' ');
+		}
+	},
 	methods: {
 		convertDay(day) {
 			console.log(this)
@@ -36,7 +45,7 @@ export default {
 </script>
 
 <style>
-.apocCalendar-Component_Date {
+/* .apocCalendar-Component_Date {
 
-}
+} */
 </style>
