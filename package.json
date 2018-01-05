@@ -1,6 +1,6 @@
 {
   "name": "apoc-calendar",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "calendar",
   "main": "dist/apoc-calendar.umd.js",
   "jsnext:main": "dist/apoc-calendar.es.js",
