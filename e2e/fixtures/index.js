@@ -3,7 +3,15 @@
   const calendar = new ApocCalendar({
     target: document.getElementById('calendar'),
     data: {
-      name: 'hoge',
+      head(year, month) {
+        return `${year}年${month}月`;
+      },
+      // day(day) {
+      //   return 'a';
+      // },
+
+      // min: '2018-01-01',
+      max: '2018-12-31',
     },
   });
   calendar.on('change', ({data}) => {

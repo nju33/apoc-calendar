@@ -1,11 +1,11 @@
 <ul class="apocCalendar-Component_DateTable">
 	{{#each dates.slice(0, 7) as date @day}}
 		<li class="{{getDayCellClass(store, date)}}" on:click="selectDay(date.day)">
-			<DayCell :store :data :date :convertDay />
+			<DayCell :store :data :date :day />
 		</li>
 	{{/each}}
 	{{#each dates as date}}
-		<li class="{{getDateCellClass(date)}}"
+		<li class="{{getDateCellClass(date, minDate, maxDate)}}"
 			on:click="selectDate(date)"
 			on:mousedown="handleMousedown(date)"
 			on:mousemove="handleMousemove(date)"
@@ -40,16 +40,20 @@ export default {
 			}
 			return classnames.join(' ');
 		},
-		getDateCellClass({selected, prev, next}) {
+		getDateCellClass(date, minDate, maxDate) {
 			const classnames = ['apocCalendar-Component_DateCell'];
-			if (selected) {
+			if (date.selected) {
 				classnames.push('apocCalendar-Is_Selected');
 			}
 
-			if (next) {
+			if (date.next) {
 				classnames.push('apocCalendar-Is_Next');
-			} else if (prev) {
+			} else if (date.prev) {
 				classnames.push('apocCalendar-Is_Prev');
+			}
+
+			if (date.disabled) {
+				classnames.push('apocCalendar-Is_Disabled');
 			}
 
 			return classnames.join(' ');
@@ -94,7 +98,8 @@ export default {
 		const todayDate = new Date();
     const year = todayDate.getFullYear();
     const month = todayDate.getMonth();
-		const store = this.get('store');
+		const {store, minDate, maxDate} = this.get();
+		store.setOptions({minDate, maxDate});
 		store.setDates(year, month, true);
 
 		this.set({
@@ -106,12 +111,6 @@ export default {
 				dates: currentDates
 			})
 		});
-
-		// store.observe('uncertainDates', uncertainDates => {
-		// 	// this.set({
-		// 	// 	dates: store.currentDates,
-		// 	// });
-		// });
 	}
 }
 </script>
@@ -141,13 +140,14 @@ export default {
 		background: #cb1b45;
 	}
 
-	&:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Selected):hover {
+	&:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover {
 		background: #ccc;
 	}
 }
 
 .apocCalendar-Is_Prev,
-.apocCalendar-Is_Next {
+.apocCalendar-Is_Next,
+.apocCalendar-Is_Disabled {
 	opacity: .3;
 }
 </style>

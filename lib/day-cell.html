@@ -1,28 +1,9 @@
 {{#if store && date}}
-	<div class="{{getClass(store, date)}}">{{convertDay(date.day)}}</div>
+	<div class="{{getClass(store, date)}}">{{day(date.day)}}</div>
 {{/if}}
 
 <script>
 export default {
-	// data() {
-	// 	return {
-	// 		data: this.options.data.date
-	// 	}
-	// },
-	// computed: {
-	// 	date: options => {
-	// 		console.log(options)
-	// 		return options.data.date;
-	// 	}
-	// }
-	// data() {
-	// 	return {
-	// 		convertDay(day) {
-	// 			console.log(this)
-	// 			return this.root.options.data.convertDay(day);
-	// 		},
-	// 	}
-	// },
 	helpers: {
 		getClass(store, {day}) {
 			const classnames = []
@@ -32,20 +13,8 @@ export default {
 			return classnames.join(' ');
 		}
 	},
-	methods: {
-		convertDay(day) {
-			console.log(this)
-			console.log(arguments)
-		}
-	},
-	oncreate() {
-		console.log(this)
-	}
 }
 </script>
 
 <style>
-/* .apocCalendar-Component_Date {
-
-} */
 </style>

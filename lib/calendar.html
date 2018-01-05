@@ -1,6 +1,6 @@
 <section class="apocCalendar-Component_Box">
-	<header class="apocCalendar-Component_Header">{{headText(headTemplate, year, month)}}</header>
-	<Month :store :convertDay />
+	<header class="apocCalendar-Component_Header">{{head(year, month + 1)}}</header>
+	<Month :store :day :minDate :maxDate />
 	<Pager :store />
 	<Pager :store type="right"/>
 </section>
@@ -22,10 +22,20 @@ export default {
 		Pager,
 	},
 	data() {
+		const todayDate = new Date();
+		const nextYearDate = new Date(
+			todayDate.getFullYear() + 1,
+			todayDate.getMonth(),
+			todayDate.getDate()
+		);
+
 		return {
 			store,
-			headTemplate: '{year}.{month}',
-			convertDay: day => {
+			min: todayDate,
+			max: nextYearDate,
+
+			head: (year, month) => `${year}.${month}`,
+			day: day => {
 				switch (day) {
 					case 0: {
 						return '日';
@@ -54,6 +64,26 @@ export default {
 				}
 			},
 		};
+	},
+	computed: {
+		minDate: min => {
+			const date = new Date(min);
+			return {
+				year: date.getFullYear(),
+				month: date.getMonth(),
+				date: date.getDate(),
+				day: date.getDay(),
+			};
+		},
+		maxDate: max => {
+			const date = new Date(max);
+			return {
+				year: date.getFullYear(),
+				month: date.getMonth(),
+				date: date.getDate(),
+				day: date.getDay(),
+			};
+		}
 	},
 	helpers: {
 		headText(template, year, month) {

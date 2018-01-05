@@ -43,10 +43,6 @@ function createElement(name) {
 	return document.createElement(name);
 }
 
-function createSvgElement(name) {
-	return document.createElementNS('http://www.w3.org/2000/svg', name);
-}
-
 function createText(data) {
 	return document.createTextNode(data);
 }
@@ -271,8 +267,6 @@ var _defined = function (it) {
   return it;
 };
 
-// true  -> String#at
-// false -> String#codePointAt
 var _stringAt = function (TO_STRING) {
   return function (that, pos) {
     var s = String(_defined(that));
@@ -310,8 +304,6 @@ var _aFunction = function (it) {
   return it;
 };
 
-// optional / simple context binding
-
 var _ctx = function (fn, that, length) {
   _aFunction(fn);
   if (that === undefined) return fn;
@@ -348,7 +340,6 @@ var _fails = function (exec) {
   }
 };
 
-// Thank's IE8 for his funny defineProperty
 var _descriptors = !_fails(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
@@ -364,10 +355,6 @@ var _ie8DomDefine = !_descriptors && !_fails(function () {
   return Object.defineProperty(_domCreate('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
-// 7.1.1 ToPrimitive(input [, PreferredType])
-
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
 var _toPrimitive = function (it, S) {
   if (!_isObject(it)) return it;
   var fn, val;
@@ -484,21 +471,13 @@ var _cof = function (it) {
   return toString.call(it).slice(8, -1);
 };
 
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-
-// eslint-disable-next-line no-prototype-builtins
 var _iobject = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return _cof(it) == 'String' ? it.split('') : Object(it);
 };
 
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-
-
 var _toIobject = function (it) {
   return _iobject(_defined(it));
 };
-
-// 7.1.15 ToLength
 
 var min = Math.min;
 var _toLength = function (it) {
@@ -511,11 +490,6 @@ var _toAbsoluteIndex = function (index, length) {
   index = _toInteger(index);
   return index < 0 ? max(index + length, 0) : min$1(index, length);
 };
-
-// false -> Array#indexOf
-// true  -> Array#includes
-
-
 
 var _arrayIncludes = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
@@ -575,10 +549,6 @@ var _enumBugKeys = (
   'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
 ).split(',');
 
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-
-
-
 var _objectKeys = Object.keys || function keys(O) {
   return _objectKeysInternal(O, _enumBugKeys);
 };
@@ -595,10 +565,6 @@ var _objectDps = _descriptors ? Object.defineProperties : function definePropert
 
 var document$2 = _global.document;
 var _html = document$2 && document$2.documentElement;
-
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-
-
 
 var IE_PROTO = _sharedKey('IE_PROTO');
 var Empty = function () { /* empty */ };
@@ -670,14 +636,9 @@ var _iterCreate = function (Constructor, NAME, next) {
   _setToStringTag(Constructor, NAME + ' Iterator');
 };
 
-// 7.1.13 ToObject(argument)
-
 var _toObject = function (it) {
   return Object(_defined(it));
 };
-
-// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-
 
 var IE_PROTO$2 = _sharedKey('IE_PROTO');
 var ObjectProto = Object.prototype;
@@ -768,8 +729,6 @@ _iterDefine(String, 'String', function (iterated) {
   return { value: point, done: false };
 });
 
-// call something on iterator step with safe closing on error
-
 var _iterCall = function (iterator, fn, value, entries) {
   try {
     return entries ? fn(_anObject(value)[0], value[1]) : fn(value);
@@ -780,8 +739,6 @@ var _iterCall = function (iterator, fn, value, entries) {
     throw e;
   }
 };
-
-// check on default Array iterator
 
 var ITERATOR$1 = _wks('iterator');
 var ArrayProto = Array.prototype;
@@ -794,8 +751,6 @@ var _createProperty = function (object, index, value) {
   if (index in object) _objectDp.f(object, index, _propertyDesc(0, value));
   else object[index] = value;
 };
-
-// getting tag from 19.1.3.6 Object.prototype.toString()
 
 var TAG$1 = _wks('toStringTag');
 // ES3 wrong here
@@ -910,20 +865,12 @@ exports.default = function (arr) {
 
 var _toConsumableArray = unwrapExports(toConsumableArray);
 
-// most Object methods by ES6 should accept primitives
-
-
-
 var _objectSap = function (KEY, exec) {
   var fn = (_core.Object || {})[KEY] || Object[KEY];
   var exp = {};
   exp[KEY] = exec(fn);
   _export(_export.S + _export.F * _fails(function () { fn(1); }), 'Object', exp);
 };
-
-// 19.1.2.14 Object.keys(O)
-
-
 
 _objectSap('keys', function () {
   return function keys(it) {
@@ -950,12 +897,6 @@ var f$2 = {}.propertyIsEnumerable;
 var _objectPie = {
 	f: f$2
 };
-
-// 19.1.2.1 Object.assign(target, source, ...)
-
-
-
-
 
 var $assign = Object.assign;
 
@@ -984,9 +925,6 @@ var _objectAssign = !$assign || _fails(function () {
     while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
   } return T;
 } : $assign;
-
-// 19.1.3.1 Object.assign(target, source)
-
 
 _export(_export.S + _export.F, 'Object', { assign: _objectAssign });
 
@@ -1024,10 +962,6 @@ exports.default = _assign2.default || function (target) {
 
 var _extends$1 = unwrapExports(_extends);
 
-// 19.1.2.9 Object.getPrototypeOf(O)
-
-
-
 _objectSap('getPrototypeOf', function () {
   return function getPrototypeOf(it) {
     return _objectGpo(_toObject(it));
@@ -1054,7 +988,6 @@ exports.default = function (instance, Constructor) {
 
 var _classCallCheck = unwrapExports(classCallCheck);
 
-// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
 _export(_export.S + _export.F * !_descriptors, 'Object', { defineProperty: _objectDp.f });
 
 var $Object = _core.Object;
@@ -1102,10 +1035,6 @@ var _iterStep = function (done, value) {
   return { value: value, done: !!done };
 };
 
-// 22.1.3.4 Array.prototype.entries()
-// 22.1.3.13 Array.prototype.keys()
-// 22.1.3.29 Array.prototype.values()
-// 22.1.3.30 Array.prototype[@@iterator]()
 var es6_array_iterator = _iterDefine(Array, 'Array', function (iterated, kind) {
   this._t = _toIobject(iterated); // target
   this._i = 0;                   // next index
@@ -1225,10 +1154,6 @@ var _wksDefine = function (name) {
   if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty$4($Symbol, name, { value: _wksExt.f(name) });
 };
 
-// all enumerable object keys, includes symbols
-
-
-
 var _enumKeys = function (it) {
   var result = _objectKeys(it);
   var getSymbols = _objectGops.f;
@@ -1241,13 +1166,9 @@ var _enumKeys = function (it) {
   } return result;
 };
 
-// 7.2.2 IsArray(argument)
-
 var _isArray = Array.isArray || function isArray(arg) {
   return _cof(arg) == 'Array';
 };
-
-// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
 
 var hiddenKeys = _enumBugKeys.concat('length', 'prototype');
 
@@ -1258,8 +1179,6 @@ var f$5 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 var _objectGopn = {
 	f: f$5
 };
-
-// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
 
 var gOPN$1 = _objectGopn.f;
 var toString$1 = {}.toString;
@@ -1297,12 +1216,6 @@ var f$6 = _descriptors ? gOPD$1 : function getOwnPropertyDescriptor(O, P) {
 var _objectGopd = {
 	f: f$6
 };
-
-// ECMAScript 6 symbols shim
-
-
-
-
 
 var META = _meta.KEY;
 
@@ -1588,10 +1501,6 @@ exports.default = function (self, call) {
 
 var _possibleConstructorReturn = unwrapExports(possibleConstructorReturn);
 
-// Works with __proto__ only. Old v8 can't work with null proto objects.
-/* eslint-disable no-proto */
-
-
 var check = function (O, proto) {
   _anObject(O);
   if (!_isObject(proto) && proto !== null) throw TypeError(proto + ": can't set as prototype!");
@@ -1614,8 +1523,6 @@ var _setProto = {
   check: check
 };
 
-// 19.1.3.19 Object.setPrototypeOf(O, proto)
-
 _export(_export.S, 'Object', { setPrototypeOf: _setProto.set });
 
 var setPrototypeOf$2 = _core.Object.setPrototypeOf;
@@ -1626,7 +1533,6 @@ module.exports = { "default": setPrototypeOf$2, __esModule: true };
 
 unwrapExports(setPrototypeOf);
 
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 _export(_export.S, 'Object', { create: _objectCreate });
 
 var $Object$1 = _core.Object;
@@ -1829,16 +1735,6 @@ assign(Store.prototype, {
 	}
 });
 
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
 
 /** Used to stand-in for `undefined` hash values. */
@@ -2761,16 +2657,6 @@ function get$1(object, path, defaultValue) {
 
 var lodash_get = get$1;
 
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT$1 = 'Expected a function';
 
 /** Used to stand-in for `undefined` hash values. */
@@ -3823,10 +3709,44 @@ var CalendarStore = function (_Store) {
       return result;
     }
   }, {
+    key: 'includesMinDate',
+    value: function includesMinDate() {
+      var currentDates = this.get('currentDates');
+      if (typeof currentDates === 'undefined') {
+        return false;
+      }
+      var found = currentDates.find(function (date) {
+        return date.disabled;
+      });
+
+      if (typeof found === 'undefined') {
+        return false;
+      } else if (new Date(found.year, found.month, found.date) > new Date(this.maxDate.year, this.maxDate.month, this.maxDate.date)) {
+        return false;
+      }
+      return true;
+    }
+  }, {
+    key: 'includesMaxDate',
+    value: function includesMaxDate() {
+      var currentDates = this.get('currentDates');
+      if (typeof currentDates === 'undefined') {
+        return false;
+      }
+      var found = [].concat(_toConsumableArray(currentDates)).reverse().find(function (date) {
+        return date.disabled;
+      });
+      if (typeof found === 'undefined') {
+        return false;
+      } else if (new Date(found.year, found.month, found.date) < new Date(this.minDate.year, this.minDate.month, this.minDate.date)) {
+        return false;
+      }
+      return true;
+    }
+  }, {
     key: 'isActiveDay',
     value: function isActiveDay(day) {
       var currentDates = this.get('currentDates');
-      // const dates = get(data, this.key);
 
       var targetDayDate = currentDates.filter(function (date) {
         return date.day === day;
@@ -3863,8 +3783,12 @@ var CalendarStore = function (_Store) {
       var currentDates = [].concat(_toConsumableArray(this.get('currentDates')));
 
       var target = currentDates.find(function (date) {
-        return _this2.dateEqual(date, targetDate);
+        return !date.disabled && _this2.dateEqual(date, targetDate);
       });
+      if (typeof target === 'undefined') {
+        return;
+      }
+
       target.selected = !target.selected;
 
       this.set({ currentDates: currentDates });
@@ -3888,6 +3812,10 @@ var CalendarStore = function (_Store) {
         });
       }
       var result = currentDates.reduce(function (obj, date) {
+        if (date.disabled) {
+          return obj;
+        }
+
         if (_this3.dateEqual(date, from) || _this3.dateEqual(date, to)) {
           if (obj.start) {
             date.selected = obj.active;
@@ -3930,14 +3858,15 @@ var CalendarStore = function (_Store) {
   }, {
     key: 'endSelectRangeDate',
     value: function endSelectRangeDate() {
-      // const uncertainDates = this.get('uncertainDates');
-      //
-      // if (typeof uncertainDates !== 'undefined') {
       this.set({
-        // currentDates: uncertainDates,
         uncertainDates: undefined
       });
-      // }
+    }
+  }, {
+    key: 'setOptions',
+    value: function setOptions(options) {
+      this.minDate = options.minDate;
+      this.maxDate = options.maxDate;
     }
   }, {
     key: 'setDates',
@@ -3975,12 +3904,17 @@ var CalendarStore = function (_Store) {
 
       var dates = range(new Date(thisYear, thisMonth, 1).getDate(), new Date(thisYear, thisMonth + 1, 0).getDate());
 
+      var minDateDate = new Date(this.minDate.year, this.minDate.month, this.minDate.date);
+
+      var maxDateDate = new Date(this.maxDate.year, this.maxDate.month, this.maxDate.date);
+
       var dateObjects = dates.map(function (date) {
         var thatDate = new Date(thisYear, thisMonth, date);
         return {
           prev: false,
           next: false,
           selected: false,
+          disabled: minDateDate > thatDate || thatDate > maxDateDate,
           year: thatDate.getFullYear(),
           month: thatDate.getMonth(),
           date: thatDate.getDate(),
@@ -4094,16 +4028,6 @@ var CalendarStore = function (_Store) {
   return CalendarStore;
 }(Store);
 
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT$2 = 'Expected a function';
 
 /** Used as references for various `Number` constants. */
@@ -4543,17 +4467,6 @@ function getClass(store, {day}) {
 	return classnames.join(' ');
 }
 
-var methods$2 = {
-	convertDay(day) {
-		console.log(this);
-		console.log(arguments);
-	}
-};
-
-function oncreate$2() {
-	console.log(this);
-}
-
 function create_main_fragment$2(state, component) {
 	var if_block_anchor;
 
@@ -4599,7 +4512,7 @@ function create_main_fragment$2(state, component) {
 
 // (1:0) {{#if store && date}}
 function create_if_block(state, component) {
-	var div, text_value = state.convertDay(state.date.day), text, div_class_value;
+	var div, text_value = state.day(state.date.day), text, div_class_value;
 
 	return {
 		c: function create() {
@@ -4618,7 +4531,7 @@ function create_if_block(state, component) {
 		},
 
 		p: function update(changed, state) {
-			if ((changed.convertDay || changed.date) && text_value !== (text_value = state.convertDay(state.date.day))) {
+			if ((changed.day || changed.date) && text_value !== (text_value = state.day(state.date.day))) {
 				text.data = text_value;
 			}
 
@@ -4639,28 +4552,18 @@ function Day_cell(options) {
 	init(this, options);
 	this._state = assign({}, options.data);
 
-	var _oncreate = oncreate$2.bind(this);
-
-	if (!options.root) {
-		this._oncreate = [_oncreate];
-	} else {
-	 	this.root._oncreate.push(_oncreate);
-	 }
-
 	this._fragment = create_main_fragment$2(this._state, this);
 
 	if (options.target) {
 		this._fragment.c();
 		this._fragment.m(options.target, options.anchor || null);
-
-		callAll(this._oncreate);
 	}
 }
 
-assign(Day_cell.prototype, methods$2, proto);
+assign(Day_cell.prototype, proto);
 
 /* lib/date-cell.html generated by Svelte v1.49.3 */
-function oncreate$3() {
+function oncreate$2() {
 	// console.log(this)
 }
 
@@ -4740,7 +4643,7 @@ function Date_cell(options) {
 	init(this, options);
 	this._state = assign({}, options.data);
 
-	var _oncreate = oncreate$3.bind(this);
+	var _oncreate = oncreate$2.bind(this);
 
 	if (!options.root) {
 		this._oncreate = [_oncreate];
@@ -4779,16 +4682,20 @@ function getDayCellClass(store, {day}) {
 	return classnames.join(' ');
 }
 
-function getDateCellClass({selected, prev, next}) {
+function getDateCellClass(date, minDate, maxDate) {
 	const classnames = ['apocCalendar-Component_DateCell'];
-	if (selected) {
+	if (date.selected) {
 		classnames.push('apocCalendar-Is_Selected');
 	}
 
-	if (next) {
+	if (date.next) {
 		classnames.push('apocCalendar-Is_Next');
-	} else if (prev) {
+	} else if (date.prev) {
 		classnames.push('apocCalendar-Is_Prev');
+	}
+
+	if (date.disabled) {
+		classnames.push('apocCalendar-Is_Disabled');
 	}
 
 	return classnames.join(' ');
@@ -4834,7 +4741,8 @@ function oncreate$1() {
 	const todayDate = new Date();
     const year = todayDate.getFullYear();
     const month = todayDate.getMonth();
-	const store = this.get('store');
+	const {store, minDate, maxDate} = this.get();
+	store.setOptions({minDate, maxDate});
 	store.setDates(year, month, true);
 
 	this.set({
@@ -4846,22 +4754,16 @@ function oncreate$1() {
 			dates: currentDates
 		});
 	});
-
-	// store.observe('uncertainDates', uncertainDates => {
-	// 	// this.set({
-	// 	// 	dates: store.currentDates,
-	// 	// });
-	// });
 }
 
 function encapsulateStyles$1(node) {
-	setAttribute(node, "svelte-3254679617", "");
+	setAttribute(node, "svelte-2048635417", "");
 }
 
 function add_css$1() {
 	var style = createElement("style");
-	style.id = 'svelte-3254679617-style';
-	style.textContent = "[svelte-3254679617].apocCalendar-Component_DateTable,[svelte-3254679617] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-3254679617].apocCalendar-Component_DayCell,[svelte-3254679617] .apocCalendar-Component_DayCell,[svelte-3254679617].apocCalendar-Component_DateCell,[svelte-3254679617] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer;background:#fff}[svelte-3254679617].apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-3254679617] .apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-3254679617].apocCalendar-Component_DateCell.apocCalendar-Is_Selected,[svelte-3254679617] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected{background:#cb1b45}[svelte-3254679617].apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Selected):hover,[svelte-3254679617] .apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Selected):hover,[svelte-3254679617].apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Selected):hover,[svelte-3254679617] .apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Selected):hover{background:#ccc}[svelte-3254679617].apocCalendar-Is_Prev,[svelte-3254679617] .apocCalendar-Is_Prev,[svelte-3254679617].apocCalendar-Is_Next,[svelte-3254679617] .apocCalendar-Is_Next{opacity:.3}";
+	style.id = 'svelte-2048635417-style';
+	style.textContent = "[svelte-2048635417].apocCalendar-Component_DateTable,[svelte-2048635417] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-2048635417].apocCalendar-Component_DayCell,[svelte-2048635417] .apocCalendar-Component_DayCell,[svelte-2048635417].apocCalendar-Component_DateCell,[svelte-2048635417] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer;background:#fff}[svelte-2048635417].apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-2048635417] .apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-2048635417].apocCalendar-Component_DateCell.apocCalendar-Is_Selected,[svelte-2048635417] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected{background:#cb1b45}[svelte-2048635417].apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2048635417] .apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2048635417].apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2048635417] .apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover{background:#ccc}[svelte-2048635417].apocCalendar-Is_Prev,[svelte-2048635417] .apocCalendar-Is_Prev,[svelte-2048635417].apocCalendar-Is_Next,[svelte-2048635417] .apocCalendar-Is_Next,[svelte-2048635417].apocCalendar-Is_Disabled,[svelte-2048635417] .apocCalendar-Is_Disabled{opacity:.3}";
 	appendNode(style, document.head);
 }
 
@@ -5011,7 +4913,7 @@ function create_main_fragment$1(state, component) {
 
 			var dates = state.dates;
 
-			if (changed.dates) {
+			if (changed.dates || changed.minDate || changed.maxDate) {
 				for (var i = 0; i < dates.length; i += 1) {
 					if (each_1_blocks[i]) {
 						each_1_blocks[i].p(changed, state, dates, dates[i], i);
@@ -5060,7 +4962,7 @@ function create_each_block(state, each_value, date, date_index, component, key) 
 			store: state.store,
 			data: state.data,
 			date: date,
-			convertDay: state.convertDay
+			day: state.day
 		}
 	});
 
@@ -5098,7 +5000,7 @@ function create_each_block(state, each_value, date, date_index, component, key) 
 			if (changed.store) daycell_changes.store = state.store;
 			if (changed.data) daycell_changes.data = state.data;
 			if (changed.dates) daycell_changes.date = date;
-			if (changed.convertDay) daycell_changes.convertDay = state.convertDay;
+			if (changed.day) daycell_changes.day = state.day;
 			daycell._set(daycell_changes);
 
 			if ((changed.store || changed.dates) && li_class_value !== (li_class_value = getDayCellClass(state.store, date))) {
@@ -5137,7 +5039,7 @@ function create_each_block_1(state, dates, date_1, date_index_1, component) {
 		},
 
 		h: function hydrate() {
-			li.className = li_class_value = getDateCellClass(date_1);
+			li.className = li_class_value = getDateCellClass(date_1, state.minDate, state.maxDate);
 			addListener(li, "click", click_handler_1);
 			addListener(li, "mousedown", mousedown_handler);
 			addListener(li, "mousemove", mousemove_handler);
@@ -5160,7 +5062,7 @@ function create_each_block_1(state, dates, date_1, date_index_1, component) {
 			if (changed.dates) datecell_changes.date = date_1;
 			datecell._set(datecell_changes);
 
-			if ((changed.dates) && li_class_value !== (li_class_value = getDateCellClass(date_1))) {
+			if ((changed.dates || changed.minDate || changed.maxDate) && li_class_value !== (li_class_value = getDateCellClass(date_1, state.minDate, state.maxDate))) {
 				li.className = li_class_value;
 			}
 
@@ -5216,7 +5118,7 @@ function Month(options) {
 	init(this, options);
 	this._state = assign(data$1(), options.data);
 
-	if (!document.getElementById("svelte-3254679617-style")) add_css$1();
+	if (!document.getElementById("svelte-2048635417-style")) add_css$1();
 
 	var _oncreate = oncreate$1.bind(this);
 
@@ -5263,7 +5165,16 @@ function getClass$1(type) {
 	return classnames.join(' ');
 }
 
-var methods$3 = {
+function includesMinDate(store) {
+	return store.includesMinDate();
+}
+
+function includesMaxDate(store) {
+	return store.includesMaxDate();
+
+}
+
+var methods$2 = {
 	move(type) {
 		if (type === 'right') {
 			this.options.data.store.next();
@@ -5273,23 +5184,93 @@ var methods$3 = {
 	}
 };
 
+function oncreate$3() {
+	const store = this.get('store');
+	store.observe('currentDates', currentDates => {
+		this.set({currentDates});
+	});
+}
+
 function encapsulateStyles$2(node) {
-	setAttribute(node, "svelte-738650055", "");
+	setAttribute(node, "svelte-1983287109", "");
 }
 
 function add_css$2() {
 	var style = createElement("style");
-	style.id = 'svelte-738650055-style';
-	style.textContent = "[svelte-738650055].apocCalendar-Component_Pager,[svelte-738650055] .apocCalendar-Component_Pager{position:absolute;bottom:50%;-webkit-transform:translateY(50%);transform:translateY(50%);cursor:pointer;border-radius:50%;background:#444;width:5em;height:5em;z-index:1}[svelte-738650055].apocCalendar-Component_Pager svg,[svelte-738650055] .apocCalendar-Component_Pager svg{position:absolute;bottom:50%;-webkit-transform:translate(50%, 50%);transform:translate(50%, 50%);width:2em;height:2em;fill:#fff}[svelte-738650055].apocCalendar-Is_Left,[svelte-738650055] .apocCalendar-Is_Left{left:-2.5em}[svelte-738650055].apocCalendar-Is_Left svg,[svelte-738650055] .apocCalendar-Is_Left svg{right:calc(50% + 1em)}[svelte-738650055].apocCalendar-Is_Right,[svelte-738650055] .apocCalendar-Is_Right{right:-2.5em}[svelte-738650055].apocCalendar-Is_Right svg,[svelte-738650055] .apocCalendar-Is_Right svg{right:calc(50% - 1em)}";
+	style.id = 'svelte-1983287109-style';
+	style.textContent = "[svelte-1983287109].apocCalendar-Component_Pager,[svelte-1983287109] .apocCalendar-Component_Pager{position:absolute;bottom:50%;-webkit-transform:translateY(50%);transform:translateY(50%);cursor:pointer;border-radius:50%;background:#444;width:5em;height:5em;z-index:1}[svelte-1983287109].apocCalendar-Component_Pager svg,[svelte-1983287109] .apocCalendar-Component_Pager svg{position:absolute;bottom:50%;-webkit-transform:translate(50%, 50%);transform:translate(50%, 50%);width:2em;height:2em;fill:#fff}[svelte-1983287109].apocCalendar-Is_Left,[svelte-1983287109] .apocCalendar-Is_Left{left:-2.5em}[svelte-1983287109].apocCalendar-Is_Left svg,[svelte-1983287109] .apocCalendar-Is_Left svg{right:calc(50% + 1em)}[svelte-1983287109].apocCalendar-Is_Right,[svelte-1983287109] .apocCalendar-Is_Right{right:-2.5em}[svelte-1983287109].apocCalendar-Is_Right svg,[svelte-1983287109] .apocCalendar-Is_Right svg{right:calc(50% - 1em)}";
 	appendNode(style, document.head);
 }
 
 function create_main_fragment$4(state, component) {
-	var div, text, div_class_value;
+	var text, if_block_1_anchor;
 
-	var if_block = (state.type === 'left') && create_if_block$2(state, component);
+	var if_block = (state.type === 'left' && !includesMinDate(state.store)) && create_if_block$2(state, component);
 
-	var if_block_1 = (state.type === 'right') && create_if_block_1(state, component);
+	var if_block_1 = (state.type === 'right' && !includesMaxDate(state.store)) && create_if_block_1(state, component);
+
+	return {
+		c: function create() {
+			if (if_block) if_block.c();
+			text = createText("\n\n");
+			if (if_block_1) if_block_1.c();
+			if_block_1_anchor = createComment();
+		},
+
+		m: function mount(target, anchor) {
+			if (if_block) if_block.m(target, anchor);
+			insertNode(text, target, anchor);
+			if (if_block_1) if_block_1.m(target, anchor);
+			insertNode(if_block_1_anchor, target, anchor);
+		},
+
+		p: function update(changed, state) {
+			if (state.type === 'left' && !includesMinDate(state.store)) {
+				if (if_block) {
+					if_block.p(changed, state);
+				} else {
+					if_block = create_if_block$2(state, component);
+					if_block.c();
+					if_block.m(text.parentNode, text);
+				}
+			} else if (if_block) {
+				if_block.u();
+				if_block.d();
+				if_block = null;
+			}
+
+			if (state.type === 'right' && !includesMaxDate(state.store)) {
+				if (if_block_1) {
+					if_block_1.p(changed, state);
+				} else {
+					if_block_1 = create_if_block_1(state, component);
+					if_block_1.c();
+					if_block_1.m(if_block_1_anchor.parentNode, if_block_1_anchor);
+				}
+			} else if (if_block_1) {
+				if_block_1.u();
+				if_block_1.d();
+				if_block_1 = null;
+			}
+		},
+
+		u: function unmount() {
+			if (if_block) if_block.u();
+			detachNode(text);
+			if (if_block_1) if_block_1.u();
+			detachNode(if_block_1_anchor);
+		},
+
+		d: function destroy$$1() {
+			if (if_block) if_block.d();
+			if (if_block_1) if_block_1.d();
+		}
+	};
+}
+
+// (1:0) {{#if type === 'left' && !includesMinDate(store)}}
+function create_if_block$2(state, component) {
+	var div, div_class_value;
 
 	function click_handler(event) {
 		var state = component.get();
@@ -5299,9 +5280,7 @@ function create_main_fragment$4(state, component) {
 	return {
 		c: function create() {
 			div = createElement("div");
-			if (if_block) if_block.c();
-			text = createText("\n\n\t");
-			if (if_block_1) if_block_1.c();
+			div.innerHTML = "<svg version=\"1.1\" width=\"8\" height=\"16\" viewBox=\"0 0 8 16\" class=\"octicon octicon-chevron-left\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M5.5 3L7 4.5 3.25 8 7 11.5 5.5 13l-5-5z\"></path></svg>";
 			this.h();
 		},
 
@@ -5313,36 +5292,9 @@ function create_main_fragment$4(state, component) {
 
 		m: function mount(target, anchor) {
 			insertNode(div, target, anchor);
-			if (if_block) if_block.m(div, null);
-			appendNode(text, div);
-			if (if_block_1) if_block_1.m(div, null);
 		},
 
 		p: function update(changed, state) {
-			if (state.type === 'left') {
-				if (!if_block) {
-					if_block = create_if_block$2(state, component);
-					if_block.c();
-					if_block.m(div, text);
-				}
-			} else if (if_block) {
-				if_block.u();
-				if_block.d();
-				if_block = null;
-			}
-
-			if (state.type === 'right') {
-				if (!if_block_1) {
-					if_block_1 = create_if_block_1(state, component);
-					if_block_1.c();
-					if_block_1.m(div, null);
-				}
-			} else if (if_block_1) {
-				if_block_1.u();
-				if_block_1.d();
-				if_block_1 = null;
-			}
-
 			if ((changed.type) && div_class_value !== (div_class_value = getClass$1(state.type))) {
 				div.className = div_class_value;
 			}
@@ -5350,85 +5302,53 @@ function create_main_fragment$4(state, component) {
 
 		u: function unmount() {
 			detachNode(div);
-			if (if_block) if_block.u();
-			if (if_block_1) if_block_1.u();
 		},
 
 		d: function destroy$$1() {
-			if (if_block) if_block.d();
-			if (if_block_1) if_block_1.d();
 			removeListener(div, "click", click_handler);
 		}
 	};
 }
 
-// (2:1) {{#if type === 'left'}}
-function create_if_block$2(state, component) {
-	var svg, path;
-
-	return {
-		c: function create() {
-			svg = createSvgElement("svg");
-			path = createSvgElement("path");
-			this.h();
-		},
-
-		h: function hydrate() {
-			setAttribute(path, "fill-rule", "evenodd");
-			setAttribute(path, "d", "M5.5 3L7 4.5 3.25 8 7 11.5 5.5 13l-5-5z");
-			setAttribute(svg, "version", "1.1");
-			setAttribute(svg, "width", "8");
-			setAttribute(svg, "height", "16");
-			setAttribute(svg, "viewBox", "0 0 8 16");
-			setAttribute(svg, "class", "octicon octicon-chevron-left");
-			setAttribute(svg, "aria-hidden", "true");
-		},
-
-		m: function mount(target, anchor) {
-			insertNode(svg, target, anchor);
-			appendNode(path, svg);
-		},
-
-		u: function unmount() {
-			detachNode(svg);
-		},
-
-		d: noop
-	};
-}
-
-// (6:1) {{#if type === 'right'}}
+// (7:0) {{#if type === 'right' && !includesMaxDate(store)}}
 function create_if_block_1(state, component) {
-	var svg, path;
+	var div, div_class_value;
+
+	function click_handler(event) {
+		var state = component.get();
+		component.move(state.type);
+	}
 
 	return {
 		c: function create() {
-			svg = createSvgElement("svg");
-			path = createSvgElement("path");
+			div = createElement("div");
+			div.innerHTML = "<svg version=\"1.1\" width=\"8\" height=\"16\" viewBox=\"0 0 8 16\" class=\"octicon octicon-chevron-right\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M7.5 8l-5 5L1 11.5 4.75 8 1 4.5 2.5 3z\"></path></svg>";
 			this.h();
 		},
 
 		h: function hydrate() {
-			setAttribute(path, "fill-rule", "evenodd");
-			setAttribute(path, "d", "M7.5 8l-5 5L1 11.5 4.75 8 1 4.5 2.5 3z");
-			setAttribute(svg, "version", "1.1");
-			setAttribute(svg, "width", "8");
-			setAttribute(svg, "height", "16");
-			setAttribute(svg, "viewBox", "0 0 8 16");
-			setAttribute(svg, "class", "octicon octicon-chevron-right");
-			setAttribute(svg, "aria-hidden", "true");
+			encapsulateStyles$2(div);
+			div.className = div_class_value = getClass$1(state.type);
+			addListener(div, "click", click_handler);
 		},
 
 		m: function mount(target, anchor) {
-			insertNode(svg, target, anchor);
-			appendNode(path, svg);
+			insertNode(div, target, anchor);
+		},
+
+		p: function update(changed, state) {
+			if ((changed.type) && div_class_value !== (div_class_value = getClass$1(state.type))) {
+				div.className = div_class_value;
+			}
 		},
 
 		u: function unmount() {
-			detachNode(svg);
+			detachNode(div);
 		},
 
-		d: noop
+		d: function destroy$$1() {
+			removeListener(div, "click", click_handler);
+		}
 	};
 }
 
@@ -5436,17 +5356,27 @@ function Pager(options) {
 	init(this, options);
 	this._state = assign(data$2(), options.data);
 
-	if (!document.getElementById("svelte-738650055-style")) add_css$2();
+	if (!document.getElementById("svelte-1983287109-style")) add_css$2();
+
+	var _oncreate = oncreate$3.bind(this);
+
+	if (!options.root) {
+		this._oncreate = [_oncreate];
+	} else {
+	 	this.root._oncreate.push(_oncreate);
+	 }
 
 	this._fragment = create_main_fragment$4(this._state, this);
 
 	if (options.target) {
 		this._fragment.c();
 		this._fragment.m(options.target, options.anchor || null);
+
+		callAll(this._oncreate);
 	}
 }
 
-assign(Pager.prototype, methods$3, proto);
+assign(Pager.prototype, methods$2, proto);
 
 /* lib/calendar.html generated by Svelte v1.49.3 */
 const store$1 = new CalendarStore();
@@ -5454,11 +5384,41 @@ const store$1 = new CalendarStore();
 	window.store = store$1;
 }
 
+function minDate(min) {
+	const date = new Date(min);
+	return {
+		year: date.getFullYear(),
+		month: date.getMonth(),
+		date: date.getDate(),
+		day: date.getDay(),
+	};
+}
+
+function maxDate(max) {
+	const date = new Date(max);
+	return {
+		year: date.getFullYear(),
+		month: date.getMonth(),
+		date: date.getDate(),
+		day: date.getDay(),
+	};
+}
+
 function data() {
+	const todayDate = new Date();
+	const nextYearDate = new Date(
+		todayDate.getFullYear() + 1,
+		todayDate.getMonth(),
+		todayDate.getDate()
+	);
+
 	return {
 		store: store$1,
-		headTemplate: '{year}.{month}',
-		convertDay: day => {
+		min: todayDate,
+		max: nextYearDate,
+
+		head: (year, month) => `${year}.${month}`,
+		day: day => {
 			switch (day) {
 				case 0: {
 					return '日';
@@ -5489,12 +5449,7 @@ function data() {
 	};
 }
 
-function headText(template, year, month) {
-	return pupa(template, {
-		year: year,
-		month: month + 1,
-	});
-}
+
 
 var methods = {
 	reset() {
@@ -5524,24 +5479,26 @@ function oncreate() {
 }
 
 function encapsulateStyles(node) {
-	setAttribute(node, "svelte-2797454306", "");
+	setAttribute(node, "svelte-1479590242", "");
 }
 
 function add_css() {
 	var style = createElement("style");
-	style.id = 'svelte-2797454306-style';
-	style.textContent = "[svelte-2797454306].apocCalendar-Component_Box,[svelte-2797454306] .apocCalendar-Component_Box{position:relative;font-size:1em;box-sizing:border-box;background:#444;border:1px solid #444}[svelte-2797454306].apocCalendar-Component_Header,[svelte-2797454306] .apocCalendar-Component_Header{font-size:1.2em;font-weight:bold;line-height:4;margin-bottom:1px;background:#fff;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}";
+	style.id = 'svelte-1479590242-style';
+	style.textContent = "[svelte-1479590242].apocCalendar-Component_Box,[svelte-1479590242] .apocCalendar-Component_Box{position:relative;font-size:1em;box-sizing:border-box;background:#444;border:1px solid #444}[svelte-1479590242].apocCalendar-Component_Header,[svelte-1479590242] .apocCalendar-Component_Header{font-size:1.2em;font-weight:bold;line-height:4;margin-bottom:1px;background:#fff;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}";
 	appendNode(style, document.head);
 }
 
 function create_main_fragment(state, component) {
-	var section, header, text_value = headText(state.headTemplate, state.year, state.month), text, text_1, text_2, text_3;
+	var section, header, text_value = state.head(state.year, state.month + 1), text, text_1, text_2, text_3;
 
 	var month = new Month({
 		root: component.root,
 		data: {
 			store: state.store,
-			convertDay: state.convertDay
+			day: state.day,
+			minDate: state.minDate,
+			maxDate: state.maxDate
 		}
 	});
 
@@ -5588,13 +5545,15 @@ function create_main_fragment(state, component) {
 		},
 
 		p: function update(changed, state) {
-			if ((changed.headTemplate || changed.year || changed.month) && text_value !== (text_value = headText(state.headTemplate, state.year, state.month))) {
+			if ((changed.head || changed.year || changed.month) && text_value !== (text_value = state.head(state.year, state.month + 1))) {
 				text.data = text_value;
 			}
 
 			var month_changes = {};
 			if (changed.store) month_changes.store = state.store;
-			if (changed.convertDay) month_changes.convertDay = state.convertDay;
+			if (changed.day) month_changes.day = state.day;
+			if (changed.minDate) month_changes.minDate = state.minDate;
+			if (changed.maxDate) month_changes.maxDate = state.maxDate;
 			month._set(month_changes);
 
 			var pager_changes = {};
@@ -5621,8 +5580,9 @@ function create_main_fragment(state, component) {
 function Calendar$1(options) {
 	init(this, options);
 	this._state = assign(data(), options.data);
+	this._recompute({ min: 1, max: 1 }, this._state);
 
-	if (!document.getElementById("svelte-2797454306-style")) add_css();
+	if (!document.getElementById("svelte-1479590242-style")) add_css();
 
 	var _oncreate = oncreate.bind(this);
 
@@ -5649,6 +5609,16 @@ function Calendar$1(options) {
 }
 
 assign(Calendar$1.prototype, methods, proto);
+
+Calendar$1.prototype._recompute = function _recompute(changed, state) {
+	if (changed.min) {
+		if (differs(state.minDate, (state.minDate = minDate(state.min)))) changed.minDate = true;
+	}
+
+	if (changed.max) {
+		if (differs(state.maxDate, (state.maxDate = maxDate(state.max)))) changed.maxDate = true;
+	}
+};
 
 return Calendar$1;
 
