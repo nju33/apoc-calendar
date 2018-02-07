@@ -267,8 +267,6 @@ var _defined = function (it) {
   return it;
 };
 
-// true  -> String#at
-// false -> String#codePointAt
 var _stringAt = function (TO_STRING) {
   return function (that, pos) {
     var s = String(_defined(that));
@@ -306,8 +304,6 @@ var _aFunction = function (it) {
   return it;
 };
 
-// optional / simple context binding
-
 var _ctx = function (fn, that, length) {
   _aFunction(fn);
   if (that === undefined) return fn;
@@ -344,7 +340,6 @@ var _fails = function (exec) {
   }
 };
 
-// Thank's IE8 for his funny defineProperty
 var _descriptors = !_fails(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
@@ -360,10 +355,6 @@ var _ie8DomDefine = !_descriptors && !_fails(function () {
   return Object.defineProperty(_domCreate('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
-// 7.1.1 ToPrimitive(input [, PreferredType])
-
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
 var _toPrimitive = function (it, S) {
   if (!_isObject(it)) return it;
   var fn, val;
@@ -480,21 +471,13 @@ var _cof = function (it) {
   return toString.call(it).slice(8, -1);
 };
 
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-
-// eslint-disable-next-line no-prototype-builtins
 var _iobject = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return _cof(it) == 'String' ? it.split('') : Object(it);
 };
 
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-
-
 var _toIobject = function (it) {
   return _iobject(_defined(it));
 };
-
-// 7.1.15 ToLength
 
 var min = Math.min;
 var _toLength = function (it) {
@@ -507,11 +490,6 @@ var _toAbsoluteIndex = function (index, length) {
   index = _toInteger(index);
   return index < 0 ? max(index + length, 0) : min$1(index, length);
 };
-
-// false -> Array#indexOf
-// true  -> Array#includes
-
-
 
 var _arrayIncludes = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
@@ -571,10 +549,6 @@ var _enumBugKeys = (
   'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
 ).split(',');
 
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-
-
-
 var _objectKeys = Object.keys || function keys(O) {
   return _objectKeysInternal(O, _enumBugKeys);
 };
@@ -591,10 +565,6 @@ var _objectDps = _descriptors ? Object.defineProperties : function definePropert
 
 var document$2 = _global.document;
 var _html = document$2 && document$2.documentElement;
-
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-
-
 
 var IE_PROTO = _sharedKey('IE_PROTO');
 var Empty = function () { /* empty */ };
@@ -666,14 +636,9 @@ var _iterCreate = function (Constructor, NAME, next) {
   _setToStringTag(Constructor, NAME + ' Iterator');
 };
 
-// 7.1.13 ToObject(argument)
-
 var _toObject = function (it) {
   return Object(_defined(it));
 };
-
-// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-
 
 var IE_PROTO$2 = _sharedKey('IE_PROTO');
 var ObjectProto = Object.prototype;
@@ -764,8 +729,6 @@ _iterDefine(String, 'String', function (iterated) {
   return { value: point, done: false };
 });
 
-// call something on iterator step with safe closing on error
-
 var _iterCall = function (iterator, fn, value, entries) {
   try {
     return entries ? fn(_anObject(value)[0], value[1]) : fn(value);
@@ -776,8 +739,6 @@ var _iterCall = function (iterator, fn, value, entries) {
     throw e;
   }
 };
-
-// check on default Array iterator
 
 var ITERATOR$1 = _wks('iterator');
 var ArrayProto = Array.prototype;
@@ -790,8 +751,6 @@ var _createProperty = function (object, index, value) {
   if (index in object) _objectDp.f(object, index, _propertyDesc(0, value));
   else object[index] = value;
 };
-
-// getting tag from 19.1.3.6 Object.prototype.toString()
 
 var TAG$1 = _wks('toStringTag');
 // ES3 wrong here
@@ -906,20 +865,12 @@ exports.default = function (arr) {
 
 var _toConsumableArray = unwrapExports(toConsumableArray);
 
-// most Object methods by ES6 should accept primitives
-
-
-
 var _objectSap = function (KEY, exec) {
   var fn = (_core.Object || {})[KEY] || Object[KEY];
   var exp = {};
   exp[KEY] = exec(fn);
   _export(_export.S + _export.F * _fails(function () { fn(1); }), 'Object', exp);
 };
-
-// 19.1.2.14 Object.keys(O)
-
-
 
 _objectSap('keys', function () {
   return function keys(it) {
@@ -946,12 +897,6 @@ var f$2 = {}.propertyIsEnumerable;
 var _objectPie = {
 	f: f$2
 };
-
-// 19.1.2.1 Object.assign(target, source, ...)
-
-
-
-
 
 var $assign = Object.assign;
 
@@ -980,9 +925,6 @@ var _objectAssign = !$assign || _fails(function () {
     while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
   } return T;
 } : $assign;
-
-// 19.1.3.1 Object.assign(target, source)
-
 
 _export(_export.S + _export.F, 'Object', { assign: _objectAssign });
 
@@ -1020,10 +962,6 @@ exports.default = _assign2.default || function (target) {
 
 var _extends$1 = unwrapExports(_extends);
 
-// 19.1.2.9 Object.getPrototypeOf(O)
-
-
-
 _objectSap('getPrototypeOf', function () {
   return function getPrototypeOf(it) {
     return _objectGpo(_toObject(it));
@@ -1050,7 +988,6 @@ exports.default = function (instance, Constructor) {
 
 var _classCallCheck = unwrapExports(classCallCheck);
 
-// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
 _export(_export.S + _export.F * !_descriptors, 'Object', { defineProperty: _objectDp.f });
 
 var $Object = _core.Object;
@@ -1098,10 +1035,6 @@ var _iterStep = function (done, value) {
   return { value: value, done: !!done };
 };
 
-// 22.1.3.4 Array.prototype.entries()
-// 22.1.3.13 Array.prototype.keys()
-// 22.1.3.29 Array.prototype.values()
-// 22.1.3.30 Array.prototype[@@iterator]()
 var es6_array_iterator = _iterDefine(Array, 'Array', function (iterated, kind) {
   this._t = _toIobject(iterated); // target
   this._i = 0;                   // next index
@@ -1221,10 +1154,6 @@ var _wksDefine = function (name) {
   if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty$4($Symbol, name, { value: _wksExt.f(name) });
 };
 
-// all enumerable object keys, includes symbols
-
-
-
 var _enumKeys = function (it) {
   var result = _objectKeys(it);
   var getSymbols = _objectGops.f;
@@ -1237,13 +1166,9 @@ var _enumKeys = function (it) {
   } return result;
 };
 
-// 7.2.2 IsArray(argument)
-
 var _isArray = Array.isArray || function isArray(arg) {
   return _cof(arg) == 'Array';
 };
-
-// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
 
 var hiddenKeys = _enumBugKeys.concat('length', 'prototype');
 
@@ -1254,8 +1179,6 @@ var f$5 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 var _objectGopn = {
 	f: f$5
 };
-
-// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
 
 var gOPN$1 = _objectGopn.f;
 var toString$1 = {}.toString;
@@ -1293,12 +1216,6 @@ var f$6 = _descriptors ? gOPD$1 : function getOwnPropertyDescriptor(O, P) {
 var _objectGopd = {
 	f: f$6
 };
-
-// ECMAScript 6 symbols shim
-
-
-
-
 
 var META = _meta.KEY;
 
@@ -1584,10 +1501,6 @@ exports.default = function (self, call) {
 
 var _possibleConstructorReturn = unwrapExports(possibleConstructorReturn);
 
-// Works with __proto__ only. Old v8 can't work with null proto objects.
-/* eslint-disable no-proto */
-
-
 var check = function (O, proto) {
   _anObject(O);
   if (!_isObject(proto) && proto !== null) throw TypeError(proto + ": can't set as prototype!");
@@ -1610,8 +1523,6 @@ var _setProto = {
   check: check
 };
 
-// 19.1.3.19 Object.setPrototypeOf(O, proto)
-
 _export(_export.S, 'Object', { setPrototypeOf: _setProto.set });
 
 var setPrototypeOf$2 = _core.Object.setPrototypeOf;
@@ -1622,7 +1533,6 @@ module.exports = { "default": setPrototypeOf$2, __esModule: true };
 
 unwrapExports(setPrototypeOf);
 
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 _export(_export.S, 'Object', { create: _objectCreate });
 
 var $Object$1 = _core.Object;
@@ -1825,16 +1735,6 @@ assign(Store.prototype, {
 	}
 });
 
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
 
 /** Used to stand-in for `undefined` hash values. */
@@ -2757,16 +2657,6 @@ function get$1(object, path, defaultValue) {
 
 var lodash_get = get$1;
 
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT$1 = 'Expected a function';
 
 /** Used to stand-in for `undefined` hash values. */
@@ -3780,13 +3670,13 @@ var CalendarStore = function (_Store) {
     }
   }, {
     key: 'reset',
-    value: function reset() {
+    value: function reset(step) {
       this.set({ data: {}, currentDates: [] });
 
       var todayDate = new Date();
       var year = todayDate.getFullYear();
       var month = todayDate.getMonth();
-      this.setDates(year, month, true);
+      this.setDates(year, month, step, true);
     }
   }, {
     key: 'dateEqual',
@@ -3979,17 +3869,35 @@ var CalendarStore = function (_Store) {
       this.maxDate = options.maxDate;
     }
   }, {
+    key: 'cachePastDates',
+    value: function cachePastDates(year, month, step) {
+      var currentStep = step;
+      while (currentStep > 0) {
+        this.setDates(year, month - currentStep, step);
+        currentStep--;
+      }
+    }
+  }, {
+    key: 'cacheFutureDates',
+    value: function cacheFutureDates(year, month, step) {
+      var currentStep = step;
+      while (currentStep > 0) {
+        this.setDates(year, month + currentStep, step);
+        currentStep--;
+      }
+    }
+  }, {
     key: 'setDates',
-    value: function setDates(year, month) {
-      var cache = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    value: function setDates(year, month, step) {
+      var cache = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
       var thisDate = new Date(year, month);
       var thisYear = thisDate.getFullYear();
       var thisMonth = thisDate.getMonth();
 
       if (cache) {
-        this.setDates(year, month - 1);
-        this.setDates(year, month + 1);
+        this.cachePastDates(year, month, step);
+        this.cacheFutureDates(year, month, step);
       }
       this.set({
         year: thisYear,
@@ -4004,6 +3912,7 @@ var CalendarStore = function (_Store) {
           date.next = false;
         });
         this.set({ currentDates: currentDates });
+
         if (cache) {
           this.padHeadDate();
           this.padTailDate();
@@ -4041,21 +3950,25 @@ var CalendarStore = function (_Store) {
     }
   }, {
     key: 'prev',
-    value: function prev() {
+    value: function prev(step) {
       var _get = this.get(),
           year = _get.year,
           month = _get.month;
+      // this.setDates(year, month - 1, true);
 
-      this.setDates(year, month - 1, true);
+
+      this.setDates(year, month - step, step, true);
     }
   }, {
     key: 'next',
-    value: function next() {
+    value: function next(step) {
       var _get2 = this.get(),
           year = _get2.year,
           month = _get2.month;
+      // this.setDates(year, month + 1, true);
 
-      this.setDates(year, month + 1, true);
+
+      this.setDates(year, month + step, step, true);
     }
   }, {
     key: 'padHeadDate',
@@ -4138,16 +4051,6 @@ var CalendarStore = function (_Store) {
   return CalendarStore;
 }(Store);
 
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT$2 = 'Expected a function';
 
 /** Used as references for various `Number` constants. */
@@ -4590,7 +4493,7 @@ function getClass(store, {day}) {
 function create_main_fragment$2(state, component) {
 	var if_block_anchor;
 
-	var if_block = (state.store && state.date) && create_if_block(state, component);
+	var if_block = (state.store && state.date) && create_if_block$1(state, component);
 
 	return {
 		c: function create() {
@@ -4608,7 +4511,7 @@ function create_main_fragment$2(state, component) {
 				if (if_block) {
 					if_block.p(changed, state);
 				} else {
-					if_block = create_if_block(state, component);
+					if_block = create_if_block$1(state, component);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -4631,7 +4534,7 @@ function create_main_fragment$2(state, component) {
 }
 
 // (1:0) {{#if store && date}}
-function create_if_block(state, component) {
+function create_if_block$1(state, component) {
 	var div, text_value = state.day(state.date.day), text, div_class_value;
 
 	return {
@@ -4690,7 +4593,7 @@ function oncreate$2() {
 function create_main_fragment$3(state, component) {
 	var if_block_anchor;
 
-	var if_block = (state.date) && create_if_block$1(state, component);
+	var if_block = (state.date) && create_if_block$2(state, component);
 
 	return {
 		c: function create() {
@@ -4708,7 +4611,7 @@ function create_main_fragment$3(state, component) {
 				if (if_block) {
 					if_block.p(changed, state);
 				} else {
-					if_block = create_if_block$1(state, component);
+					if_block = create_if_block$2(state, component);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -4731,7 +4634,7 @@ function create_main_fragment$3(state, component) {
 }
 
 // (1:0) {{#if date}}
-function create_if_block$1(state, component) {
+function create_if_block$2(state, component) {
 	var div, text_value = state.date.date, text;
 
 	return {
@@ -4863,7 +4766,7 @@ function oncreate$1() {
     const month = todayDate.getMonth();
 	const {store, minDate, maxDate} = this.get();
 	store.setOptions({minDate, maxDate});
-	store.setDates(year, month, true);
+	store.setDates(year, month, this.options.data.pagerStep, true);
 
 	this.set({
 		dates: this.options.data.store.currentDates,
@@ -4877,13 +4780,13 @@ function oncreate$1() {
 }
 
 function encapsulateStyles$1(node) {
-	setAttribute(node, "svelte-3239578694", "");
+	setAttribute(node, "svelte-2708534929", "");
 }
 
 function add_css$1() {
 	var style = createElement("style");
-	style.id = 'svelte-3239578694-style';
-	style.textContent = "[svelte-3239578694].apocCalendar-Component_DateTable,[svelte-3239578694] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-3239578694].apocCalendar-Component_DayCell,[svelte-3239578694] .apocCalendar-Component_DayCell,[svelte-3239578694].apocCalendar-Component_DateCell,[svelte-3239578694] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer;background:#fff}[svelte-3239578694].apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-3239578694] .apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-3239578694].apocCalendar-Component_DateCell.apocCalendar-Is_Selected,[svelte-3239578694] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected{background:#cb1b45}[svelte-3239578694].apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-3239578694] .apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-3239578694].apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-3239578694] .apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover{background:#ccc}[svelte-3239578694].apocCalendar-Is_Prev,[svelte-3239578694] .apocCalendar-Is_Prev,[svelte-3239578694].apocCalendar-Is_Next,[svelte-3239578694] .apocCalendar-Is_Next,[svelte-3239578694].apocCalendar-Is_Disabled,[svelte-3239578694] .apocCalendar-Is_Disabled{opacity:.3}";
+	style.id = 'svelte-2708534929-style';
+	style.textContent = "[svelte-2708534929].apocCalendar-Component_DateTable,[svelte-2708534929] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-2708534929].apocCalendar-Component_DayCell,[svelte-2708534929] .apocCalendar-Component_DayCell,[svelte-2708534929].apocCalendar-Component_DateCell,[svelte-2708534929] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer;background:#fff}[svelte-2708534929].apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-2708534929] .apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-2708534929].apocCalendar-Component_DateCell.apocCalendar-Is_Selected,[svelte-2708534929] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected{background:#cb1b45}[svelte-2708534929].apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2708534929] .apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2708534929].apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2708534929] .apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover{background:#ccc}[svelte-2708534929].apocCalendar-Is_Prev,[svelte-2708534929] .apocCalendar-Is_Prev,[svelte-2708534929].apocCalendar-Is_Next,[svelte-2708534929] .apocCalendar-Is_Next,[svelte-2708534929].apocCalendar-Is_Disabled,[svelte-2708534929] .apocCalendar-Is_Disabled{opacity:.3}";
 	appendNode(style, document.head);
 }
 
@@ -5238,7 +5141,7 @@ function Month(options) {
 	init(this, options);
 	this._state = assign(data$1(), options.data);
 
-	if (!document.getElementById("svelte-3239578694-style")) add_css$1();
+	if (!document.getElementById("svelte-2708534929-style")) add_css$1();
 
 	var _oncreate = oncreate$1.bind(this);
 
@@ -5312,22 +5215,22 @@ function oncreate$3() {
 }
 
 function encapsulateStyles$2(node) {
-	setAttribute(node, "svelte-1983287109", "");
+	setAttribute(node, "svelte-804290395", "");
 }
 
 function add_css$2() {
 	var style = createElement("style");
-	style.id = 'svelte-1983287109-style';
-	style.textContent = "[svelte-1983287109].apocCalendar-Component_Pager,[svelte-1983287109] .apocCalendar-Component_Pager{position:absolute;bottom:50%;-webkit-transform:translateY(50%);transform:translateY(50%);cursor:pointer;border-radius:50%;background:#444;width:5em;height:5em;z-index:1}[svelte-1983287109].apocCalendar-Component_Pager svg,[svelte-1983287109] .apocCalendar-Component_Pager svg{position:absolute;bottom:50%;-webkit-transform:translate(50%, 50%);transform:translate(50%, 50%);width:2em;height:2em;fill:#fff}[svelte-1983287109].apocCalendar-Is_Left,[svelte-1983287109] .apocCalendar-Is_Left{left:-2.5em}[svelte-1983287109].apocCalendar-Is_Left svg,[svelte-1983287109] .apocCalendar-Is_Left svg{right:calc(50% + 1em)}[svelte-1983287109].apocCalendar-Is_Right,[svelte-1983287109] .apocCalendar-Is_Right{right:-2.5em}[svelte-1983287109].apocCalendar-Is_Right svg,[svelte-1983287109] .apocCalendar-Is_Right svg{right:calc(50% - 1em)}";
+	style.id = 'svelte-804290395-style';
+	style.textContent = "[svelte-804290395].apocCalendar-Component_Pager,[svelte-804290395] .apocCalendar-Component_Pager{position:absolute;bottom:50%;-webkit-transform:translateY(50%);transform:translateY(50%);cursor:pointer;border-radius:50%;background:#444;width:5em;height:5em;z-index:1}[svelte-804290395].apocCalendar-Component_Pager svg,[svelte-804290395] .apocCalendar-Component_Pager svg{position:absolute;bottom:50%;-webkit-transform:translate(50%, 50%);transform:translate(50%, 50%);width:2em;height:2em;fill:#fff}[svelte-804290395].apocCalendar-Is_Left,[svelte-804290395] .apocCalendar-Is_Left{left:-2.5em}[svelte-804290395].apocCalendar-Is_Left svg,[svelte-804290395] .apocCalendar-Is_Left svg{right:calc(50% + 1em)}[svelte-804290395].apocCalendar-Is_Right,[svelte-804290395] .apocCalendar-Is_Right{right:-2.5em}[svelte-804290395].apocCalendar-Is_Right svg,[svelte-804290395] .apocCalendar-Is_Right svg{right:calc(50% - 1em)}";
 	appendNode(style, document.head);
 }
 
 function create_main_fragment$4(state, component) {
 	var text, if_block_1_anchor;
 
-	var if_block = (state.type === 'left' && !includesMinDate(state.store)) && create_if_block$2(state, component);
+	var if_block = (state.type === 'left' && !includesMinDate(state.store)) && create_if_block$3(state, component);
 
-	var if_block_1 = (state.type === 'right' && !includesMaxDate(state.store)) && create_if_block_1(state, component);
+	var if_block_1 = (state.type === 'right' && !includesMaxDate(state.store)) && create_if_block_1$1(state, component);
 
 	return {
 		c: function create() {
@@ -5349,7 +5252,7 @@ function create_main_fragment$4(state, component) {
 				if (if_block) {
 					if_block.p(changed, state);
 				} else {
-					if_block = create_if_block$2(state, component);
+					if_block = create_if_block$3(state, component);
 					if_block.c();
 					if_block.m(text.parentNode, text);
 				}
@@ -5363,7 +5266,7 @@ function create_main_fragment$4(state, component) {
 				if (if_block_1) {
 					if_block_1.p(changed, state);
 				} else {
-					if_block_1 = create_if_block_1(state, component);
+					if_block_1 = create_if_block_1$1(state, component);
 					if_block_1.c();
 					if_block_1.m(if_block_1_anchor.parentNode, if_block_1_anchor);
 				}
@@ -5389,12 +5292,12 @@ function create_main_fragment$4(state, component) {
 }
 
 // (1:0) {{#if type === 'left' && !includesMinDate(store)}}
-function create_if_block$2(state, component) {
+function create_if_block$3(state, component) {
 	var div, div_class_value;
 
 	function click_handler(event) {
 		var state = component.get();
-		component.move(state.type);
+		component.options.data.onClickPagerPrev(state.step);
 	}
 
 	return {
@@ -5431,12 +5334,12 @@ function create_if_block$2(state, component) {
 }
 
 // (7:0) {{#if type === 'right' && !includesMaxDate(store)}}
-function create_if_block_1(state, component) {
+function create_if_block_1$1(state, component) {
 	var div, div_class_value;
 
 	function click_handler(event) {
 		var state = component.get();
-		component.move(state.type);
+		component.options.data.onClickPagerNext(state.step);
 	}
 
 	return {
@@ -5476,7 +5379,7 @@ function Pager(options) {
 	init(this, options);
 	this._state = assign(data$2(), options.data);
 
-	if (!document.getElementById("svelte-1983287109-style")) add_css$2();
+	if (!document.getElementById("svelte-804290395-style")) add_css$2();
 
 	var _oncreate = oncreate$3.bind(this);
 
@@ -5500,6 +5403,10 @@ assign(Pager.prototype, methods$2, proto);
 
 /* lib/calendar.html generated by Svelte v1.49.3 */
 const store = new CalendarStore();
+{
+	window.store = store;
+}
+
 function minDate(min) {
 	const date = new Date(min);
 	return {
@@ -5532,7 +5439,17 @@ function data() {
 		store,
 		min: todayDate,
 		max: nextYearDate,
-
+		pager: {
+			prev: true,
+			next: true,
+			step: 1,
+		},
+		onClickPagerPrev: (step = 1) => {
+			store.prev(step);
+		},
+		onClickPagerNext: (step = 1) => {
+			store.next(step);
+		},
 		head: (year, month) => `${year}.${month}`,
 		day: day => {
 			switch (day) {
@@ -5569,7 +5486,7 @@ function data() {
 
 var methods = {
 	reset() {
-		store.reset();
+		store.reset(this.step);
 	}
 };
 
@@ -5595,13 +5512,13 @@ function oncreate() {
 }
 
 function encapsulateStyles(node) {
-	setAttribute(node, "svelte-1479590242", "");
+	setAttribute(node, "svelte-792669557", "");
 }
 
 function add_css() {
 	var style = createElement("style");
-	style.id = 'svelte-1479590242-style';
-	style.textContent = "[svelte-1479590242].apocCalendar-Component_Box,[svelte-1479590242] .apocCalendar-Component_Box{position:relative;font-size:1em;box-sizing:border-box;background:#444;border:1px solid #444}[svelte-1479590242].apocCalendar-Component_Header,[svelte-1479590242] .apocCalendar-Component_Header{font-size:1.2em;font-weight:bold;line-height:4;margin-bottom:1px;background:#fff;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}";
+	style.id = 'svelte-792669557-style';
+	style.textContent = "[svelte-792669557].apocCalendar-Component_Box,[svelte-792669557] .apocCalendar-Component_Box{position:relative;font-size:1em;box-sizing:border-box;background:#444;border:1px solid #444}[svelte-792669557].apocCalendar-Component_Header,[svelte-792669557] .apocCalendar-Component_Header{font-size:1.2em;font-weight:bold;line-height:4;margin-bottom:1px;background:#fff;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}";
 	appendNode(style, document.head);
 }
 
@@ -5614,19 +5531,14 @@ function create_main_fragment(state, component) {
 			store: state.store,
 			day: state.day,
 			minDate: state.minDate,
-			maxDate: state.maxDate
+			maxDate: state.maxDate,
+			pagerStep: state.pager.step
 		}
 	});
 
-	var pager = new Pager({
-		root: component.root,
-		data: { store: state.store }
-	});
+	var if_block = (state.pager.prev) && create_if_block(state, component);
 
-	var pager_1 = new Pager({
-		root: component.root,
-		data: { store: state.store, type: "right" }
-	});
+	var if_block_1 = (state.pager.next) && create_if_block_1(state, component);
 
 	return {
 		c: function create() {
@@ -5636,9 +5548,9 @@ function create_main_fragment(state, component) {
 			text_1 = createText("\n\t");
 			month._fragment.c();
 			text_2 = createText("\n\t");
-			pager._fragment.c();
-			text_3 = createText("\n\t");
-			pager_1._fragment.c();
+			if (if_block) if_block.c();
+			text_3 = createText("\n\n\t");
+			if (if_block_1) if_block_1.c();
 			this.h();
 		},
 
@@ -5655,9 +5567,9 @@ function create_main_fragment(state, component) {
 			appendNode(text_1, section);
 			month._mount(section, null);
 			appendNode(text_2, section);
-			pager._mount(section, null);
+			if (if_block) if_block.m(section, null);
 			appendNode(text_3, section);
-			pager_1._mount(section, null);
+			if (if_block_1) if_block_1.m(section, null);
 		},
 
 		p: function update(changed, state) {
@@ -5670,25 +5582,127 @@ function create_main_fragment(state, component) {
 			if (changed.day) month_changes.day = state.day;
 			if (changed.minDate) month_changes.minDate = state.minDate;
 			if (changed.maxDate) month_changes.maxDate = state.maxDate;
+			if (changed.pager) month_changes.pagerStep = state.pager.step;
 			month._set(month_changes);
 
-			var pager_changes = {};
-			if (changed.store) pager_changes.store = state.store;
-			pager._set(pager_changes);
+			if (state.pager.prev) {
+				if (if_block) {
+					if_block.p(changed, state);
+				} else {
+					if_block = create_if_block(state, component);
+					if_block.c();
+					if_block.m(section, text_3);
+				}
+			} else if (if_block) {
+				if_block.u();
+				if_block.d();
+				if_block = null;
+			}
 
-			var pager_1_changes = {};
-			if (changed.store) pager_1_changes.store = state.store;
-			pager_1._set(pager_1_changes);
+			if (state.pager.next) {
+				if (if_block_1) {
+					if_block_1.p(changed, state);
+				} else {
+					if_block_1 = create_if_block_1(state, component);
+					if_block_1.c();
+					if_block_1.m(section, null);
+				}
+			} else if (if_block_1) {
+				if_block_1.u();
+				if_block_1.d();
+				if_block_1 = null;
+			}
 		},
 
 		u: function unmount() {
 			detachNode(section);
+			if (if_block) if_block.u();
+			if (if_block_1) if_block_1.u();
 		},
 
 		d: function destroy$$1() {
 			month.destroy(false);
+			if (if_block) if_block.d();
+			if (if_block_1) if_block_1.d();
+		}
+	};
+}
+
+// (4:1) {{#if pager.prev}}
+function create_if_block(state, component) {
+
+	var pager = new Pager({
+		root: component.root,
+		data: {
+			store: state.store,
+			onClickPagerPrev: state.onClickPagerPrev,
+			step: state.pager.step
+		}
+	});
+
+	return {
+		c: function create() {
+			pager._fragment.c();
+		},
+
+		m: function mount(target, anchor) {
+			pager._mount(target, anchor);
+		},
+
+		p: function update(changed, state) {
+			var pager_changes = {};
+			if (changed.store) pager_changes.store = state.store;
+			if (changed.onClickPagerPrev) pager_changes.onClickPagerPrev = state.onClickPagerPrev;
+			if (changed.pager) pager_changes.step = state.pager.step;
+			pager._set(pager_changes);
+		},
+
+		u: function unmount() {
+			pager._unmount();
+		},
+
+		d: function destroy$$1() {
 			pager.destroy(false);
-			pager_1.destroy(false);
+		}
+	};
+}
+
+// (8:1) {{#if pager.next}}
+function create_if_block_1(state, component) {
+
+	var pager = new Pager({
+		root: component.root,
+		data: {
+			store: state.store,
+			type: "right",
+			onClickPagerNext: state.onClickPagerNext,
+			step: state.pager.step
+		}
+	});
+
+	return {
+		c: function create() {
+			pager._fragment.c();
+		},
+
+		m: function mount(target, anchor) {
+			pager._mount(target, anchor);
+		},
+
+		p: function update(changed, state) {
+			var pager_changes = {};
+			if (changed.store) pager_changes.store = state.store;
+			if (changed.onClickPagerNext) pager_changes.onClickPagerNext = state.onClickPagerNext;
+			if (changed.pager) pager_changes.step = state.pager.step;
+			pager._set(pager_changes);
+		},
+
+		u: function unmount() {
+			pager._unmount();
+		},
+
+		d: function destroy$$1() {
+			pager.destroy(false);
 		}
 	};
 }
@@ -5698,7 +5712,7 @@ function Calendar$1(options) {
 	this._state = assign(data(), options.data);
 	this._recompute({ min: 1, max: 1 }, this._state);
 
-	if (!document.getElementById("svelte-1479590242-style")) add_css();
+	if (!document.getElementById("svelte-792669557-style")) add_css();
 
 	var _oncreate = oncreate.bind(this);
 

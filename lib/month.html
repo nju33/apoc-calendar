@@ -100,7 +100,7 @@ export default {
     const month = todayDate.getMonth();
 		const {store, minDate, maxDate} = this.get();
 		store.setOptions({minDate, maxDate});
-		store.setDates(year, month, true);
+		store.setDates(year, month, this.options.data.pagerStep, true);
 
 		this.set({
 			dates: this.options.data.store.currentDates,

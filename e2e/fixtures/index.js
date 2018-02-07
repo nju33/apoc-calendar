@@ -3,6 +3,15 @@
   const calendar = new ApocCalendar({
     target: document.getElementById('calendar'),
     data: {
+      pager: {
+        prev: true,
+        next: true,
+        step: 2,
+      },
+
+      // onClickPagerPrev: () => {
+      // }
+
       head(year, month) {
         return `${year}年${month}月`;
       },

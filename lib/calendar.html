@@ -1,8 +1,13 @@
 <section class="apocCalendar-Component_Box">
 	<header class="apocCalendar-Component_Header">{{head(year, month + 1)}}</header>
-	<Month :store :day :minDate :maxDate />
-	<Pager :store />
-	<Pager :store type="right"/>
+	<Month :store :day :minDate :maxDate pagerStep="{{pager.step}}" />
+	{{#if pager.prev}}
+		<Pager :store :onClickPagerPrev step="{{pager.step}}" />
+	{{/if}}
+
+	{{#if pager.next}}
+		<Pager :store type="right" :onClickPagerNext step="{{pager.step}}" />
+	{{/if}}
 </section>
 
 <script>
@@ -33,7 +38,17 @@ export default {
 			store,
 			min: todayDate,
 			max: nextYearDate,
-
+			pager: {
+				prev: true,
+				next: true,
+				step: 1,
+			},
+			onClickPagerPrev: (step = 1) => {
+				store.prev(step);
+			},
+			onClickPagerNext: (step = 1) => {
+				store.next(step);
+			},
 			head: (year, month) => `${year}.${month}`,
 			day: day => {
 				switch (day) {
@@ -95,7 +110,7 @@ export default {
 	},
 	methods: {
 		reset() {
-			store.reset();
+			store.reset(this.step);
 		}
 	},
 	oncreate() {
