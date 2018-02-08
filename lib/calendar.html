@@ -1,12 +1,12 @@
 <section class="apocCalendar-Component_Box">
 	<header class="apocCalendar-Component_Header">{{head(year, month + 1)}}</header>
-	<Month :store :day :minDate :maxDate pagerStep="{{pager.step}}" />
+	<Month :store :day :initial :minDate :maxDate pagerStep="{{pager.step}}" />
 	{{#if pager.prev}}
-		<Pager :store :onClickPagerPrev step="{{pager.step}}" />
+		<Pager :store step="{{pager.step}}" />
 	{{/if}}
 
 	{{#if pager.next}}
-		<Pager :store type="right" :onClickPagerNext step="{{pager.step}}" />
+		<Pager :store type="right" step="{{pager.step}}" />
 	{{/if}}
 </section>
 
@@ -16,10 +16,10 @@ import CalendarStore from './store'
 import Month from './month.html'
 import Pager from './pager.html'
 
-const store = new CalendarStore();
-if (process.env.NODE_ENV !== 'production') {
-	window.store = store;
-}
+// const store = new CalendarStore();
+// if (process.env.NODE_ENV !== 'production') {
+// 	window.store = store;
+// }
 
 export default {
 	components: {
@@ -35,20 +35,22 @@ export default {
 		);
 
 		return {
-			store,
+			store: new CalendarStore(),
 			min: todayDate,
 			max: nextYearDate,
+			initial: todayDate,
 			pager: {
 				prev: true,
 				next: true,
 				step: 1,
 			},
-			onClickPagerPrev: (step = 1) => {
-				store.prev(step);
-			},
-			onClickPagerNext: (step = 1) => {
-				store.next(step);
-			},
+			// onClickPagerPrev(step = 1) {
+			// 	this.store.prev(step);
+			// },
+			// onClickPagerNext(store, step = 1) {
+			// 	// console.log(arguments)
+			// 	this.get('store').next(step);
+			// },
 			head: (year, month) => `${year}.${month}`,
 			day: day => {
 				switch (day) {
@@ -110,20 +112,54 @@ export default {
 	},
 	methods: {
 		reset() {
-			store.reset(this.step);
-		}
+			this.get('store').reset(this.step);
+		},
+		setData(data) {
+			const {store} = this.get();
+			store.setData(data);
+		},
+		getData() {
+			const {store} = this.get();
+			return store.get('data');
+		},
+		sync(...calendars) {
+			const {store} = this.get();
+			const data = this.getData();
+			console.log(data)
+
+			calendars.forEach(calendar => {
+				calendar.setData(data);
+			});
+		},
+		prev() {
+			const {store, pager: {step}} = this.get();
+			store.prev(step);
+		},
+		next() {
+			const {store, pager: {step}} = this.get();
+			store.next(step);
+		},
+		onClickPagerPrev() {
+			this.prev();
+			this.fire('prev');
+		},
+		onClickPagerNext() {
+			this.next();
+			this.fire('next');
+		},
 	},
 	oncreate() {
+		const {store} = this.get();
+
 		store.observe('year', year => {
 			this.set({year});
 		});
-
 		store.observe('month', month => {
 			this.set({month});
 		});
 
 		const handleChange = () => {
-			const data = store.exportData();
+			const data = this.get('store').exportData();
 			if (data.length === 0) {
 				return;
 			}

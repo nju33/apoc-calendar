@@ -77,6 +77,10 @@ export default {
 		handleMousemove: throttle(function (date) {
 			if (this.get('mousedown')) {
 				const {store, from} = this.get();
+				if (from === date) {
+					return;
+				}
+
 				this.set({to: date});
 				store.selectRangeDate(from, date);
 			}
@@ -95,10 +99,10 @@ export default {
 		}
 	},
 	oncreate() {
-		const todayDate = new Date();
-    const year = todayDate.getFullYear();
-    const month = todayDate.getMonth();
-		const {store, minDate, maxDate} = this.get();
+		const {store, minDate, maxDate, initial} = this.get();
+		const initialDate = new Date(initial);
+    const year = initialDate.getFullYear();
+    const month = initialDate.getMonth();
 		store.setOptions({minDate, maxDate});
 		store.setDates(year, month, this.options.data.pagerStep, true);
 
@@ -111,6 +115,13 @@ export default {
 				dates: currentDates
 			})
 		});
+		store.observe('data', () => {
+			// console.log(this.get('initial'), store.get('currentDates'))
+			this.set({
+				dates: store.get('currentDates')
+			})
+		});
+
 	}
 }
 </script>
