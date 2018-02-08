@@ -72,7 +72,9 @@
     }
   },
   "dependencies": {
+    "date-fns": "^1.29.0",
     "instantify": "^0.0.1",
+    "lodash": "^4.17.5",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
     "lodash.throttle": "^4.1.1",
