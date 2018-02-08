@@ -3673,11 +3673,7 @@ var CalendarStore = function (_Store) {
     value: function setData(newestData) {
       var _this2 = this;
 
-      var _get = this.get(),
-          year = _get.year,
-          month = _get.month,
-          currentDates = _get.currentDates,
-          data = _get.data;
+      // const {year, month, currentDates, data} = this.get();
       // console.log(currentDates);
 
       // const pairs = [
@@ -3694,48 +3690,69 @@ var CalendarStore = function (_Store) {
       //   }
       // });
       //
+      setTimeout(function () {
+        var _get = _this2.get(),
+            year = _get.year,
+            month = _get.month,
+            currentDates = _get.currentDates;
 
-      var target = [].concat(_toConsumableArray(lodash_get(newestData, this.prevKey, [])), _toConsumableArray(lodash_get(newestData, year + '.' + month, [])), _toConsumableArray(lodash_get(newestData, this.nextKey, [])));
+        var target = [].concat(_toConsumableArray(lodash_get(newestData, _this2.prevKey, [])), _toConsumableArray(lodash_get(newestData, year + '.' + month, [])), _toConsumableArray(lodash_get(newestData, _this2.nextKey, [])));
 
-      currentDates.forEach(function (currentDate) {
-        target.forEach(function (targetDate) {
-          if (_this2.dateEqual(currentDate, targetDate)) {
-            currentDate.selected = targetDate.selected;
-            if (year === currentDate.year && month === currentDate.month) {
-              currentDate.prev = false;
-              currentDate.next = false;
-              if (month < currentDate) {
-                currentDate.prev = true;
-              } else if (month > currentDate) {
+        // console.log(year, month);
+
+        currentDates.forEach(function (currentDate) {
+          target.forEach(function (targetDate) {
+            if (_this2.dateEqual(currentDate, targetDate)) {
+              currentDate.selected = targetDate.selected;
+              if (year === currentDate.year && month === currentDate.month) {
+                currentDate.prev = false;
+                currentDate.next = false;
+              } else if (year <= currentDate.year && month < currentDate.month) {
+                // currentDate.prev = true;
+                currentDate.next = true;
+              } else if (year >= currentDate.year && month > currentDate.month) {
+                // currentDate.prev = true;
                 currentDate.next = true;
               }
             }
-          }
+          });
         });
-      });
+        _this2.set({ currentDates: currentDates });
+      }, 0);
+
+      var _get2 = this.get(),
+          data = _get2.data;
 
       _Object$keys(newestData).forEach(function (year) {
-        newestData[year].forEach(function (month) {
-          var path = year + '.' + month;
-          var date = lodash_get(data, path, false);
-          if (!date) {
-            return;
-          }
+        newestData[year].forEach(function (month, monthIndex) {
+          month.forEach(function (date, dateIndex) {
+            var path = year + '[' + monthIndex + '][' + dateIndex + ']';
 
-          lodash_set(data, path, date.selected);
+            var got = lodash_get(data, path, false);
+            if (!got) {
+              return;
+            }
+
+            lodash_set(data, path + '.selected', got.selected);
+          });
         });
       });
+      this.set({
+        data: newestData
+      });
+
+      // console.log(newestData);
 
       // console.log('month', month, '---------------------');
       // console.log(newestData);
       // console.log(target);
       // console.log(currentDates);
 
-      this.set({
-        currentDates: currentDates,
-        data: data
-        // data: newestData,
-      });
+      // this.set({
+      //   currentDates,
+      //   // data,
+      //   // data: newestData,
+      // });
 
       // const cloned = {...data};
       // object.keys(cloned).forEach(year => {
@@ -3846,11 +3863,12 @@ var CalendarStore = function (_Store) {
     value: function selectDay(day) {
       var _this3 = this;
 
-      var _get2 = this.get(),
-          year = _get2.year,
-          month = _get2.month,
-          data = _get2.data,
-          currentDates = _get2.currentDates;
+      var _get3 = this.get(),
+          year = _get3.year,
+          month = _get3.month,
+          data = _get3.data,
+          currentDates = _get3.currentDates,
+          pad = _get3.pad;
       // const currentDates = this.get('currentDates');
 
 
@@ -3859,11 +3877,13 @@ var CalendarStore = function (_Store) {
       var dates = currentDates.filter(function (date) {
         return date.day === day;
       }).map(function (date) {
-        date.selected = !isActiveDay;
+        if (pad) {
+          date.selected = !isActiveDay;
+        } else if (!date.next && !date.prev) {
+          date.selected = !isActiveDay;
+        }
         return date;
       });
-
-      // const data = this.get('data');
 
       var targetDates = [].concat(_toConsumableArray(lodash_get(data, this.prevKey, [])), _toConsumableArray(lodash_get(data, year + '.' + month, [])), _toConsumableArray(lodash_get(data, this.nextKey, [])));
 
@@ -3885,11 +3905,11 @@ var CalendarStore = function (_Store) {
     value: function selectDate(targetDate) {
       var _this4 = this;
 
-      var _get3 = this.get(),
-          year = _get3.year,
-          month = _get3.month,
-          data = _get3.data,
-          currentDates = _get3.currentDates;
+      var _get4 = this.get(),
+          year = _get4.year,
+          month = _get4.month,
+          data = _get4.data,
+          currentDates = _get4.currentDates;
 
       var target = currentDates.find(function (date) {
         return !date.disabled && _this4.dateEqual(date, targetDate);
@@ -3923,11 +3943,11 @@ var CalendarStore = function (_Store) {
         return;
       }
 
-      var _get4 = this.get(),
-          year = _get4.year,
-          month = _get4.month,
-          data = _get4.data,
-          currentDates = _get4.currentDates;
+      var _get5 = this.get(),
+          year = _get5.year,
+          month = _get5.month,
+          data = _get5.data,
+          currentDates = _get5.currentDates;
 
       if (typeof uncertainDates !== 'undefined') {
         uncertainDates.forEach(function (date) {
@@ -4085,9 +4105,9 @@ var CalendarStore = function (_Store) {
   }, {
     key: 'prev',
     value: function prev(step) {
-      var _get5 = this.get(),
-          year = _get5.year,
-          month = _get5.month;
+      var _get6 = this.get(),
+          year = _get6.year,
+          month = _get6.month;
       // this.setDates(year, month - 1, true);
 
 
@@ -4096,9 +4116,9 @@ var CalendarStore = function (_Store) {
   }, {
     key: 'next',
     value: function next(step) {
-      var _get6 = this.get(),
-          year = _get6.year,
-          month = _get6.month;
+      var _get7 = this.get(),
+          year = _get7.year,
+          month = _get7.month;
       // this.setDates(year, month + 1, true);
 
 
@@ -4159,18 +4179,18 @@ var CalendarStore = function (_Store) {
   }, {
     key: 'key',
     get: function get() {
-      var _get7 = this.get(),
-          year = _get7.year,
-          month = _get7.month;
+      var _get8 = this.get(),
+          year = _get8.year,
+          month = _get8.month;
 
       return year + '.' + month;
     }
   }, {
     key: 'prevKey',
     get: function get() {
-      var _get8 = this.get(),
-          year = _get8.year,
-          month = _get8.month;
+      var _get9 = this.get(),
+          year = _get9.year,
+          month = _get9.month;
 
       var prevDate = new Date(year, month - 1);
       return prevDate.getFullYear() + '.' + prevDate.getMonth();
@@ -4178,9 +4198,9 @@ var CalendarStore = function (_Store) {
   }, {
     key: 'nextKey',
     get: function get() {
-      var _get9 = this.get(),
-          year = _get9.year,
-          month = _get9.month;
+      var _get10 = this.get(),
+          year = _get10.year,
+          month = _get10.month;
 
       var nextDate = new Date(year, month + 1);
       return nextDate.getFullYear() + '.' + nextDate.getMonth();
@@ -4936,7 +4956,7 @@ function oncreate$1() {
 	const initialDate = new Date(initial);
     const year = initialDate.getFullYear();
     const month = initialDate.getMonth();
-	// store.pad = pad;
+	store.pad = pad;
 	store.setOptions({minDate, maxDate});
 	store.setDates(year, month, this.options.data.pagerStep, true);
 
@@ -4959,13 +4979,13 @@ function oncreate$1() {
 }
 
 function encapsulateStyles$1(node) {
-	setAttribute(node, "svelte-1041090808", "");
+	setAttribute(node, "svelte-3772764326", "");
 }
 
 function add_css$1() {
 	var style = createElement("style");
-	style.id = 'svelte-1041090808-style';
-	style.textContent = "[svelte-1041090808].apocCalendar-Component_DateTable,[svelte-1041090808] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-1041090808].apocCalendar-Component_DayCell,[svelte-1041090808] .apocCalendar-Component_DayCell,[svelte-1041090808].apocCalendar-Component_DateCell,[svelte-1041090808] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer;background:#fff}[svelte-1041090808].apocCalendar-Component_DayCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled),[svelte-1041090808] .apocCalendar-Component_DayCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled),[svelte-1041090808].apocCalendar-Component_DateCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled),[svelte-1041090808] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled){background:#cb1b45}[svelte-1041090808].apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-1041090808] .apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-1041090808].apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-1041090808] .apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover{background:#ccc}[svelte-1041090808].apocCalendar-Is_Disabled,[svelte-1041090808] .apocCalendar-Is_Disabled{opacity:.3}";
+	style.id = 'svelte-3772764326-style';
+	style.textContent = "[svelte-3772764326].apocCalendar-Component_DateTable,[svelte-3772764326] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-3772764326].apocCalendar-Component_DayCell,[svelte-3772764326] .apocCalendar-Component_DayCell,[svelte-3772764326].apocCalendar-Component_DateCell,[svelte-3772764326] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer;background:#fff}[svelte-3772764326].apocCalendar-Component_DayCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Hidden),[svelte-3772764326] .apocCalendar-Component_DayCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Hidden),[svelte-3772764326].apocCalendar-Component_DateCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Hidden),[svelte-3772764326] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Hidden){background:#cb1b45}[svelte-3772764326].apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-3772764326] .apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-3772764326].apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-3772764326] .apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover{background:#ccc}[svelte-3772764326].apocCalendar-Is_Disabled,[svelte-3772764326] .apocCalendar-Is_Disabled{opacity:.3}";
 	appendNode(style, document.head);
 }
 
@@ -5321,7 +5341,7 @@ function Month(options) {
 	init(this, options);
 	this._state = assign(data$1(), options.data);
 
-	if (!document.getElementById("svelte-1041090808-style")) add_css$1();
+	if (!document.getElementById("svelte-3772764326-style")) add_css$1();
 
 	var _oncreate = oncreate$1.bind(this);
 
@@ -5675,6 +5695,11 @@ var methods = {
 		const {store} = this.get();
 		return store.get('data');
 	},
+	// share(...calendars) {
+	// 	calendars.forEach(calendar => {
+	// 		calendar.replaceData(this.store);
+	// 	});
+	// },
 	sync(...calendars) {
 		const {store} = this.get();
 		const data = this.getData();
@@ -5724,13 +5749,13 @@ function oncreate() {
 }
 
 function encapsulateStyles(node) {
-	setAttribute(node, "svelte-1567272299", "");
+	setAttribute(node, "svelte-3407082827", "");
 }
 
 function add_css() {
 	var style = createElement("style");
-	style.id = 'svelte-1567272299-style';
-	style.textContent = "[svelte-1567272299].apocCalendar-Component_Box,[svelte-1567272299] .apocCalendar-Component_Box{position:relative;font-size:1em;box-sizing:border-box;background:#444;border:1px solid #444}[svelte-1567272299].apocCalendar-Component_Header,[svelte-1567272299] .apocCalendar-Component_Header{font-size:1.2em;font-weight:bold;line-height:4;margin-bottom:1px;background:#fff;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}";
+	style.id = 'svelte-3407082827-style';
+	style.textContent = "[svelte-3407082827].apocCalendar-Component_Box,[svelte-3407082827] .apocCalendar-Component_Box{position:relative;font-size:1em;box-sizing:border-box;background:#444;border:1px solid #444}[svelte-3407082827].apocCalendar-Component_Header,[svelte-3407082827] .apocCalendar-Component_Header{font-size:1.2em;font-weight:bold;line-height:4;margin-bottom:1px;background:#fff;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}";
 	appendNode(style, document.head);
 }
 
@@ -5921,7 +5946,7 @@ function Calendar$1(options) {
 	this._state = assign(data(), options.data);
 	this._recompute({ min: 1, max: 1 }, this._state);
 
-	if (!document.getElementById("svelte-1567272299-style")) add_css();
+	if (!document.getElementById("svelte-3407082827-style")) add_css();
 
 	var _oncreate = oncreate.bind(this);
 

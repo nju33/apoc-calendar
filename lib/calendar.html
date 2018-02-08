@@ -123,6 +123,11 @@ export default {
 			const {store} = this.get();
 			return store.get('data');
 		},
+		// share(...calendars) {
+		// 	calendars.forEach(calendar => {
+		// 		calendar.replaceData(this.store);
+		// 	});
+		// },
 		sync(...calendars) {
 			const {store} = this.get();
 			const data = this.getData();
