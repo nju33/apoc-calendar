@@ -1,40 +1,29 @@
 {{#if date}}
-	<div>{{date.date}}</div>
+	<div class="{{getClass(date, pad)}}">{{date.date}}</div>
 {{/if}}
 
 <script>
 export default {
-	// data() {
-	// 	return {
-	// 		data: this.options.data.date
-	// 	}
-	// },
-	// computed: {
-	// 	date: options => {
-	// 		console.log(options)
-	// 		return options.data.date;
-	// 	}
-	// }
 	helpers: {
-		// getClass(date) {
-		// 	const classnames = ['apocCalendar-Component_Date']
-		// 	if (date.prev) {
-		// 		classnames.push('apocCalendar-Is_Prev');
-		// 	} else if (date.next) {
-		// 		classnames.push('apocCalendar-Is_Next');
-		// 	}
-		// 	return classnames.join(' ');
-		// },
+		getClass(date, pad) {
+			const classnames = ['apocCalendar-Component_Date']
+			if (!pad && (date.prev || date.next)) {
+				classnames.push('apocCalendar-Is_Hidden');
+			}
+
+			if (date.prev) {
+				classnames.push('apocCalendar-Is_Prev');
+			} else if (date.next) {
+				classnames.push('apocCalendar-Is_Next');
+			}
+			return classnames.join(' ');
+		},
 	},
-	oncreate() {
-		// console.log(this)
-	}
 }
 </script>
 
 <style>
-/* .apocCalendar-Is_Prev,
-.apocCalendar-Is_Next {
-	opacity: .3;
-} */
+.apocCalendar-Is_Hidden {
+	visibility: hidden;
+}
 </style>

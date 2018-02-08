@@ -33,6 +33,7 @@
   const multiLeft = new ApocCalendar({
     target: document.getElementById('multi-left'),
     data: {
+      pad: false,
       pager: {
         prev: true,
         // next: true,
@@ -52,7 +53,7 @@
       // min: '2018-01-01',
       // max: '2018-12-31',
       // eslint-disable-next-line
-      max: dateFns.addMonths(today, 11)
+      max: dateFns.addMonths(today, 12)
     },
   });
 
@@ -60,6 +61,7 @@
   const multiRight = new ApocCalendar({
     target: document.getElementById('multi-right'),
     data: {
+      pad: false,
       pager: {
         // prev: true,
         next: true,
@@ -81,7 +83,7 @@
       // eslint-disable-next-line
       initial: dateFns.addMonths(today, 1),
       // eslint-disable-next-line
-      max: dateFns.addMonths(today, 11)
+      max: dateFns.addMonths(today, 12)
       // min: '2018-01-01',
       // max: '2018-12-31',
     },
@@ -95,9 +97,9 @@
     console.log(data);
   });
 
-  multiRight.on('cahnge', ({data}) => {
-    console.log(data);
-  });
+  // multiRight.on('cahnge', ({data}) => {
+  //   console.log(data);
+  // });
 
   multiLeft.on('prev', () => {
     multiLeft.sync(multiRight);

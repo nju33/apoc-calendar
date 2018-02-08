@@ -254,73 +254,6 @@ module.exports = (tpl, data) => {
 };
 });
 
-// 7.2.1 RequireObjectCoercible(argument)
-var _defined = function (it) {
-  if (it == undefined) throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-var _toObject = function (it) {
-  return Object(_defined(it));
-};
-
-var hasOwnProperty = {}.hasOwnProperty;
-var _has = function (it, key) {
-  return hasOwnProperty.call(it, key);
-};
-
-var toString = {}.toString;
-
-var _cof = function (it) {
-  return toString.call(it).slice(8, -1);
-};
-
-var _iobject = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
-  return _cof(it) == 'String' ? it.split('') : Object(it);
-};
-
-var _toIobject = function (it) {
-  return _iobject(_defined(it));
-};
-
-// 7.1.4 ToInteger
-var ceil = Math.ceil;
-var floor = Math.floor;
-var _toInteger = function (it) {
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-
-var min = Math.min;
-var _toLength = function (it) {
-  return it > 0 ? min(_toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
-};
-
-var max = Math.max;
-var min$1 = Math.min;
-var _toAbsoluteIndex = function (index, length) {
-  index = _toInteger(index);
-  return index < 0 ? max(index + length, 0) : min$1(index, length);
-};
-
-var _arrayIncludes = function (IS_INCLUDES) {
-  return function ($this, el, fromIndex) {
-    var O = _toIobject($this);
-    var length = _toLength(O.length);
-    var index = _toAbsoluteIndex(fromIndex, length);
-    var value;
-    // Array#includes uses SameValueZero equality algorithm
-    // eslint-disable-next-line no-self-compare
-    if (IS_INCLUDES && el != el) while (length > index) {
-      value = O[index++];
-      // eslint-disable-next-line no-self-compare
-      if (value != value) return true;
-    // Array#indexOf ignores holes, Array#includes - not
-    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
-      if (O[index] === el) return IS_INCLUDES || index || 0;
-    } return !IS_INCLUDES && -1;
-  };
-};
-
 var _global = createCommonjsModule(function (module) {
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
@@ -329,49 +262,6 @@ var global = module.exports = typeof window != 'undefined' && window.Math == Mat
   : Function('return this')();
 if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 });
-
-var SHARED = '__core-js_shared__';
-var store = _global[SHARED] || (_global[SHARED] = {});
-var _shared = function (key) {
-  return store[key] || (store[key] = {});
-};
-
-var id = 0;
-var px = Math.random();
-var _uid = function (key) {
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-};
-
-var shared = _shared('keys');
-
-var _sharedKey = function (key) {
-  return shared[key] || (shared[key] = _uid(key));
-};
-
-var arrayIndexOf = _arrayIncludes(false);
-var IE_PROTO = _sharedKey('IE_PROTO');
-
-var _objectKeysInternal = function (object, names) {
-  var O = _toIobject(object);
-  var i = 0;
-  var result = [];
-  var key;
-  for (key in O) if (key != IE_PROTO) _has(O, key) && result.push(key);
-  // Don't enum bug & hidden keys
-  while (names.length > i) if (_has(O, key = names[i++])) {
-    ~arrayIndexOf(result, key) || result.push(key);
-  }
-  return result;
-};
-
-// IE 8- don't enum bug keys
-var _enumBugKeys = (
-  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
-).split(',');
-
-var _objectKeys = Object.keys || function keys(O) {
-  return _objectKeysInternal(O, _enumBugKeys);
-};
 
 var _core = createCommonjsModule(function (module) {
 var core = module.exports = { version: '2.5.1' };
@@ -537,26 +427,111 @@ $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library`
 var _export = $export;
 
-var _objectSap = function (KEY, exec) {
-  var fn = (_core.Object || {})[KEY] || Object[KEY];
-  var exp = {};
-  exp[KEY] = exec(fn);
-  _export(_export.S + _export.F * _fails(function () { fn(1); }), 'Object', exp);
+var hasOwnProperty = {}.hasOwnProperty;
+var _has = function (it, key) {
+  return hasOwnProperty.call(it, key);
 };
 
-_objectSap('keys', function () {
-  return function keys(it) {
-    return _objectKeys(_toObject(it));
+var toString = {}.toString;
+
+var _cof = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+var _iobject = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
+  return _cof(it) == 'String' ? it.split('') : Object(it);
+};
+
+// 7.2.1 RequireObjectCoercible(argument)
+var _defined = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+var _toIobject = function (it) {
+  return _iobject(_defined(it));
+};
+
+// 7.1.4 ToInteger
+var ceil = Math.ceil;
+var floor = Math.floor;
+var _toInteger = function (it) {
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+var min = Math.min;
+var _toLength = function (it) {
+  return it > 0 ? min(_toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+};
+
+var max = Math.max;
+var min$1 = Math.min;
+var _toAbsoluteIndex = function (index, length) {
+  index = _toInteger(index);
+  return index < 0 ? max(index + length, 0) : min$1(index, length);
+};
+
+var _arrayIncludes = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = _toIobject($this);
+    var length = _toLength(O.length);
+    var index = _toAbsoluteIndex(fromIndex, length);
+    var value;
+    // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++];
+      // eslint-disable-next-line no-self-compare
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
+      if (O[index] === el) return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
   };
-});
+};
 
-var keys$1 = _core.Object.keys;
+var SHARED = '__core-js_shared__';
+var store = _global[SHARED] || (_global[SHARED] = {});
+var _shared = function (key) {
+  return store[key] || (store[key] = {});
+};
 
-var keys = createCommonjsModule(function (module) {
-module.exports = { "default": keys$1, __esModule: true };
-});
+var id = 0;
+var px = Math.random();
+var _uid = function (key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
 
-var _Object$keys = unwrapExports(keys);
+var shared = _shared('keys');
+
+var _sharedKey = function (key) {
+  return shared[key] || (shared[key] = _uid(key));
+};
+
+var arrayIndexOf = _arrayIncludes(false);
+var IE_PROTO = _sharedKey('IE_PROTO');
+
+var _objectKeysInternal = function (object, names) {
+  var O = _toIobject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) if (key != IE_PROTO) _has(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while (names.length > i) if (_has(O, key = names[i++])) {
+    ~arrayIndexOf(result, key) || result.push(key);
+  }
+  return result;
+};
+
+// IE 8- don't enum bug keys
+var _enumBugKeys = (
+  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+).split(',');
+
+var _objectKeys = Object.keys || function keys(O) {
+  return _objectKeysInternal(O, _enumBugKeys);
+};
 
 var f$1 = Object.getOwnPropertySymbols;
 
@@ -568,6 +543,10 @@ var f$2 = {}.propertyIsEnumerable;
 
 var _objectPie = {
 	f: f$2
+};
+
+var _toObject = function (it) {
+  return Object(_defined(it));
 };
 
 var $assign = Object.assign;
@@ -633,6 +612,27 @@ exports.default = _assign2.default || function (target) {
 });
 
 var _extends$1 = unwrapExports(_extends);
+
+var _objectSap = function (KEY, exec) {
+  var fn = (_core.Object || {})[KEY] || Object[KEY];
+  var exp = {};
+  exp[KEY] = exec(fn);
+  _export(_export.S + _export.F * _fails(function () { fn(1); }), 'Object', exp);
+};
+
+_objectSap('keys', function () {
+  return function keys(it) {
+    return _objectKeys(_toObject(it));
+  };
+});
+
+var keys$1 = _core.Object.keys;
+
+var keys = createCommonjsModule(function (module) {
+module.exports = { "default": keys$1, __esModule: true };
+});
+
+var _Object$keys = unwrapExports(keys);
 
 var _stringAt = function (TO_STRING) {
   return function (that, pos) {
@@ -3676,7 +3676,8 @@ var CalendarStore = function (_Store) {
       var _get = this.get(),
           year = _get.year,
           month = _get.month,
-          currentDates = _get.currentDates;
+          currentDates = _get.currentDates,
+          data = _get.data;
       // console.log(currentDates);
 
       // const pairs = [
@@ -3700,18 +3701,40 @@ var CalendarStore = function (_Store) {
         target.forEach(function (targetDate) {
           if (_this2.dateEqual(currentDate, targetDate)) {
             currentDate.selected = targetDate.selected;
+            if (year === currentDate.year && month === currentDate.month) {
+              currentDate.prev = false;
+              currentDate.next = false;
+              if (month < currentDate) {
+                currentDate.prev = true;
+              } else if (month > currentDate) {
+                currentDate.next = true;
+              }
+            }
           }
         });
       });
 
-      console.log('month', month, '---------------------');
-      console.log(newestData);
+      _Object$keys(newestData).forEach(function (year) {
+        newestData[year].forEach(function (month) {
+          var path = year + '.' + month;
+          var date = lodash_get(data, path, false);
+          if (!date) {
+            return;
+          }
+
+          lodash_set(data, path, date.selected);
+        });
+      });
+
+      // console.log('month', month, '---------------------');
+      // console.log(newestData);
       // console.log(target);
       // console.log(currentDates);
 
       this.set({
         currentDates: currentDates,
-        data: newestData
+        data: data
+        // data: newestData,
       });
 
       // const cloned = {...data};
@@ -4127,6 +4150,11 @@ var CalendarStore = function (_Store) {
     key: 'currentDates',
     get: function get() {
       return this.get('currentDates');
+    }
+  }, {
+    key: 'pad',
+    set: function set(pad) {
+      this.set({ pad: pad });
     }
   }, {
     key: 'key',
@@ -4593,9 +4621,9 @@ function toNumber$1(value) {
 var lodash_throttle = throttle;
 
 /* lib/day-cell.html generated by Svelte v1.49.3 */
-function getClass(store, {day}) {
-	const classnames = [];
-	if (store.isActiveDay(day)) {
+function getClass(store, date) {
+	const classnames = ['apocCalendar-Component_Day'];
+	if (store.isActiveDay(date.day)) {
 		classnames.push('apocCalendar-Is_Selected');
 	}
 	return classnames.join(' ');
@@ -4697,8 +4725,29 @@ function Day_cell(options) {
 assign(Day_cell.prototype, proto);
 
 /* lib/date-cell.html generated by Svelte v1.49.3 */
-function oncreate$2() {
-	// console.log(this)
+function getClass$1(date, pad) {
+	const classnames = ['apocCalendar-Component_Date'];
+	if (!pad && (date.prev || date.next)) {
+		classnames.push('apocCalendar-Is_Hidden');
+	}
+
+	if (date.prev) {
+		classnames.push('apocCalendar-Is_Prev');
+	} else if (date.next) {
+		classnames.push('apocCalendar-Is_Next');
+	}
+	return classnames.join(' ');
+}
+
+function encapsulateStyles$2(node) {
+	setAttribute(node, "svelte-1056091150", "");
+}
+
+function add_css$2() {
+	var style = createElement("style");
+	style.id = 'svelte-1056091150-style';
+	style.textContent = "[svelte-1056091150].apocCalendar-Is_Hidden,[svelte-1056091150] .apocCalendar-Is_Hidden{visibility:hidden}";
+	appendNode(style, document.head);
 }
 
 function create_main_fragment$3(state, component) {
@@ -4746,12 +4795,18 @@ function create_main_fragment$3(state, component) {
 
 // (1:0) {{#if date}}
 function create_if_block$2(state, component) {
-	var div, text_value = state.date.date, text;
+	var div, text_value = state.date.date, text, div_class_value;
 
 	return {
 		c: function create() {
 			div = createElement("div");
 			text = createText(text_value);
+			this.h();
+		},
+
+		h: function hydrate() {
+			encapsulateStyles$2(div);
+			div.className = div_class_value = getClass$1(state.date, state.pad);
 		},
 
 		m: function mount(target, anchor) {
@@ -4762,6 +4817,10 @@ function create_if_block$2(state, component) {
 		p: function update(changed, state) {
 			if ((changed.date) && text_value !== (text_value = state.date.date)) {
 				text.data = text_value;
+			}
+
+			if ((changed.date || changed.pad) && div_class_value !== (div_class_value = getClass$1(state.date, state.pad))) {
+				div.className = div_class_value;
 			}
 		},
 
@@ -4777,21 +4836,13 @@ function Date_cell(options) {
 	init(this, options);
 	this._state = assign({}, options.data);
 
-	var _oncreate = oncreate$2.bind(this);
-
-	if (!options.root) {
-		this._oncreate = [_oncreate];
-	} else {
-	 	this.root._oncreate.push(_oncreate);
-	 }
+	if (!document.getElementById("svelte-1056091150-style")) add_css$2();
 
 	this._fragment = create_main_fragment$3(this._state, this);
 
 	if (options.target) {
 		this._fragment.c();
 		this._fragment.m(options.target, options.anchor || null);
-
-		callAll(this._oncreate);
 	}
 }
 
@@ -4816,8 +4867,13 @@ function getDayCellClass(store, {day}) {
 	return classnames.join(' ');
 }
 
-function getDateCellClass(date, minDate, maxDate) {
+function getDateCellClass(date, minDate, maxDate, pad) {
 	const classnames = ['apocCalendar-Component_DateCell'];
+
+	if (!pad && (date.next || date.prev)) {
+		classnames.push('apocCalendar-Is_Hidden');
+	}
+
 	if (date.selected) {
 		classnames.push('apocCalendar-Is_Selected');
 	}
@@ -4828,7 +4884,7 @@ function getDateCellClass(date, minDate, maxDate) {
 		classnames.push('apocCalendar-Is_Prev');
 	}
 
-	if (date.disabled) {
+	if (date.disabled || (date.year === maxDate.year && date.month === maxDate.month)) {
 		classnames.push('apocCalendar-Is_Disabled');
 	}
 
@@ -4876,10 +4932,11 @@ var methods$1 = {
 };
 
 function oncreate$1() {
-	const {store, minDate, maxDate, initial} = this.get();
+	const {store, minDate, maxDate, initial, pad} = this.get();
 	const initialDate = new Date(initial);
     const year = initialDate.getFullYear();
     const month = initialDate.getMonth();
+	// store.pad = pad;
 	store.setOptions({minDate, maxDate});
 	store.setDates(year, month, this.options.data.pagerStep, true);
 
@@ -4902,13 +4959,13 @@ function oncreate$1() {
 }
 
 function encapsulateStyles$1(node) {
-	setAttribute(node, "svelte-2681641450", "");
+	setAttribute(node, "svelte-1041090808", "");
 }
 
 function add_css$1() {
 	var style = createElement("style");
-	style.id = 'svelte-2681641450-style';
-	style.textContent = "[svelte-2681641450].apocCalendar-Component_DateTable,[svelte-2681641450] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-2681641450].apocCalendar-Component_DayCell,[svelte-2681641450] .apocCalendar-Component_DayCell,[svelte-2681641450].apocCalendar-Component_DateCell,[svelte-2681641450] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer;background:#fff}[svelte-2681641450].apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-2681641450] .apocCalendar-Component_DayCell.apocCalendar-Is_Selected,[svelte-2681641450].apocCalendar-Component_DateCell.apocCalendar-Is_Selected,[svelte-2681641450] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected{background:#cb1b45}[svelte-2681641450].apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2681641450] .apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2681641450].apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-2681641450] .apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover{background:#ccc}[svelte-2681641450].apocCalendar-Is_Prev,[svelte-2681641450] .apocCalendar-Is_Prev,[svelte-2681641450].apocCalendar-Is_Next,[svelte-2681641450] .apocCalendar-Is_Next,[svelte-2681641450].apocCalendar-Is_Disabled,[svelte-2681641450] .apocCalendar-Is_Disabled{opacity:.3}";
+	style.id = 'svelte-1041090808-style';
+	style.textContent = "[svelte-1041090808].apocCalendar-Component_DateTable,[svelte-1041090808] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-1041090808].apocCalendar-Component_DayCell,[svelte-1041090808] .apocCalendar-Component_DayCell,[svelte-1041090808].apocCalendar-Component_DateCell,[svelte-1041090808] .apocCalendar-Component_DateCell{transition:.1s;padding:1em .5em;cursor:pointer;background:#fff}[svelte-1041090808].apocCalendar-Component_DayCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled),[svelte-1041090808] .apocCalendar-Component_DayCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled),[svelte-1041090808].apocCalendar-Component_DateCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled),[svelte-1041090808] .apocCalendar-Component_DateCell.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled){background:#cb1b45}[svelte-1041090808].apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-1041090808] .apocCalendar-Component_DayCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-1041090808].apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover,[svelte-1041090808] .apocCalendar-Component_DateCell:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover{background:#ccc}[svelte-1041090808].apocCalendar-Is_Disabled,[svelte-1041090808] .apocCalendar-Is_Disabled{opacity:.3}";
 	appendNode(style, document.head);
 }
 
@@ -5058,7 +5115,7 @@ function create_main_fragment$1(state, component) {
 
 			var dates = state.dates;
 
-			if (changed.dates || changed.minDate || changed.maxDate) {
+			if (changed.dates || changed.minDate || changed.maxDate || changed.pad) {
 				for (var i = 0; i < dates.length; i += 1) {
 					if (each_1_blocks[i]) {
 						each_1_blocks[i].p(changed, state, dates, dates[i], i);
@@ -5173,7 +5230,7 @@ function create_each_block_1(state, dates, date_1, date_index_1, component) {
 
 	var datecell = new Date_cell({
 		root: component.root,
-		data: { date: date_1 }
+		data: { date: date_1, pad: state.pad }
 	});
 
 	return {
@@ -5184,7 +5241,7 @@ function create_each_block_1(state, dates, date_1, date_index_1, component) {
 		},
 
 		h: function hydrate() {
-			li.className = li_class_value = getDateCellClass(date_1, state.minDate, state.maxDate);
+			li.className = li_class_value = getDateCellClass(date_1, state.minDate, state.maxDate, state.pad);
 			addListener(li, "click", click_handler_1);
 			addListener(li, "mousedown", mousedown_handler);
 			addListener(li, "mousemove", mousemove_handler);
@@ -5205,9 +5262,10 @@ function create_each_block_1(state, dates, date_1, date_index_1, component) {
 		p: function update(changed, state, dates, date_1, date_index_1) {
 			var datecell_changes = {};
 			if (changed.dates) datecell_changes.date = date_1;
+			if (changed.pad) datecell_changes.pad = state.pad;
 			datecell._set(datecell_changes);
 
-			if ((changed.dates || changed.minDate || changed.maxDate) && li_class_value !== (li_class_value = getDateCellClass(date_1, state.minDate, state.maxDate))) {
+			if ((changed.dates || changed.minDate || changed.maxDate || changed.pad) && li_class_value !== (li_class_value = getDateCellClass(date_1, state.minDate, state.maxDate, state.pad))) {
 				li.className = li_class_value;
 			}
 
@@ -5263,7 +5321,7 @@ function Month(options) {
 	init(this, options);
 	this._state = assign(data$1(), options.data);
 
-	if (!document.getElementById("svelte-2681641450-style")) add_css$1();
+	if (!document.getElementById("svelte-1041090808-style")) add_css$1();
 
 	var _oncreate = oncreate$1.bind(this);
 
@@ -5298,7 +5356,7 @@ function data$2() {
 	};
 }
 
-function getClass$1(type) {
+function getClass$2(type) {
 	const classnames = ['apocCalendar-Component_Pager'];
 
 	if (type === 'right') {
@@ -5329,7 +5387,7 @@ var methods$2 = {
 	}
 };
 
-function oncreate$3() {
+function oncreate$2() {
 	console.log(this.root);
 	const store = this.get('store');
 	store.observe('currentDates', currentDates => {
@@ -5337,11 +5395,11 @@ function oncreate$3() {
 	});
 }
 
-function encapsulateStyles$2(node) {
+function encapsulateStyles$3(node) {
 	setAttribute(node, "svelte-3351639003", "");
 }
 
-function add_css$2() {
+function add_css$3() {
 	var style = createElement("style");
 	style.id = 'svelte-3351639003-style';
 	style.textContent = "[svelte-3351639003].apocCalendar-Component_Pager,[svelte-3351639003] .apocCalendar-Component_Pager{position:absolute;bottom:50%;-webkit-transform:translateY(50%);transform:translateY(50%);cursor:pointer;border-radius:50%;background:#444;width:5em;height:5em;z-index:1}[svelte-3351639003].apocCalendar-Component_Pager svg,[svelte-3351639003] .apocCalendar-Component_Pager svg{position:absolute;bottom:50%;-webkit-transform:translate(50%, 50%);transform:translate(50%, 50%);width:2em;height:2em;fill:#fff}[svelte-3351639003].apocCalendar-Is_Left,[svelte-3351639003] .apocCalendar-Is_Left{left:-2.5em}[svelte-3351639003].apocCalendar-Is_Left svg,[svelte-3351639003] .apocCalendar-Is_Left svg{right:calc(50% + 1em)}[svelte-3351639003].apocCalendar-Is_Right,[svelte-3351639003] .apocCalendar-Is_Right{right:-2.5em}[svelte-3351639003].apocCalendar-Is_Right svg,[svelte-3351639003] .apocCalendar-Is_Right svg{right:calc(50% - 1em)}";
@@ -5431,8 +5489,8 @@ function create_if_block$3(state, component) {
 		},
 
 		h: function hydrate() {
-			encapsulateStyles$2(div);
-			div.className = div_class_value = getClass$1(state.type);
+			encapsulateStyles$3(div);
+			div.className = div_class_value = getClass$2(state.type);
 			addListener(div, "click", click_handler);
 		},
 
@@ -5441,7 +5499,7 @@ function create_if_block$3(state, component) {
 		},
 
 		p: function update(changed, state) {
-			if ((changed.type) && div_class_value !== (div_class_value = getClass$1(state.type))) {
+			if ((changed.type) && div_class_value !== (div_class_value = getClass$2(state.type))) {
 				div.className = div_class_value;
 			}
 		},
@@ -5473,8 +5531,8 @@ function create_if_block_1$1(state, component) {
 		},
 
 		h: function hydrate() {
-			encapsulateStyles$2(div);
-			div.className = div_class_value = getClass$1(state.type);
+			encapsulateStyles$3(div);
+			div.className = div_class_value = getClass$2(state.type);
 			addListener(div, "click", click_handler);
 		},
 
@@ -5483,7 +5541,7 @@ function create_if_block_1$1(state, component) {
 		},
 
 		p: function update(changed, state) {
-			if ((changed.type) && div_class_value !== (div_class_value = getClass$1(state.type))) {
+			if ((changed.type) && div_class_value !== (div_class_value = getClass$2(state.type))) {
 				div.className = div_class_value;
 			}
 		},
@@ -5502,9 +5560,9 @@ function Pager(options) {
 	init(this, options);
 	this._state = assign(data$2(), options.data);
 
-	if (!document.getElementById("svelte-3351639003-style")) add_css$2();
+	if (!document.getElementById("svelte-3351639003-style")) add_css$3();
 
-	var _oncreate = oncreate$3.bind(this);
+	var _oncreate = oncreate$2.bind(this);
 
 	if (!options.root) {
 		this._oncreate = [_oncreate];
@@ -5555,6 +5613,7 @@ function data() {
 
 	return {
 		store: new CalendarStore(),
+		pad: true,
 		min: todayDate,
 		max: nextYearDate,
 		initial: todayDate,
@@ -5619,7 +5678,6 @@ var methods = {
 	sync(...calendars) {
 		const {store} = this.get();
 		const data = this.getData();
-		console.log(data);
 
 		calendars.forEach(calendar => {
 			calendar.setData(data);
@@ -5666,13 +5724,13 @@ function oncreate() {
 }
 
 function encapsulateStyles(node) {
-	setAttribute(node, "svelte-850622465", "");
+	setAttribute(node, "svelte-1567272299", "");
 }
 
 function add_css() {
 	var style = createElement("style");
-	style.id = 'svelte-850622465-style';
-	style.textContent = "[svelte-850622465].apocCalendar-Component_Box,[svelte-850622465] .apocCalendar-Component_Box{position:relative;font-size:1em;box-sizing:border-box;background:#444;border:1px solid #444}[svelte-850622465].apocCalendar-Component_Header,[svelte-850622465] .apocCalendar-Component_Header{font-size:1.2em;font-weight:bold;line-height:4;margin-bottom:1px;background:#fff;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}";
+	style.id = 'svelte-1567272299-style';
+	style.textContent = "[svelte-1567272299].apocCalendar-Component_Box,[svelte-1567272299] .apocCalendar-Component_Box{position:relative;font-size:1em;box-sizing:border-box;background:#444;border:1px solid #444}[svelte-1567272299].apocCalendar-Component_Header,[svelte-1567272299] .apocCalendar-Component_Header{font-size:1.2em;font-weight:bold;line-height:4;margin-bottom:1px;background:#fff;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}";
 	appendNode(style, document.head);
 }
 
@@ -5687,6 +5745,7 @@ function create_main_fragment(state, component) {
 			initial: state.initial,
 			minDate: state.minDate,
 			maxDate: state.maxDate,
+			pad: state.pad,
 			pagerStep: state.pager.step
 		}
 	});
@@ -5738,6 +5797,7 @@ function create_main_fragment(state, component) {
 			if (changed.initial) month_changes.initial = state.initial;
 			if (changed.minDate) month_changes.minDate = state.minDate;
 			if (changed.maxDate) month_changes.maxDate = state.maxDate;
+			if (changed.pad) month_changes.pad = state.pad;
 			if (changed.pager) month_changes.pagerStep = state.pager.step;
 			month._set(month_changes);
 
@@ -5861,7 +5921,7 @@ function Calendar$1(options) {
 	this._state = assign(data(), options.data);
 	this._recompute({ min: 1, max: 1 }, this._state);
 
-	if (!document.getElementById("svelte-850622465-style")) add_css();
+	if (!document.getElementById("svelte-1567272299-style")) add_css();
 
 	var _oncreate = oncreate.bind(this);
 

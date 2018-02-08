@@ -5,9 +5,9 @@
 <script>
 export default {
 	helpers: {
-		getClass(store, {day}) {
-			const classnames = []
-			if (store.isActiveDay(day)) {
+		getClass(store, date) {
+			const classnames = ['apocCalendar-Component_Day']
+			if (store.isActiveDay(date.day)) {
 				classnames.push('apocCalendar-Is_Selected');
 			}
 			return classnames.join(' ');

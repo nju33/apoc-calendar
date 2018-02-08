@@ -1,6 +1,6 @@
 <section class="apocCalendar-Component_Box">
 	<header class="apocCalendar-Component_Header">{{head(year, month + 1)}}</header>
-	<Month :store :day :initial :minDate :maxDate pagerStep="{{pager.step}}" />
+	<Month :store :day :initial :minDate :maxDate :pad pagerStep="{{pager.step}}" />
 	{{#if pager.prev}}
 		<Pager :store step="{{pager.step}}" />
 	{{/if}}
@@ -36,6 +36,7 @@ export default {
 
 		return {
 			store: new CalendarStore(),
+			pad: true,
 			min: todayDate,
 			max: nextYearDate,
 			initial: todayDate,
@@ -125,7 +126,6 @@ export default {
 		sync(...calendars) {
 			const {store} = this.get();
 			const data = this.getData();
-			console.log(data)
 
 			calendars.forEach(calendar => {
 				calendar.setData(data);

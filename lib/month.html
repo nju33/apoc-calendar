@@ -5,12 +5,12 @@
 		</li>
 	{{/each}}
 	{{#each dates as date}}
-		<li class="{{getDateCellClass(date, minDate, maxDate)}}"
+		<li class="{{getDateCellClass(date, minDate, maxDate, pad)}}"
 			on:click="selectDate(date)"
 			on:mousedown="handleMousedown(date)"
 			on:mousemove="handleMousemove(date)"
 			on:mouseup="handleMouseup(date)">
-			<DateCell :date />
+			<DateCell :date :pad />
 		</li>
 	{{/each}}
 </ul>
@@ -40,8 +40,13 @@ export default {
 			}
 			return classnames.join(' ');
 		},
-		getDateCellClass(date, minDate, maxDate) {
+		getDateCellClass(date, minDate, maxDate, pad) {
 			const classnames = ['apocCalendar-Component_DateCell'];
+
+			if (!pad && (date.next || date.prev)) {
+				classnames.push('apocCalendar-Is_Hidden');
+			}
+
 			if (date.selected) {
 				classnames.push('apocCalendar-Is_Selected');
 			}
@@ -52,7 +57,7 @@ export default {
 				classnames.push('apocCalendar-Is_Prev');
 			}
 
-			if (date.disabled) {
+			if (date.disabled || (date.year === maxDate.year && date.month === maxDate.month)) {
 				classnames.push('apocCalendar-Is_Disabled');
 			}
 
@@ -99,10 +104,11 @@ export default {
 		}
 	},
 	oncreate() {
-		const {store, minDate, maxDate, initial} = this.get();
+		const {store, minDate, maxDate, initial, pad} = this.get();
 		const initialDate = new Date(initial);
     const year = initialDate.getFullYear();
     const month = initialDate.getMonth();
+		// store.pad = pad;
 		store.setOptions({minDate, maxDate});
 		store.setDates(year, month, this.options.data.pagerStep, true);
 
@@ -147,7 +153,7 @@ export default {
 	cursor: pointer;
 	background: #fff;
 
-	&.apocCalendar-Is_Selected {
+	&.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled) {
 		background: #cb1b45;
 	}
 
@@ -156,8 +162,8 @@ export default {
 	}
 }
 
-.apocCalendar-Is_Prev,
-.apocCalendar-Is_Next,
+/* .apocCalendar-Is_Prev, */
+/* .apocCalendar-Is_Next, */
 .apocCalendar-Is_Disabled {
 	opacity: .3;
 }
