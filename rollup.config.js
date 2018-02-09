@@ -33,6 +33,7 @@ module.exports = {
     commonjs({include: 'node_modules/**'}),
     babel({include: 'lib/**/*.js'}),
     svelte({
+      store: true,
       extensions: ['.html'],
       include: './lib/**/*.html',
       preprocess: {

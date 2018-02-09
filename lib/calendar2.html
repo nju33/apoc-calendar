@@ -1,5 +1,5 @@
 <section class="apocCalendar-Component_Box">
-	<header class="apocCalendar-Component_Header">{{$year}}</header>
+	<header class="apocCalendar-Component_Header">{{head($year, $month)}}</header>
 	<!-- <Month :store :day :initial :minDate :maxDate :pad $pagerStep="{{$pager.step}}" /> -->
 	<!-- {{#if $pager.prev}} -->
 		<!-- <Pager step="{{$pager.step}}" /> -->
@@ -30,10 +30,8 @@ export default {
 		return {};
 	},
 	helpers: {
-		head(year, month) {
-			console.log(arguments)
-			console.log(year);
-			return 'a';
+		head: (year, month) => {
+			return `${year}.${month}`;
 		}
 	},
 	methods: {
@@ -41,7 +39,7 @@ export default {
 	oncreate() {
 		// console.log(this)
 		console.log(this.store)
-		console.log(this.store.get())
+		console.log(this.store.get('year'))
 		// const {store} = this.get();
     //
 		// store.observe('year', year => {
