@@ -2,6 +2,8 @@ const {promisify} = require('util');
 const nodeResolver = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
+const nodent = require('rollup-plugin-nodent');
+const buble = require('rollup-plugin-buble');
 const svelte = require('rollup-plugin-svelte');
 const replace = require('rollup-plugin-replace');
 const json = require('rollup-plugin-json');
@@ -29,7 +31,7 @@ module.exports = {
   plugins: [
     nodeResolver({jsnext: true}),
     commonjs({include: 'node_modules/**'}),
-    babel({include: 'lib/**/*.js', runtimeHelpers: true}),
+    babel({include: 'lib/**/*.js'}),
     svelte({
       extensions: ['.html'],
       include: './lib/**/*.html',
@@ -48,6 +50,18 @@ module.exports = {
           return {code: css};
         },
       },
+    }),
+    nodent(),
+    buble({
+      target: {
+        chrome: 49,
+        node: 4,
+        firefox: 45,
+        safari: 9,
+        edge: 12,
+        ie: 11,
+      },
+      transforms: {dangerousForOf: true},
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(nodeEnv),
