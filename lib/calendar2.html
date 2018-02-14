@@ -1,6 +1,7 @@
 <section class="apocCalendar-Component_Box">
 	<header class="apocCalendar-Component_Header">{{head($year, $month)}}</header>
 	<!-- <Month :store :day :initial :minDate :maxDate :pad $pagerStep="{{$pager.step}}" /> -->
+	<Month />
 	<!-- {{#if $pager.prev}} -->
 		<!-- <Pager step="{{$pager.step}}" /> -->
 	<!-- {{/if}} -->
@@ -13,7 +14,8 @@
 <script>
 import pupa from 'pupa';
 import CalendarStore from './store'
-import Month from './month.html'
+// import Month from './month.html'
+import Month from './month2.html'
 import Pager from './pager.html'
 
 // const store = new CalendarStore();
@@ -74,9 +76,9 @@ export default {
 }
 
 .apocCalendar-Component_Header {
-	font-size: 1.2em;
+	font-size: 1em;
 	font-weight: bold;
-	line-height: 4;
+	line-height: 2;
 	margin-bottom: 1px;
 	background: #fff;
 	user-select: none;

@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
+
 (() => {
-  const today = new Date();
+  const now = new Date();
 
   // eslint-disable-next-line
   // const single = new ApocCalendar({
@@ -7,30 +9,12 @@
   // });
 
   // eslint-disable-next-line
-  const multiLeft = new ApocCalendar(document.getElementById('multi-left'),
+  const multiLeft = new ApocCalendar(
+    document.getElementById('multi-left'),
     {
-      pad: false,
-      pager: {
-        prev: true,
-        // next: true,
-        step: 2,
-      },
-
-      // onClickPagerPrev: () => {
-      // }
-
-      head(year, month) {
-        return `${year}年${month}月`;
-      },
-      // day(day) {
-      //   return 'a';
-      // },
-
-      // min: '2018-01-01',
-      // max: '2018-12-31',
-      // eslint-disable-next-line
-      max: dateFns.addMonths(today, 12)
-    });
+      // 'date.max': dateFns.addMonths(now, 12)
+    }
+  );
 
   // eslint-disable-next-line no-undef
   // eslint-disable-next-line
