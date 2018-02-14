@@ -1,12 +1,16 @@
+<span style="display:none">{{key}}</span>
 <ul class="apocCalendar-Component_DateTable">
 	{{#each $days as day}}
-		<li class="{{getDayCellClass(day)}}" on:click="selectDay(day)">
+		<li class="{{getDayCellClass(day, $__key_dates__)}}" on:click="selectDay(day)">
 			<DayCell :day />
 		</li>
 	{{/each}}
 
 	{{#each $dates as date}}
-		<li class="{{getDateCellClass(date)}}">
+		<li
+			class="{{getDateCellClass(date, $__key_dates__)}}"
+			on:click="selectDate(date)"
+		>
 			<DateCell :date />
 		</li>
 	{{/each}}
@@ -28,12 +32,41 @@ export default {
 	components: {DayCell, DateCell},
 	data() {
 		return {
-		// 	dates: [],
-    //
-		// 	mousedown: false,
-		// 	from: null,
-			to: null,
+			key: ''
 		};
+	},
+	computed: {
+		// getDateCellClass(dates) {
+		// 	return date => {
+		// 		const classnames = ['apocCalendar-Component_DateCell'];
+    //
+		// 		// console.log(minDate)
+    //
+		// 		if (date instanceof DatePad) {
+		// 			classnames.shift();
+		// 		}
+    //
+		// 		// if (!pad && (date.next || date.prev)) {
+		// 		// 	classnames.push('apocCalendar-Is_Hidden');
+		// 		// }
+		// 		//
+		// 		if (date.isSelected()) 	{
+		// 			classnames.push('apocCalendar-Is_Selected');
+		// 		}
+		// 		//
+		// 		// if (date.next) {
+		// 		// 	classnames.push('apocCalendar-Is_Next');
+		// 		// } else if (date.prev) {
+		// 		// 	classnames.push('apocCalendar-Is_Prev');
+		// 		// }
+		// 		//
+		// 		// if (date.disabled || (date.year === maxDate.year && date.month === maxDate.month)) {
+		// 		// 	classnames.push('apocCalendar-Is_Disabled');
+		// 		// }
+    //
+		// 		return classnames.join(' ');
+		// 	}
+		// }
 	},
 	helpers: {
 		// getDayCellClass(store, {day}) {
@@ -44,8 +77,11 @@ export default {
 			// }
 			return classnames.join(' ');
 		},
-		getDateCellClass(date, minDate, maxDate, pad) {
+		getDateCellClass(date, selection) {
 			const classnames = ['apocCalendar-Component_DateCell'];
+
+			// console.log(minDate)
+			// console.log(1, selection)
 
 			if (date instanceof DatePad) {
 				classnames.shift();
@@ -55,9 +91,9 @@ export default {
 			// 	classnames.push('apocCalendar-Is_Hidden');
 			// }
       //
-			// if (date.selected) {
-			// 	classnames.push('apocCalendar-Is_Selected');
-			// }
+			if (date.isSelected()) {
+				classnames.push('apocCalendar-Is_Selected');
+			}
       //
 			// if (date.next) {
 			// 	classnames.push('apocCalendar-Is_Next');
@@ -72,7 +108,15 @@ export default {
 			return classnames.join(' ');
 		}
 	},
-	// methods: {
+	methods: {
+		selectDay(day) {
+			// this.get('store').selectDay(day);
+		},
+		selectDate(date) {
+			date.select();
+			this.store.udpateDates();
+		},
+	},
 	// 	selectDay(day) {
 	// 		this.get('store').selectDay(day);
 	// 	},

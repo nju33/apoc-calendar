@@ -16,6 +16,10 @@
     }
   );
 
+  multiLeft.on('onUpdateDates', function () {
+    console.log(arguments);
+  });
+
   // eslint-disable-next-line no-undef
   // eslint-disable-next-line
   // const multiLeft = new ApocCalendar({
