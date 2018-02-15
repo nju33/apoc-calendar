@@ -1,12 +1,9 @@
 {
   "presets": [
-    ["env", {
-      "browsers": ["> 3%, last 2 versions, not ie < 11"],
-      "modules": false
-    }],
     "flow"
   ],
   "plugins": [
+    "external-helpers",
     "transform-object-rest-spread",
     "transform-class-properties"
   ],

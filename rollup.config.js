@@ -25,7 +25,9 @@ const banner = `
 const nodeEnv = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  banner,
+  output: {
+    banner,
+  },
   cache: null,
   input: 'lib/apoc-calendar.js',
   plugins: [
@@ -41,12 +43,18 @@ module.exports = {
           const sassResult = await pSassRender({
             data: content,
           });
+
           const {css} = await postcss([
             autoprefixer({
               browsers: ['last 2 versions', 'not < 1% in jp', 'not < 0.5%'],
               grid: true,
             }),
-          ]).process(sassResult.css.toString());
+          ]).process(sassResult.css.toString(), {
+            // in the below, it's provisional to prevent warning message
+            from: 'dummy.css',
+            to: 'dummy.css',
+            map: {},
+          });
 
           return {code: css};
         },
