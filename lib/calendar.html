@@ -1,5 +1,11 @@
-<section class="apocCalendar-Component_Box">
-	<header class="apocCalendar-Component_Header">{{head($year, $month + 1)}}</header>
+<section
+	class="apocCalendar-Component_Box"
+	style="{{getBoxStyles($color)}}"
+>
+	<header
+		class="apocCalendar-Component_Header"
+		style="{{getheaderStyles($color)}}"
+	>{{head($year, $month + 1)}}</header>
 	<Month />
 
 	{{#if $pager.prev}}
@@ -26,6 +32,18 @@ export default {
 		return {};
 	},
 	helpers: {
+		getBoxStyles(color) {
+			return `
+				background: ${color.background.table};
+				border: 1px solid ${color.background.table};
+			`;
+		},
+		getheaderStyles(color) {
+			return `
+				background: ${color.background.cell};
+				color: ${color.text};
+			`;
+		},
 		head: (year, month) => {
 			return `${year}.${month}`;
 		},
@@ -38,8 +56,6 @@ export default {
 	position: relative;
 	font-size: 1em;
 	box-sizing: border-box;
-	background: #444;
-	border: 1px solid #444;
 }
 
 .apocCalendar-Component_Header {
@@ -47,7 +63,6 @@ export default {
 	font-weight: bold;
 	line-height: 2;
 	margin-bottom: 1px;
-	background: #fff;
 	user-select: none;
 }
 </style>

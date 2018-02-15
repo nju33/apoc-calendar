@@ -1,6 +1,10 @@
 <ul class="apocCalendar-Component_DateTable">
 	{{#each $days as day, i}}
-		<li class="{{getDayCellClass($getDayState(i), $__key_dates__)}}" on:click="selectDay(i)">
+		<li
+			class="{{getDayCellClass($getDayState(i), $__key_dates__)}}"
+			style="{{getDayCellStyle($getDayState(i), $color, $__key_dates__)}}"
+			on:click="selectDay(i)"
+		>
 			<DayCell :day />
 		</li>
 	{{/each}}
@@ -8,7 +12,10 @@
 	{{#each $dates as date}}
 		<li
 			class="{{getDateCellClass(date, $__key_dates__)}}"
+			style="{{getDateCellStyle(date, $color, $__key_dates__)}}"
 			on:click="selectDate(date)"
+			on:mouseenter="handleDateMouseEnter(event)"
+			on:mouseleave="handleDateMouseLeave(event)"
 		>
 			<DateCell :date />
 		</li>
@@ -34,7 +41,19 @@ export default {
 
 			return classnames.join(' ');
 		},
-		getDateCellClass(date, selection) {
+		getDayCellStyle(active, color) {
+			const styles = [
+				`background: ${color.background.cell}`,
+				`color: ${color.text}`,
+			];
+
+			if (active) {
+				styles.push(`background: ${color.active}`);
+			}
+
+			return styles.join(';');
+		},
+		getDateCellClass(date) {
 			const classnames = ['apocCalendar-Component_DateCell'];
 
 			if (date instanceof DatePad) {
@@ -46,6 +65,22 @@ export default {
 			}
 
 			return classnames.join(' ');
+		},
+		getDateCellStyle(date, color) {
+			const styles = [
+				`color: ${color.text}`,
+			];
+
+			if (!date instanceof DatePad) {
+				styles.push(`background: ${color.background.cell}`);
+
+				if (date.isSelected()) {
+					styles.push(`background: ${color.background.active}`);
+				}
+			}
+
+
+			return styles.join(';')
 		}
 	},
 	methods: {
@@ -53,12 +88,38 @@ export default {
 			this.store.selectDay(day);
 		},
 		selectDate(date) {
+			if (date instanceof DatePad) {
+				return;
+			}
+
 			if (date.isSelected()) {
 				date.deselect();
 			} else {
 				date.select();
 			}
 			this.store.updateDates();
+		},
+		setActiveColorToBackground(el) {
+			Object.assign(el.style, {
+				background: this.store.color.background.hover
+			});
+		},
+		resetColorToBackground(el) {
+			Object.assign(el.style, {
+				background: null
+			});
+		},
+		handleDateMouseEnter(ev) {
+			const el = ev.target;
+			if (!el.classList.contains('apocCalendar-Is_Selected') && !el.classList.contains('apocCalendar-Is_Pad') ) {
+				this.setActiveColorToBackground(el);
+			}
+		},
+		handleDateMouseLeave(ev) {
+			const el = ev.target;
+			if (!el.classList.contains('apocCalendar-Is_Selected') && !el.classList.contains('apocCalendar-Is_Pad') ) {
+				this.resetColorToBackground(el);
+			}
 		},
 	},
 }
@@ -88,13 +149,13 @@ export default {
 	background: #fff;
 	margin: 0;
 
-	&.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Hidden) {
+	/* &.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Hidden) {
 		background: #cb1b45;
-	}
+	} */
 
-	&:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):not(.apocCalendar-Is_Pad):hover {
+	/* &:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):not(.apocCalendar-Is_Pad):hover {
 		background: #ccc;
-	}
+	} */
 }
 
 .apocCalendar-Is_Pad {
