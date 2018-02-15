@@ -1,12 +1,13 @@
 <section class="apocCalendar-Component_Box">
-	<header class="apocCalendar-Component_Header">{{head(year, month + 1)}}</header>
-	<Month :store :day :initial :minDate :maxDate :pad pagerStep="{{pager.step}}" />
-	{{#if pager.prev}}
-		<Pager :store step="{{pager.step}}" />
+	<header class="apocCalendar-Component_Header">{{head($year, $month + 1)}}</header>
+	<Month />
+
+	{{#if $pager.prev}}
+		<Pager />
 	{{/if}}
 
-	{{#if pager.next}}
-		<Pager :store type="right" step="{{pager.step}}" />
+	{{#if $pager.next}}
+		<Pager type="right" />
 	{{/if}}
 </section>
 
@@ -16,165 +17,19 @@ import CalendarStore from './store'
 import Month from './month.html'
 import Pager from './pager.html'
 
-// const store = new CalendarStore();
-// if (process.env.NODE_ENV !== 'production') {
-// 	window.store = store;
-// }
-
 export default {
 	components: {
 		Month,
 		Pager,
 	},
 	data() {
-		const todayDate = new Date();
-		const nextYearDate = new Date(
-			todayDate.getFullYear() + 1,
-			todayDate.getMonth(),
-			todayDate.getDate()
-		);
-
-		return {
-			store: new CalendarStore(),
-			pad: true,
-			min: todayDate,
-			max: nextYearDate,
-			initial: todayDate,
-			pager: {
-				prev: true,
-				next: true,
-				step: 1,
-			},
-			// onClickPagerPrev(step = 1) {
-			// 	this.store.prev(step);
-			// },
-			// onClickPagerNext(store, step = 1) {
-			// 	// console.log(arguments)
-			// 	this.get('store').next(step);
-			// },
-			head: (year, month) => `${year}.${month}`,
-			day: day => {
-				switch (day) {
-					case 0: {
-						return '日';
-					}
-					case 1: {
-						return '月';
-					}
-					case 2: {
-						return '火';
-					}
-					case 3: {
-						return '水';
-					}
-					case 4: {
-						return '木';
-					}
-					case 5: {
-						return '金';
-					}
-					case 6: {
-						return '土';
-					}
-					default: {
-						throw new Error('err');
-					}
-				}
-			},
-		};
-	},
-	computed: {
-		minDate: min => {
-			const date = new Date(min);
-			return {
-				year: date.getFullYear(),
-				month: date.getMonth(),
-				date: date.getDate(),
-				day: date.getDay(),
-			};
-		},
-		maxDate: max => {
-			const date = new Date(max);
-			return {
-				year: date.getFullYear(),
-				month: date.getMonth(),
-				date: date.getDate(),
-				day: date.getDay(),
-			};
-		}
+		return {};
 	},
 	helpers: {
-		headText(template, year, month) {
-			return pupa(template, {
-				year: year,
-				month: month + 1,
-			});
+		head: (year, month) => {
+			return `${year}.${month}`;
 		},
 	},
-	methods: {
-		reset() {
-			this.get('store').reset(this.step);
-		},
-		setData(data) {
-			const {store} = this.get();
-			store.setData(data);
-		},
-		getData() {
-			const {store} = this.get();
-			return store.get('data');
-		},
-		// share(...calendars) {
-		// 	calendars.forEach(calendar => {
-		// 		calendar.replaceData(this.store);
-		// 	});
-		// },
-		sync(...calendars) {
-			const {store} = this.get();
-			const data = this.getData();
-
-			calendars.forEach(calendar => {
-				calendar.setData(data);
-			});
-		},
-		prev() {
-			const {store, pager: {step}} = this.get();
-			store.prev(step);
-		},
-		next() {
-			const {store, pager: {step}} = this.get();
-			store.next(step);
-		},
-		onClickPagerPrev() {
-			this.prev();
-			this.fire('prev');
-		},
-		onClickPagerNext() {
-			this.next();
-			this.fire('next');
-		},
-	},
-	oncreate() {
-		console.log(this)
-		const {store} = this.get();
-
-		store.observe('year', year => {
-			this.set({year});
-		});
-		store.observe('month', month => {
-			this.set({month});
-		});
-
-		const handleChange = () => {
-			const data = this.get('store').exportData();
-			if (data.length === 0) {
-				return;
-			}
-			this.fire('change', {data});
-		}
-
-		store.observe('currentDates', handleChange);
-		store.observe('data', handleChange);
-	}
 };
 </script>
 
@@ -182,16 +37,15 @@ export default {
 .apocCalendar-Component_Box {
 	position: relative;
 	font-size: 1em;
-	/* padding: 0 2em; */
 	box-sizing: border-box;
 	background: #444;
 	border: 1px solid #444;
 }
 
 .apocCalendar-Component_Header {
-	font-size: 1.2em;
+	font-size: 1em;
 	font-weight: bold;
-	line-height: 4;
+	line-height: 2;
 	margin-bottom: 1px;
 	background: #fff;
 	user-select: none;

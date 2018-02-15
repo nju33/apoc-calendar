@@ -1,16 +1,16 @@
 <ul class="apocCalendar-Component_DateTable">
-	{{#each dates.slice(0, 7) as date @day}}
-		<li class="{{getDayCellClass(store, date)}}" on:click="selectDay(date.day)">
-			<DayCell :store :data :date :day />
+	{{#each $days as day, i}}
+		<li class="{{getDayCellClass($getDayState(i), $__key_dates__)}}" on:click="selectDay(i)">
+			<DayCell :day />
 		</li>
 	{{/each}}
-	{{#each dates as date}}
-		<li class="{{getDateCellClass(date, minDate, maxDate, pad)}}"
+
+	{{#each $dates as date}}
+		<li
+			class="{{getDateCellClass(date, $__key_dates__)}}"
 			on:click="selectDate(date)"
-			on:mousedown="handleMousedown(date)"
-			on:mousemove="handleMousemove(date)"
-			on:mouseup="handleMouseup(date)">
-			<DateCell :date :pad />
+		>
+			<DateCell :date />
 		</li>
 	{{/each}}
 </ul>
@@ -20,45 +20,29 @@ import throttle from 'lodash.throttle';
 import DayCell from './day-cell.html';
 import DateCell from './date-cell.html';
 import {range} from './helpers';
+import DatePad from './date-pad';
 
 export default {
 	components: {DayCell, DateCell},
-	data() {
-		return {
-			dates: [],
-
-			mousedown: false,
-			from: null,
-			to: null,
-		};
-	},
 	helpers: {
-		getDayCellClass(store, {day}) {
+		getDayCellClass(active) {
 			const classnames = ['apocCalendar-Component_DayCell'];
-			if (store.isActiveDay(day)) {
+
+			if (active) {
 				classnames.push('apocCalendar-Is_Selected');
 			}
+
 			return classnames.join(' ');
 		},
-		getDateCellClass(date, minDate, maxDate, pad) {
+		getDateCellClass(date, selection) {
 			const classnames = ['apocCalendar-Component_DateCell'];
 
-			if (!pad && (date.next || date.prev)) {
-				classnames.push('apocCalendar-Is_Hidden');
+			if (date instanceof DatePad) {
+				classnames.push('apocCalendar-Is_Pad');
 			}
 
-			if (date.selected) {
+			if (date.isSelected()) {
 				classnames.push('apocCalendar-Is_Selected');
-			}
-
-			if (date.next) {
-				classnames.push('apocCalendar-Is_Next');
-			} else if (date.prev) {
-				classnames.push('apocCalendar-Is_Prev');
-			}
-
-			if (date.disabled || (date.year === maxDate.year && date.month === maxDate.month)) {
-				classnames.push('apocCalendar-Is_Disabled');
 			}
 
 			return classnames.join(' ');
@@ -66,70 +50,17 @@ export default {
 	},
 	methods: {
 		selectDay(day) {
-			this.get('store').selectDay(day);
+			this.store.selectDay(day);
 		},
 		selectDate(date) {
-			this.get('store').selectDate(date);
-		},
-		handleMousedown(date) {
-			this.set({
-				mousedown: true,
-				from: date,
-				to: null,
-			});
-			this.get('store').selectRangeDate(date);
-		},
-		handleMousemove: throttle(function (date) {
-			if (this.get('mousedown')) {
-				const {store, from} = this.get();
-				if (from === date) {
-					return;
-				}
-
-				this.set({to: date});
-				store.selectRangeDate(from, date);
+			if (date.isSelected()) {
+				date.deselect();
+			} else {
+				date.select();
 			}
-		}, 100),
-		handleMouseup(date) {
-			if (!this.get('mousedown')) {
-				return;
-			}
-
-			this.set({
-				mousedown: false,
-				from: null,
-				to: null,
-			});
-			this.get('store').endSelectRangeDate();
-		}
+			this.store.updateDates();
+		},
 	},
-	oncreate() {
-		console.log(this);
-		const {store, minDate, maxDate, initial, pad} = this.get();
-		const initialDate = new Date(initial);
-    const year = initialDate.getFullYear();
-    const month = initialDate.getMonth();
-		store.pad = pad;
-		store.setOptions({minDate, maxDate});
-		store.setDates(year, month, this.options.data.pagerStep, true);
-
-		this.set({
-			dates: this.options.data.store.currentDates,
-		})
-
-		store.observe('currentDates', currentDates => {
-			this.set({
-				dates: currentDates
-			})
-		});
-		store.observe('data', () => {
-			// console.log(this.get('initial'), store.get('currentDates'))
-			this.set({
-				dates: store.get('currentDates')
-			})
-		});
-
-	}
 }
 </script>
 
@@ -149,23 +80,24 @@ export default {
 
 .apocCalendar-Component_DayCell,
 .apocCalendar-Component_DateCell {
-	transition: .1s;
-	padding: 1em .5em;
+	/* transition: .1s; */
+	font-size: .8em;
+	width: 3em;
+	height: 1.5em;
 	cursor: pointer;
 	background: #fff;
+	margin: 0;
 
 	&.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Hidden) {
 		background: #cb1b45;
 	}
 
-	&:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):hover {
+	&:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):not(.apocCalendar-Is_Pad):hover {
 		background: #ccc;
 	}
 }
 
-/* .apocCalendar-Is_Prev, */
-/* .apocCalendar-Is_Next, */
-.apocCalendar-Is_Disabled {
-	opacity: .3;
+.apocCalendar-Is_Pad {
+	background: transparent;
 }
 </style>

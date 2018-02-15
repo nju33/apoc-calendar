@@ -8,17 +8,49 @@
   //   target: document.getElementById('single'),
   // });
 
+  console.log('now', now);
+
   // eslint-disable-next-line
   const multiLeft = new ApocCalendar(
     document.getElementById('multi-left'),
     {
-      // 'date.max': dateFns.addMonths(now, 12)
+      'date.min': now,
+      'date.max': dateFns.addMonths(now, 13),
+      'pager.next': false,
     }
   );
 
-  multiLeft.on('onUpdateDates', function () {
+  // eslint-disable-next-line
+  const multiRight = new ApocCalendar(
+    document.getElementById('multi-right'),
+    {
+      ref: multiLeft,
+      'pager.prev': false,
+      'pager.next': false,
+    }
+  );
+
+  // eslint-disable-next-line
+  const multiRight2 = new ApocCalendar(
+    document.getElementById('multi-right2'),
+    {
+      ref: multiLeft,
+      'pager.prev': false,
+    }
+  );
+
+  multiLeft.on('onUpdateDates', dates => {
+    console.log(dates);
+  });
+  multiLeft.on('onReachLowerLimit', function () {
+    console.log('aaaaa');
     console.log(arguments);
   });
+  multiLeft.on('onReachUpperLimit', function () {
+    console.log(arguments);
+  });
+
+  // multiRight.connect(multiLeft);
 
   // eslint-disable-next-line no-undef
   // eslint-disable-next-line
