@@ -47,8 +47,9 @@ export default {
 				`color: ${color.text}`,
 			];
 
+			console.log(active)
 			if (active) {
-				styles.push(`background: ${color.active}`);
+				styles.push(`background: ${color.background.active}`);
 			}
 
 			return styles.join(';');
@@ -73,10 +74,10 @@ export default {
 
 			if (!date instanceof DatePad) {
 				styles.push(`background: ${color.background.cell}`);
+			}
 
-				if (date.isSelected()) {
-					styles.push(`background: ${color.background.active}`);
-				}
+			if (date.isSelected()) {
+				styles.push(`background: ${color.background.active}`);
 			}
 
 

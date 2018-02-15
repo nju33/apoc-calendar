@@ -45,4 +45,10 @@
   document.getElementById('reset').addEventListener('click', () => {
     multiLeft.reset();
   });
+
+  console.log(multiLeft);
+  multiLeft.restore([
+    '2018-02-15',
+    '2018-04-04',
+  ]);
 })();
