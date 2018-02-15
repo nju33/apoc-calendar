@@ -5,10 +5,7 @@
   "main": "dist/apoc-calendar.umd.js",
   "jsnext:main": "dist/apoc-calendar.es.js",
   "files": [
-    "dist",
-    "package.json",
-    "LICENSE.md",
-    "README.md"
+    "dist"
   ],
   "scripts": {
     "start": "node dev-server.js",
