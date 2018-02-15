@@ -1,12 +1,12 @@
-{{#if type === 'left' && !includesMinDate(store)}}
-	<div class="{{getClass(type)}}" on:click='move(type)'>
-		<svg version="1.1" width="8" height="16" viewBox="0 0 8 16" class="octicon octicon-chevron-left" aria-hidden="true"><path fill-rule="evenodd" d="M5.5 3L7 4.5 3.25 8 7 11.5 5.5 13l-5-5z"/></svg>
+{{#if type === 'left'}}
+	<div class="{{getClass(type)}}" on:click='prev()'>
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
 	</div>
 {{/if}}
 
-{{#if type === 'right' && !includesMaxDate(store)}}
-	<div class="{{getClass(type)}}" on:click='move(type)'>
-		<svg version="1.1" width="8" height="16" viewBox="0 0 8 16" class="octicon octicon-chevron-right" aria-hidden="true"><path fill-rule="evenodd" d="M7.5 8l-5 5L1 11.5 4.75 8 1 4.5 2.5 3z"/></svg>
+{{#if type === 'right'}}
+	<div class="{{getClass(type)}}" on:click='next()'>
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
 	</div>
 {{/if}}
 
@@ -29,29 +29,15 @@ export default {
 
 			return classnames.join(' ');
 		},
-		includesMinDate(store) {
-			return store.includesMinDate();
-		},
-		includesMaxDate(store) {
-			return store.includesMaxDate();
-
-		}
 	},
 	methods: {
-		move(type) {
-			if (type === 'right') {
-				this.options.data.store.next();
-			} else {
-				this.options.data.store.prev();
-			}
+		prev() {
+			this.store.setPrevMonth();
+		},
+		next() {
+			this.store.setNextMonth();
 		}
 	},
-	oncreate() {
-		const store = this.get('store');
-		store.observe('currentDates', currentDates => {
-			this.set({currentDates});
-		});
-	}
 }
 </script>
 
@@ -63,33 +49,33 @@ export default {
 	cursor: pointer;
 	border-radius: 50%;
 	background: #444;
-	width: 5em;
-	height: 5em;
+	width: 2em;
+	height: 2em;
 	z-index: 1;
 
 	& svg {
 		position: absolute;
 		bottom: 50%;
 		transform: translate(50%, 50%);
-		width: 2em;
-		height: 2em;
-		fill: #fff;
+		width: 1em;
+		height: 1em;
+		stroke: #fff;
 	}
 }
 
 .apocCalendar-Is_Left {
-	left: -2.5em;
+	left: -1em;
 
 	& svg {
-		right: calc(50% + 1em);
+		right: calc(50% + .45em);
 	}
 }
 
 .apocCalendar-Is_Right {
-	right: -2.5em;
+	right: -1em;
 
 	& svg {
-		right: calc(50% - 1em);
+		right: calc(50% - .45em);
 	}
 }
 </style>

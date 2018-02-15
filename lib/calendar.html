@@ -1,8 +1,20 @@
-<section class="apocCalendar-Component_Box">
-	<header class="apocCalendar-Component_Header">{{head(year, month + 1)}}</header>
-	<Month :store :day :minDate :maxDate />
-	<Pager :store />
-	<Pager :store type="right"/>
+<section
+	class="apocCalendar-Component_Box"
+	style="{{getBoxStyles($color)}}"
+>
+	<header
+		class="apocCalendar-Component_Header"
+		style="{{getheaderStyles($color)}}"
+	>{{head($year, $month + 1)}}</header>
+	<Month />
+
+	{{#if $pager.prev}}
+		<Pager />
+	{{/if}}
+
+	{{#if $pager.next}}
+		<Pager type="right" />
+	{{/if}}
 </section>
 
 <script>
@@ -11,113 +23,31 @@ import CalendarStore from './store'
 import Month from './month.html'
 import Pager from './pager.html'
 
-const store = new CalendarStore();
-if (process.env.NODE_ENV !== 'production') {
-	window.store = store;
-}
-
 export default {
 	components: {
 		Month,
 		Pager,
 	},
 	data() {
-		const todayDate = new Date();
-		const nextYearDate = new Date(
-			todayDate.getFullYear() + 1,
-			todayDate.getMonth(),
-			todayDate.getDate()
-		);
-
-		return {
-			store,
-			min: todayDate,
-			max: nextYearDate,
-
-			head: (year, month) => `${year}.${month}`,
-			day: day => {
-				switch (day) {
-					case 0: {
-						return '日';
-					}
-					case 1: {
-						return '月';
-					}
-					case 2: {
-						return '火';
-					}
-					case 3: {
-						return '水';
-					}
-					case 4: {
-						return '木';
-					}
-					case 5: {
-						return '金';
-					}
-					case 6: {
-						return '土';
-					}
-					default: {
-						throw new Error('err');
-					}
-				}
-			},
-		};
-	},
-	computed: {
-		minDate: min => {
-			const date = new Date(min);
-			return {
-				year: date.getFullYear(),
-				month: date.getMonth(),
-				date: date.getDate(),
-				day: date.getDay(),
-			};
-		},
-		maxDate: max => {
-			const date = new Date(max);
-			return {
-				year: date.getFullYear(),
-				month: date.getMonth(),
-				date: date.getDate(),
-				day: date.getDay(),
-			};
-		}
+		return {};
 	},
 	helpers: {
-		headText(template, year, month) {
-			return pupa(template, {
-				year: year,
-				month: month + 1,
-			});
+		getBoxStyles(color) {
+			return `
+				background: ${color.background.table};
+				border: 1px solid ${color.background.table};
+			`;
+		},
+		getheaderStyles(color) {
+			return `
+				background: ${color.background.cell};
+				color: ${color.text};
+			`;
+		},
+		head: (year, month) => {
+			return `${year}.${month}`;
 		},
 	},
-	methods: {
-		reset() {
-			store.reset();
-		}
-	},
-	oncreate() {
-		store.observe('year', year => {
-			this.set({year});
-		});
-
-		store.observe('month', month => {
-			this.set({month});
-		});
-
-		const handleChange = () => {
-			const data = store.exportData();
-			if (data.length === 0) {
-				return;
-			}
-			this.fire('change', {data});
-		}
-
-		store.observe('currentDates', handleChange);
-		store.observe('data', handleChange);
-	}
 };
 </script>
 
@@ -125,18 +55,14 @@ export default {
 .apocCalendar-Component_Box {
 	position: relative;
 	font-size: 1em;
-	/* padding: 0 2em; */
 	box-sizing: border-box;
-	background: #444;
-	border: 1px solid #444;
 }
 
 .apocCalendar-Component_Header {
-	font-size: 1.2em;
+	font-size: 1em;
 	font-weight: bold;
-	line-height: 4;
+	line-height: 2;
 	margin-bottom: 1px;
-	background: #fff;
 	user-select: none;
 }
 </style>

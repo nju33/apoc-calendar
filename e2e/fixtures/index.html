@@ -7,15 +7,30 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>apoc-modal</title>
   <link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+	<link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+	<link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
 </head>
 
 <body style="margin: 0">
 
   <div data-apoc-modal-sibling class="container">
-		<div id="calendar"></div>
+		<div class="row">
+			<div class="column column-50 column-offset-25">
+				<div id="single"></div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="column"><div id="multi-left"></div></div>
+			<div class="column"><div id="multi-right"></div></div>
+			<div class="column"><div id="multi-right2"></div></div>
+			<div class="column"></div>
+		</div>
 		<button type="button" id="reset">reset</button>
   </div>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.js"></script>
   <script src="/scripts/apoc-calendar.js"></script>
   <script src="/index.js"></script>
 </body>

@@ -1,15 +1,10 @@
-{{#if store && date}}
-	<div class="{{getClass(store, date)}}">{{day(date.day)}}</div>
-{{/if}}
+<div>{{day}}</div>
 
 <script>
 export default {
 	helpers: {
-		getClass(store, {day}) {
-			const classnames = []
-			if (store.isActiveDay(day)) {
-				classnames.push('apocCalendar-Is_Selected');
-			}
+		getClass(store, date) {
+			const classnames = ['apocCalendar-Component_Day']
 			return classnames.join(' ');
 		}
 	},

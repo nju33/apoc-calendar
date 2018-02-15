@@ -1,13 +1,8 @@
 {
   "presets": [
-    ["env", {
-      "browsers": ["> 3%, last 2 versions, not ie < 11"],
-      "modules": false
-    }],
     "flow"
   ],
   "plugins": [
-    "transform-runtime",
     "external-helpers",
     "transform-object-rest-spread",
     "transform-class-properties"
@@ -16,13 +11,17 @@
     "test": {
       "presets": [
         ["env", {
-          "browsers": ["> 3%, last 2 versions, not ie < 11"]
+          "browsers": ["> 3%, last 2 versions, not ie < 11"],
+          "modules": false
         }],
         "flow"
       ],
       "plugins": [
+        "external-helpers",
+        "transform-es2015-modules-commonjs",
+        "transform-runtime",
         "transform-object-rest-spread",
-        "transform-class-properties"
+        "transform-class-properties",
       ],
     }
   }

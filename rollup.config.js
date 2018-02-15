@@ -2,6 +2,8 @@ const {promisify} = require('util');
 const nodeResolver = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
+const nodent = require('rollup-plugin-nodent');
+const buble = require('rollup-plugin-buble');
 const svelte = require('rollup-plugin-svelte');
 const replace = require('rollup-plugin-replace');
 const json = require('rollup-plugin-json');
@@ -23,14 +25,17 @@ const banner = `
 const nodeEnv = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  banner,
+  output: {
+    banner,
+  },
   cache: null,
   input: 'lib/apoc-calendar.js',
   plugins: [
     nodeResolver({jsnext: true}),
     commonjs({include: 'node_modules/**'}),
-    babel({include: 'lib/**/*.js', runtimeHelpers: true}),
+    babel({include: 'lib/**/*.js'}),
     svelte({
+      store: true,
       extensions: ['.html'],
       include: './lib/**/*.html',
       preprocess: {
@@ -38,16 +43,34 @@ module.exports = {
           const sassResult = await pSassRender({
             data: content,
           });
+
           const {css} = await postcss([
             autoprefixer({
               browsers: ['last 2 versions', 'not < 1% in jp', 'not < 0.5%'],
               grid: true,
             }),
-          ]).process(sassResult.css.toString());
+          ]).process(sassResult.css.toString(), {
+            // in the below, it's provisional to prevent warning message
+            from: 'dummy.css',
+            to: 'dummy.css',
+            map: {},
+          });
 
           return {code: css};
         },
       },
+    }),
+    nodent(),
+    buble({
+      target: {
+        chrome: 49,
+        node: 4,
+        firefox: 45,
+        safari: 9,
+        edge: 12,
+        ie: 11,
+      },
+      transforms: {dangerousForOf: true},
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(nodeEnv),
