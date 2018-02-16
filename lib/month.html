@@ -5,7 +5,7 @@
 	{{#each $days as day, i}}
 		<li
 			class="{{getDayCellClass($getDayState(i), $__key_dates__)}}"
-			style="{{getDayCellStyle($getDayState(i), $color, $__key_dates__)}}"
+			style="{{getDayCellStyle($getDayState(i), $color, i, $__key_dates__)}}"
 			on:click="selectDay(i)"
 		>
 			<DayCell :day />
@@ -34,15 +34,9 @@ import isEven from './helpers/is-even';
 export default {
 	components: {DayCell, DateCell},
 	helpers: {
-		// isEven(num) {
-		// 	return num >= 7 && num < 14 ||
-		// 				 num >= 21 && num < 28 ||
-		// 				 num >= 35 && num > 42;
-		// },
 		getMonthStyles(color) {
-			return `
-				background: ${color.background};
-			`;
+			const styles = [`background: ${color.background}`];
+			return styles.join(';');
 		},
 		getDayCellClass(active) {
 			const classnames = ['apocCalendar-Component_DayCell'];
@@ -53,14 +47,23 @@ export default {
 
 			return classnames.join(' ');
 		},
-		getDayCellStyle(active, color) {
+		getDayCellStyle(active, color, i) {
 			const styles = [
-				`background: ${color.tableCell.background.default}`,
+				`background: ${color.tableCell.background.day || color.tableCell.background.default}`,
 				`color: ${color.text}`,
 			];
 
-			if (active) {
-				styles.push(`background: ${color.tableCell.background.active}`);
+			// sun or sat
+			if (i === 0) {
+				styles.push(`background: ${color.sunday.background || color.tableCell.background.default}`);
+				styles.push(`color: ${color.sunday.text}`);
+			} else if (i === 6) {
+				styles.push(`background: ${color.saturday.background || color.tableCell.background.default}`);
+				styles.push(`color: ${color.saturday.text}`);
+			}
+
+			if (active && color.tableCell.background.dayActive) {
+				styles.push(`background: ${color.tableCell.background.dayActive}`);
 			}
 
 			return styles.join(';');
