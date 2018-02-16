@@ -75,6 +75,7 @@
     "svelte": "^1.54.1"
   },
   "dependencies": {
+    "core-js": "^2.5.3",
     "date-fns": "^1.29.0",
     "deep-shallow": "^0.1.0",
     "instantify": "^0.0.1",
