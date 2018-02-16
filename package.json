@@ -2,16 +2,21 @@
   "name": "apoc-calendar",
   "version": "0.1.0",
   "description": "calendar",
-  "main": "dist/apoc-calendar.umd.js",
-  "jsnext:main": "dist/apoc-calendar.es.js",
+  "main": "dist/apoc-calendar.js",
+  "cjs:main": "dist/apoc-calendar.js",
+  "module": "dist/apoc-calendar.m.js",
+  "jsnext:main": "dist/apoc-calendar.m.js",
+  "umd:main": "dist/apoc-calendar.umd.js",
+  "iife:main": "dist/apoc-calendar.iife.js",
   "files": [
     "dist"
   ],
   "scripts": {
     "start": "node dev-server.js",
-    "prepare": "yarn prod",
-    "preprod": "mkdir -p dist; NODE_ENV='production' node prod.js",
-    "prod": "babili dist/apoc-calendar.js -o dist/apoc-calendar.min.js"
+    "prepare": "yarn build",
+    "build": "yarn build:rollup && yarn build:microbundle",
+    "build:rollup": "mkdir -p dist; NODE_ENV='production' node prod.js",
+    "build:microbundle": "microbundle build -i .apoc-calendar.js"
   },
   "repository": "nju33/apoc-calendar",
   "keywords": [],
@@ -25,6 +30,7 @@
     "access": "public"
   },
   "devDependencies": {
+    "acorn-jsx": "^4.1.1",
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
@@ -49,6 +55,7 @@
     "gulp-postcss": "^7.0.1",
     "jest": "^22.2.1",
     "jsdom": "^11.6.2",
+    "microbundle": "^0.4.3",
     "postcss-easings": "^1.0.1",
     "postcss-modules": "^1.1.0",
     "prettier": "^1.10.2",
@@ -68,7 +75,7 @@
   },
   "dependencies": {
     "date-fns": "^1.29.0",
-    "deep-shallow": "^0.0.1",
+    "deep-shallow": "^0.1.0",
     "instantify": "^0.0.1",
     "lodash": "^4.17.5",
     "lodash.get": "^4.4.2",

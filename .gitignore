@@ -1,3 +1,8 @@
+/.apoc-calendar.js
+/lib/style.css*
+/lib/class-name.json
+
+
 ### https://raw.github.com/github/gitignore/be3333655bffe9507d66cc864aee95ed6052b4ed/NODE.gitignore
 
 # Logs
@@ -62,10 +67,3 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-/dist/**
-!/dist/.gitkeep
-!/dist/apoc-calendar.js
-!/dist/apoc-calendar.min.js
-/lib/style.css*
-/lib/class-name.json

@@ -48,27 +48,28 @@ function bundle() {
     rollup(rollupConfig).then(bundle => {
       rollupConfig.cache = bundle;
 
-      ['iife', 'es', 'umd'].forEach(async format => {
+      // ['iife', 'es', 'umd'].forEach(async format => {
+      ['cjs', 'umd'].forEach(async format => {
         switch (format) {
-          case 'iife': {
-            const opts = {
-              name: MODULE_NAME,
-              globals,
-              format,
-              banner: rollupConfig.banner,
-            };
-            const destPath = './dist/apoc-calendar.js';
-            try {
-              const result = await bundle.generate(opts);
-              fs.writeFileSync(destPath, result.code);
-            } catch (err) {
-              reject(err);
-            }
-            break;
-          }
+          // case 'iife': {
+          //   const opts = {
+          //     name: MODULE_NAME,
+          //     globals,
+          //     format,
+          //     banner: rollupConfig.banner,
+          //   };
+          //   const destPath = './dist/apoc-calendar.iife.js';
+          //   try {
+          //     const result = await bundle.generate(opts);
+          //     fs.writeFileSync(destPath, result.code);
+          //   } catch (err) {
+          //     reject(err);
+          //   }
+          //   break;
+          // }
           case 'umd': {
             const opts = {
-              name: 'default',
+              name: MODULE_NAME,
               globals,
               format,
             };
@@ -81,14 +82,14 @@ function bundle() {
             }
             break;
           }
-          case 'es':
+          case 'cjs':
           default: {
             const opts = {
               globals,
               format,
               exports: 'default',
             };
-            const destPath = './dist/apoc-calendar.es.js';
+            const destPath = './.apoc-calendar.js';
             try {
               const result = await bundle.generate(opts);
               fs.writeFileSync(destPath, result.code);

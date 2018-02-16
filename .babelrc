@@ -17,7 +17,6 @@
         "flow"
       ],
       "plugins": [
-        "external-helpers",
         "transform-es2015-modules-commonjs",
         "transform-runtime",
         "transform-object-rest-spread",
