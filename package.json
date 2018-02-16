@@ -1,6 +1,6 @@
 {
   "name": "apoc-calendar",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "calendar",
   "main": "dist/apoc-calendar.js",
   "cjs:main": "dist/apoc-calendar.js",
