@@ -1,4 +1,5 @@
 const {promisify} = require('util');
+const sourcemaps = require('rollup-plugin-sourcemaps');
 const nodeResolver = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
@@ -31,6 +32,7 @@ module.exports = {
   cache: null,
   input: 'lib/apoc-calendar.js',
   plugins: [
+    sourcemaps(),
     nodeResolver({jsnext: true}),
     commonjs({include: 'node_modules/**'}),
     babel({include: 'lib/**/*.js'}),

@@ -9,6 +9,17 @@
       'date.min': now,
       'date.max': dateFns.addMonths(now, 13),
       'pager.next': false,
+
+      'color.background': '#40a8e2',
+      'color.header.background': '#40a8e2',
+      'color.header.text': '#fff',
+      'color.tableCell.background.default': '#fff',
+      'color.tableCell.background.even': '#f3f3f3',
+      'color.tableCell.background.blank': '#fff',
+      'color.tableCell.background.active': '#c2e5fa',
+      'color.tableCell.text.invalid': '#8a99a4',
+      'color.tableCell.background.invalid': '#fff',
+      'color.pager.background': '#40a8e2',
     }
   );
 

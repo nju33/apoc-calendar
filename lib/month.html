@@ -1,4 +1,7 @@
-<ul class="apocCalendar-Component_DateTable">
+<ul
+	class="apocCalendar-Component_DateTable"
+	style={{getMonthStyles($color)}}
+>
 	{{#each $days as day, i}}
 		<li
 			class="{{getDayCellClass($getDayState(i), $__key_dates__)}}"
@@ -9,10 +12,10 @@
 		</li>
 	{{/each}}
 
-	{{#each $dates as date}}
+	{{#each $dates as date, i}}
 		<li
-			class="{{getDateCellClass(date, $__key_dates__)}}"
-			style="{{getDateCellStyle(date, $color, $__key_dates__)}}"
+			class="{{getDateCellClass(date, i, $__key_dates__)}}"
+			style="{{getDateCellStyle(date, $color, i, $__key_dates__)}}"
 			on:click="selectDate(date)"
 			on:mouseenter="handleDateMouseEnter(event)"
 			on:mouseleave="handleDateMouseLeave(event)"
@@ -23,15 +26,24 @@
 </ul>
 
 <script>
-import throttle from 'lodash.throttle';
 import DayCell from './day-cell.html';
 import DateCell from './date-cell.html';
-import {range} from './helpers';
 import DatePad from './date-pad';
+import isEven from './helpers/is-even';
 
 export default {
 	components: {DayCell, DateCell},
 	helpers: {
+		// isEven(num) {
+		// 	return num >= 7 && num < 14 ||
+		// 				 num >= 21 && num < 28 ||
+		// 				 num >= 35 && num > 42;
+		// },
+		getMonthStyles(color) {
+			return `
+				background: ${color.background};
+			`;
+		},
 		getDayCellClass(active) {
 			const classnames = ['apocCalendar-Component_DayCell'];
 
@@ -43,22 +55,31 @@ export default {
 		},
 		getDayCellStyle(active, color) {
 			const styles = [
-				`background: ${color.background.cell}`,
+				`background: ${color.tableCell.background.default}`,
 				`color: ${color.text}`,
 			];
 
-			console.log(active)
 			if (active) {
-				styles.push(`background: ${color.background.active}`);
+				styles.push(`background: ${color.tableCell.background.active}`);
 			}
 
 			return styles.join(';');
 		},
-		getDateCellClass(date) {
+		getDateCellClass(date, i) {
 			const classnames = ['apocCalendar-Component_DateCell'];
 
 			if (date instanceof DatePad) {
 				classnames.push('apocCalendar-Is_Pad');
+			} else {
+				if (isEven(i)) {
+					classnames.push('apocCalendar-Is_Even');
+				} else {
+					classnames.push('apocCalendar-Is_Odd');
+				}
+			}
+
+			if (!date.inRange()) {
+				classnames.push('apocCalendar-Is_Invalid');
 			}
 
 			if (date.isSelected()) {
@@ -67,17 +88,28 @@ export default {
 
 			return classnames.join(' ');
 		},
-		getDateCellStyle(date, color) {
+		getDateCellStyle(date, color, i) {
 			const styles = [
 				`color: ${color.text}`,
 			];
 
-			if (!date instanceof DatePad) {
-				styles.push(`background: ${color.background.cell}`);
+			if (date instanceof DatePad) {
+				styles.push(`background: ${color.tableCell.background.blank}`);
+			} else {
+				if (isEven(i)) {
+					styles.push(`background: ${color.tableCell.background.even || color.tableCell.background.default}`);
+				} else {
+					styles.push(`background: ${color.tableCell.background.odd || color.tableCell.background.default}`);
+				}
+			}
+
+			if (!date.inRange()) {
+				// styles.push(`background: ${color.tableCell.background.invalid}`);
+				styles.push(`color: ${color.tableCell.text.invalid}`);
 			}
 
 			if (date.isSelected()) {
-				styles.push(`background: ${color.background.active}`);
+				styles.push(`background: ${color.tableCell.background.active}`);
 			}
 
 
@@ -102,23 +134,45 @@ export default {
 		},
 		setActiveColorToBackground(el) {
 			Object.assign(el.style, {
-				background: this.store.color.background.hover
+				background: this.store.color.tableCell.background.hover
 			});
 		},
 		resetColorToBackground(el) {
-			Object.assign(el.style, {
-				background: null
-			});
+			if (el.classList.contains('apocCalendar-Is_Odd')) {
+				Object.assign(el.style, {
+					background: this.store.color.tableCell.background.odd ||
+					            this.store.color.tableCell.background.default
+				});
+
+			} else if (el.classList.contains('apocCalendar-Is_Even')) {
+				Object.assign(el.style, {
+					background: this.store.color.tableCell.background.even ||
+					            this.store.color.tableCell.background.default
+				});
+
+			} else {
+				Object.assign(el.style, {
+					background: this.store.color.tableCell.background.default
+				});
+			}
 		},
 		handleDateMouseEnter(ev) {
 			const el = ev.target;
-			if (!el.classList.contains('apocCalendar-Is_Selected') && !el.classList.contains('apocCalendar-Is_Pad') ) {
+			if (
+				!el.classList.contains('apocCalendar-Is_Selected') &&
+				!el.classList.contains('apocCalendar-Is_Pad') &&
+				!el.classList.contains('apocCalendar-Is_Invalid')
+			) {
 				this.setActiveColorToBackground(el);
 			}
 		},
 		handleDateMouseLeave(ev) {
 			const el = ev.target;
-			if (!el.classList.contains('apocCalendar-Is_Selected') && !el.classList.contains('apocCalendar-Is_Pad') ) {
+			if (
+				!el.classList.contains('apocCalendar-Is_Selected') &&
+				!el.classList.contains('apocCalendar-Is_Pad') &&
+				!el.classList.contains('apocCalendar-Is_Invalid')
+			) {
 				this.resetColorToBackground(el);
 			}
 		},
@@ -142,24 +196,19 @@ export default {
 
 .apocCalendar-Component_DayCell,
 .apocCalendar-Component_DateCell {
-	/* transition: .1s; */
 	font-size: .8em;
-	width: 3em;
 	height: 1.5em;
 	cursor: pointer;
-	background: #fff;
+	text-align: center;
+	line-height: 1.7;
 	margin: 0;
-
-	/* &.apocCalendar-Is_Selected:not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Hidden) {
-		background: #cb1b45;
-	} */
-
-	/* &:not(.apocCalendar-Is_Prev):not(.apocCalendar-Is_Next):not(.apocCalendar-Is_Disabled):not(.apocCalendar-Is_Selected):not(.apocCalendar-Is_Pad):hover {
-		background: #ccc;
-	} */
 }
 
 .apocCalendar-Is_Pad {
 	background: transparent;
+}
+
+.apocCalendar-Is_Invalid {
+	cursor: default;
 }
 </style>

@@ -34,14 +34,15 @@ export default {
 	helpers: {
 		getBoxStyles(color) {
 			return `
-				background: ${color.background.table};
-				border: 1px solid ${color.background.table};
+				background: ${color.background};
+				color: ${color.text};
+				border: 1px solid ${color.background};
 			`;
 		},
 		getheaderStyles(color) {
 			return `
-				background: ${color.background.cell};
-				color: ${color.text};
+				background: ${color.header.background};
+				color: ${color.header.text};
 			`;
 		},
 		head: (year, month) => {
@@ -63,6 +64,7 @@ export default {
 	font-weight: bold;
 	line-height: 2;
 	margin-bottom: 1px;
+	text-align: center;
 	user-select: none;
 }
 </style>

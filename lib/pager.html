@@ -1,11 +1,11 @@
 {{#if type === 'left'}}
-	<div class="{{getClass(type)}}" on:click='prev()'>
+	<div class="{{getClass(type)}}" style="{{getStyles($color)}}" on:click='prev()'>
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
 	</div>
 {{/if}}
 
 {{#if type === 'right'}}
-	<div class="{{getClass(type)}}" on:click='next()'>
+	<div class="{{getClass(type)}}" style="{{getStyles($color)}}" on:click='next()'>
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
 	</div>
 {{/if}}
@@ -29,6 +29,9 @@ export default {
 
 			return classnames.join(' ');
 		},
+		getStyles(color) {
+			return [`background: ${color.pager.background}`].join(';');
+		}
 	},
 	methods: {
 		prev() {
@@ -48,7 +51,6 @@ export default {
 	transform: translateY(50%);
 	cursor: pointer;
 	border-radius: 50%;
-	background: #444;
 	width: 2em;
 	height: 2em;
 	z-index: 1;
