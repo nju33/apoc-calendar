@@ -1,2 +1,3325 @@
-!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e():"function"==typeof define&&define.amd?define(e):e()}(0,function(){var t,e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},n="object"==typeof e&&e&&e.Object===Object&&e,r={default:n,__moduleExports:n},o="object"==typeof self&&self&&self.Object===Object&&self,a=r&&n||r||o||Function("return this")(),s={default:a,__moduleExports:a},i=s&&a||s,u=i.Symbol,c={default:u,__moduleExports:u},f=c&&u||c,l=Object.prototype,d=l.hasOwnProperty,h=l.toString,p=f?f.toStringTag:void 0,_=function(t){var e=d.call(t,p),n=t[p];try{t[p]=void 0;var r=!0}catch(t){}var o=h.call(t);return r&&(e?t[p]=n:delete t[p]),o},m={default:_,__moduleExports:_},g=Object.prototype.toString,v=function(t){return g.call(t)},y={default:v,__moduleExports:v},b=m&&_||m,x=y&&v||y,D=f?f.toStringTag:void 0,w=function(t){return null==t?void 0===t?"[object Undefined]":"[object Null]":D&&D in Object(t)?b(t):x(t)},C={default:w,__moduleExports:w},E=function(t){var e=typeof t;return null!=t&&("object"==e||"function"==e)},S={default:E,__moduleExports:E},$=C&&w||C,M=S&&E||S,T=function(t){if(!M(t))return!1;var e=$(t);return"[object Function]"==e||"[object GeneratorFunction]"==e||"[object AsyncFunction]"==e||"[object Proxy]"==e},j={default:T,__moduleExports:T},k=i["__core-js_shared__"],O={default:k,__moduleExports:k},Y=O&&k||O,F=(t=/[^.]+$/.exec(Y&&Y.keys&&Y.keys.IE_PROTO||""))?"Symbol(src)_1."+t:"",I=function(t){return!!F&&F in t},P={default:I,__moduleExports:I},H=Function.prototype.toString,N=function(t){if(null!=t){try{return H.call(t)}catch(t){}try{return t+""}catch(t){}}return""},z={default:N,__moduleExports:N},R=j&&T||j,L=P&&I||P,A=z&&N||z,W=/^\[object .+?Constructor\]$/,B=Function.prototype,G=Object.prototype,U=RegExp("^"+B.toString.call(G.hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$"),X=function(t){return!(!M(t)||L(t))&&(R(t)?U:W).test(A(t))},Z={default:X,__moduleExports:X},J=function(t,e){return null==t?void 0:t[e]},q={default:J,__moduleExports:J},Q=Z&&X||Z,K=q&&J||q,V=function(t,e){var n=K(t,e);return Q(n)?n:void 0},tt={default:V,__moduleExports:V},et=tt&&V||tt,nt=function(){try{var t=et(Object,"defineProperty");return t({},"",{}),t}catch(t){}}(),rt={default:nt,__moduleExports:nt},ot=rt&&nt||rt,at=function(t,e,n){"__proto__"==e&&ot?ot(t,e,{configurable:!0,enumerable:!0,value:n,writable:!0}):t[e]=n},st={default:at,__moduleExports:at},it=function(t,e){return t===e||t!=t&&e!=e},ut={default:it,__moduleExports:it},ct=st&&at||st,ft=ut&&it||ut,lt=Object.prototype.hasOwnProperty,dt=function(t,e,n){var r=t[e];lt.call(t,e)&&ft(r,n)&&(void 0!==n||e in t)||ct(t,e,n)},ht={default:dt,__moduleExports:dt},pt=Array.isArray,_t={default:pt,__moduleExports:pt},mt=function(t){return null!=t&&"object"==typeof t},gt={default:mt,__moduleExports:mt},vt=gt&&mt||gt,yt=function(t){return"symbol"==typeof t||vt(t)&&"[object Symbol]"==$(t)},bt={default:yt,__moduleExports:yt},xt=_t&&pt||_t,Dt=bt&&yt||bt,wt=/\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,Ct=/^\w*$/,Et=function(t,e){if(xt(t))return!1;var n=typeof t;return!("number"!=n&&"symbol"!=n&&"boolean"!=n&&null!=t&&!Dt(t))||Ct.test(t)||!wt.test(t)||null!=e&&t in Object(e)},St={default:Et,__moduleExports:Et},$t=et(Object,"create"),Mt={default:$t,__moduleExports:$t},Tt=Mt&&$t||Mt,jt=function(){this.__data__=Tt?Tt(null):{},this.size=0},kt={default:jt,__moduleExports:jt},Ot=function(t){var e=this.has(t)&&delete this.__data__[t];return this.size-=e?1:0,e},Yt={default:Ot,__moduleExports:Ot},Ft=Object.prototype.hasOwnProperty,It=function(t){var e=this.__data__;if(Tt){var n=e[t];return"__lodash_hash_undefined__"===n?void 0:n}return Ft.call(e,t)?e[t]:void 0},Pt={default:It,__moduleExports:It},Ht=Object.prototype.hasOwnProperty,Nt=function(t){var e=this.__data__;return Tt?void 0!==e[t]:Ht.call(e,t)},zt={default:Nt,__moduleExports:Nt},Rt=function(t,e){var n=this.__data__;return this.size+=this.has(t)?0:1,n[t]=Tt&&void 0===e?"__lodash_hash_undefined__":e,this},Lt={default:Rt,__moduleExports:Rt},At=Yt&&Ot||Yt,Wt=Pt&&It||Pt,Bt=zt&&Nt||zt,Gt=Lt&&Rt||Lt;function Ut(t){var e=-1,n=null==t?0:t.length;for(this.clear();++e<n;){var r=t[e];this.set(r[0],r[1])}}Ut.prototype.clear=kt&&jt||kt,Ut.prototype.delete=At,Ut.prototype.get=Wt,Ut.prototype.has=Bt,Ut.prototype.set=Gt;var Xt=Ut,Zt={default:Xt,__moduleExports:Xt},Jt=function(){this.__data__=[],this.size=0},qt={default:Jt,__moduleExports:Jt},Qt=function(t,e){for(var n=t.length;n--;)if(ft(t[n][0],e))return n;return-1},Kt={default:Qt,__moduleExports:Qt},Vt=Kt&&Qt||Kt,te=Array.prototype.splice,ee=function(t){var e=this.__data__,n=Vt(e,t);return!(n<0||(n==e.length-1?e.pop():te.call(e,n,1),--this.size,0))},ne={default:ee,__moduleExports:ee},re=function(t){var e=this.__data__,n=Vt(e,t);return n<0?void 0:e[n][1]},oe={default:re,__moduleExports:re},ae=function(t){return Vt(this.__data__,t)>-1},se={default:ae,__moduleExports:ae},ie=function(t,e){var n=this.__data__,r=Vt(n,t);return r<0?(++this.size,n.push([t,e])):n[r][1]=e,this},ue={default:ie,__moduleExports:ie},ce=ne&&ee||ne,fe=oe&&re||oe,le=se&&ae||se,de=ue&&ie||ue;function he(t){var e=-1,n=null==t?0:t.length;for(this.clear();++e<n;){var r=t[e];this.set(r[0],r[1])}}he.prototype.clear=qt&&Jt||qt,he.prototype.delete=ce,he.prototype.get=fe,he.prototype.has=le,he.prototype.set=de;var pe=he,_e={default:pe,__moduleExports:pe},me=et(i,"Map"),ge={default:me,__moduleExports:me},ve=Zt&&Xt||Zt,ye=_e&&pe||_e,be=ge&&me||ge,xe=function(){this.size=0,this.__data__={hash:new ve,map:new(be||ye),string:new ve}},De={default:xe,__moduleExports:xe},we=function(t){var e=typeof t;return"string"==e||"number"==e||"symbol"==e||"boolean"==e?"__proto__"!==t:null===t},Ce={default:we,__moduleExports:we},Ee=Ce&&we||Ce,Se=function(t,e){var n=t.__data__;return Ee(e)?n["string"==typeof e?"string":"hash"]:n.map},$e={default:Se,__moduleExports:Se},Me=$e&&Se||$e,Te=function(t){var e=Me(this,t).delete(t);return this.size-=e?1:0,e},je={default:Te,__moduleExports:Te},ke=function(t){return Me(this,t).get(t)},Oe={default:ke,__moduleExports:ke},Ye=function(t){return Me(this,t).has(t)},Fe={default:Ye,__moduleExports:Ye},Ie=function(t,e){var n=Me(this,t),r=n.size;return n.set(t,e),this.size+=n.size==r?0:1,this},Pe={default:Ie,__moduleExports:Ie},He=je&&Te||je,Ne=Oe&&ke||Oe,ze=Fe&&Ye||Fe,Re=Pe&&Ie||Pe;function Le(t){var e=-1,n=null==t?0:t.length;for(this.clear();++e<n;){var r=t[e];this.set(r[0],r[1])}}Le.prototype.clear=De&&xe||De,Le.prototype.delete=He,Le.prototype.get=Ne,Le.prototype.has=ze,Le.prototype.set=Re;var Ae={default:Le,__moduleExports:Le},We=Ae&&Le||Ae,Be="Expected a function";function Ge(t,e){if("function"!=typeof t||null!=e&&"function"!=typeof e)throw new TypeError(Be);var n=function(){var r=arguments,o=e?e.apply(this,r):r[0],a=n.cache;if(a.has(o))return a.get(o);var s=t.apply(this,r);return n.cache=a.set(o,s)||a,s};return n.cache=new(Ge.Cache||We),n}Ge.Cache=We;var Ue={default:Ge,__moduleExports:Ge},Xe=Ue&&Ge||Ue,Ze=function(t){var e=Xe(t,function(t){return 500===n.size&&n.clear(),t}),n=e.cache;return e},Je={default:Ze,__moduleExports:Ze},qe=/[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g,Qe=/\\(\\)?/g,Ke=(Je&&Ze||Je)(function(t){var e=[];return 46===t.charCodeAt(0)&&e.push(""),t.replace(qe,function(t,n,r,o){e.push(r?o.replace(Qe,"$1"):n||t)}),e}),Ve={default:Ke,__moduleExports:Ke},tn=function(t,e){for(var n=-1,r=null==t?0:t.length,o=Array(r);++n<r;)o[n]=e(t[n],n,t);return o},en={default:tn,__moduleExports:tn},nn=en&&tn||en,rn=f?f.prototype:void 0,on=rn?rn.toString:void 0,an=function t(e){if("string"==typeof e)return e;if(xt(e))return nn(e,t)+"";if(Dt(e))return on?on.call(e):"";var n=e+"";return"0"==n&&1/e==-1/0?"-0":n},sn={default:an,__moduleExports:an},un=sn&&an||sn,cn=function(t){return null==t?"":un(t)},fn={default:cn,__moduleExports:cn},ln=St&&Et||St,dn=Ve&&Ke||Ve,hn=fn&&cn||fn,pn=function(t,e){return xt(t)?t:ln(t,e)?[t]:dn(hn(t))},_n={default:pn,__moduleExports:pn},mn=/^(?:0|[1-9]\d*)$/,gn=function(t,e){var n=typeof t;return!!(e=null==e?9007199254740991:e)&&("number"==n||"symbol"!=n&&mn.test(t))&&t>-1&&t%1==0&&t<e},vn={default:gn,__moduleExports:gn},yn=function(t){if("string"==typeof t||Dt(t))return t;var e=t+"";return"0"==e&&1/t==-1/0?"-0":e},bn={default:yn,__moduleExports:yn},xn=ht&&dt||ht,Dn=_n&&pn||_n,wn=vn&&gn||vn,Cn=bn&&yn||bn,En=function(t,e,n,r){if(!M(t))return t;for(var o=-1,a=(e=Dn(e,t)).length,s=a-1,i=t;null!=i&&++o<a;){var u=Cn(e[o]),c=n;if(o!=s){var f=i[u];void 0===(c=r?r(f,u,i):void 0)&&(c=M(f)?f:wn(e[o+1])?[]:{})}xn(i,u,c),i=i[u]}return t},Sn={default:En,__moduleExports:En},$n=Sn&&En||Sn,Mn=function(t){return function(t){return Object.keys(t).reduce(function(e,n){return function(t,e,n){return null==t?t:$n(t,e,n)}(e,n,t[n])},{})}(t)};function Tn(){}function jn(t){for(var e,n,r=arguments,o=1,a=arguments.length;o<a;o++)for(e in n=r[o])t[e]=n[e];return t}function kn(t,e){e.appendChild(t)}function On(t,e,n){e.insertBefore(t,n)}function Yn(t){t.parentNode.removeChild(t)}function Fn(t){for(var e=0;e<t.length;e+=1)t[e]&&t[e].d()}function In(t){return document.createElement(t)}function Pn(t){return document.createTextNode(t)}function Hn(){return document.createComment("")}function Nn(t,e,n){t.addEventListener(e,n,!1)}function zn(t,e,n){t.removeEventListener(e,n,!1)}function Rn(t,e,n){t.setAttribute(e,n)}function Ln(){return Object.create(null)}function An(t){this.destroy=Tn,this.fire("destroy"),this.set=this.get=Tn,!1!==t&&this._fragment.u(),this._fragment.d(),this._fragment=this._state=null}function Wn(t,e){return t!=t?e==e:t!==e||t&&"object"==typeof t||"function"==typeof t}function Bn(t,e){return t!=t?e==e:t!==e}function Gn(t,e,n,r,o){for(var a in e)if(n[a]){var s=r[a],i=o[a],u=e[a];if(u)for(var c=0;c<u.length;c+=1){var f=u[c];f.__calling||(f.__calling=!0,f.call(t,s,i),f.__calling=!1)}}}function Un(t){return t?this._state[t]:this._state}function Xn(t,e){t._observers={pre:Ln(),post:Ln()},t._handlers=Ln(),t._bind=e._bind,t.options=e,t.root=e.root||t,t.store=t.root.store||e.store}function Zn(t,e,n){var r=n&&n.defer?this._observers.post:this._observers.pre;return(r[t]||(r[t]=[])).push(e),n&&!1===n.init||(e.__calling=!0,e.call(this,this._state[t]),e.__calling=!1),{cancel:function(){var n=r[t].indexOf(e);~n&&r[t].splice(n,1)}}}function Jn(t){for(;t&&t.length;)t.shift()()}function qn(){this.store._remove(this)}var Qn={destroy:An,get:Un,fire:function(t,e){var n=t in this._handlers&&this._handlers[t].slice();if(n)for(var r=0;r<n.length;r+=1)n[r].call(this,e)},observe:Zn,on:function(t,e){if("teardown"===t)return this.on("destroy",e);var n=this._handlers[t]||(this._handlers[t]=[]);return n.push(e),{cancel:function(){var t=n.indexOf(e);~t&&n.splice(t,1)}}},set:function(t){this._set(jn({},t)),this.root._lock||(this.root._lock=!0,Jn(this.root._beforecreate),Jn(this.root._oncreate),Jn(this.root._aftercreate),this.root._lock=!1)},teardown:An,_recompute:Tn,_set:function(t){var e=this._state,n={},r=!1;for(var o in t)this._differs(t[o],e[o])&&(n[o]=r=!0);r&&(this._state=jn({},e,t),this._recompute(n,this._state),this._bind&&this._bind(n,this._state),this._fragment&&(Gn(this,this._observers.pre,n,this._state,e),this._fragment.p(n,this._state),Gn(this,this._observers.post,n,this._state,e)))},_mount:function(t,e){this._fragment.m(t,e)},_unmount:function(){this._fragment&&this._fragment.u()},_differs:Wn},Kn="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};!function(t,e){t(e={exports:{}},e.exports)}(function(t){t.exports=function(t,e){if("string"!=typeof t)throw new TypeError("Expected a string in the first argument, got "+typeof t);if("object"!=typeof e)throw new TypeError("Expected an Object/Array in the second argument, got "+typeof e);return t.replace(/{(.*?)}/g,function(t,n){for(var r=e,o=0,a=n.split(".");o<a.length;o+=1){r=r?r[a[o]]:""}return r||""})}});function Vn(t,e){this._observers={pre:Ln(),post:Ln()},this._changeHandlers=[],this._dependents=[],this._computed=Ln(),this._sortedComputedProperties=[],this._state=jn({},t),this._differs=e&&e.immutable?Bn:Wn}jn(Vn.prototype,{_add:function(t,e){this._dependents.push({component:t,props:e})},_init:function(t){for(var e={},n=0;n<t.length;n+=1){var r=t[n];e["$"+r]=this._state[r]}return e},_remove:function(t){for(var e=this._dependents.length;e--;)if(this._dependents[e].component===t)return void this._dependents.splice(e,1)},_sortComputedProperties:function(){var t,e=this._computed,n=this._sortedComputedProperties=[],r=Ln();function o(a){if(t[a])throw new Error("Cyclical dependency detected");if(!r[a]){r[a]=!0;var s=e[a];s&&(t[a]=!0,s.deps.forEach(o),n.push(s))}}for(var a in this._computed)t=Ln(),o(a)},compute:function(t,e,n){var r,o=this,a={deps:e,update:function(a,s,i){var u=e.map(function(t){return t in s&&(i=!0),a[t]});if(i){var c=n.apply(null,u);o._differs(c,r)&&(r=c,s[t]=!0,a[t]=r)}}};a.update(this._state,{},!0),this._computed[t]=a,this._sortComputedProperties()},get:Un,observe:Zn,onchange:function(t){return this._changeHandlers.push(t),{cancel:function(){var e=this._changeHandlers.indexOf(t);~e&&this._changeHandlers.splice(e,1)}}},set:function(t){var e=this._state,n=this._changed={},r=!1;for(var o in t){if(this._computed[o])throw new Error("'"+o+"' is a read-only property");this._differs(t[o],e[o])&&(n[o]=r=!0)}if(r){this._state=jn({},e,t);for(var a=0;a<this._sortedComputedProperties.length;a+=1)this._sortedComputedProperties[a].update(this._state,n);for(a=0;a<this._changeHandlers.length;a+=1)this._changeHandlers[a](this._state,n);Gn(this,this._observers.pre,n,this._state,e);var s=this._dependents.slice();for(a=0;a<s.length;a+=1){var i=s[a],u={};r=!1;for(var c=0;c<i.props.length;c+=1){var f=i.props[c];f in n&&(u["$"+f]=this._state[f],r=!0)}r&&i.component.set(u)}Gn(this,this._observers.post,n,this._state,e)}}});var tr=function(t){return t instanceof Date},er=36e5,nr=6e4,rr=2,or=/[T ]/,ar=/:/,sr=/^(\d{2})$/,ir=[/^([+-]\d{2})$/,/^([+-]\d{3})$/,/^([+-]\d{4})$/],ur=/^(\d{4})/,cr=[/^([+-]\d{4})/,/^([+-]\d{5})/,/^([+-]\d{6})/],fr=/^-(\d{2})$/,lr=/^-?(\d{3})$/,dr=/^-?(\d{2})-?(\d{2})$/,hr=/^-?W(\d{2})$/,pr=/^-?W(\d{2})-?(\d{1})$/,_r=/^(\d{2}([.,]\d*)?)$/,mr=/^(\d{2}):?(\d{2}([.,]\d*)?)$/,gr=/^(\d{2}):?(\d{2}):?(\d{2}([.,]\d*)?)$/,vr=/([Z+-].*)$/,yr=/^(Z)$/,br=/^([+-])(\d{2})$/,xr=/^([+-])(\d{2}):?(\d{2})$/;function Dr(t,e,n){e=e||0,n=n||0;var r=new Date(0);r.setUTCFullYear(t,0,4);var o=7*e+n+1-(r.getUTCDay()||7);return r.setUTCDate(r.getUTCDate()+o),r}var wr=function(t,e){if(tr(t))return new Date(t.getTime());if("string"!=typeof t)return new Date(t);var n=(e||{}).additionalDigits;n=null==n?rr:Number(n);var r=function(t){var e,n={},r=t.split(or);if(ar.test(r[0])?(n.date=null,e=r[0]):(n.date=r[0],e=r[1]),e){var o=vr.exec(e);o?(n.time=e.replace(o[1],""),n.timezone=o[1]):n.time=e}return n}(t),o=function(t,e){var n,r=ir[e],o=cr[e];if(n=ur.exec(t)||o.exec(t)){var a=n[1];return{year:parseInt(a,10),restDateString:t.slice(a.length)}}if(n=sr.exec(t)||r.exec(t)){var s=n[1];return{year:100*parseInt(s,10),restDateString:t.slice(s.length)}}return{year:null}}(r.date,n),a=function(t,e){if(null===e)return null;var n,r,o,a;if(0===t.length)return(r=new Date(0)).setUTCFullYear(e),r;if(n=fr.exec(t))return r=new Date(0),o=parseInt(n[1],10)-1,r.setUTCFullYear(e,o),r;if(n=lr.exec(t)){r=new Date(0);var s=parseInt(n[1],10);return r.setUTCFullYear(e,0,s),r}if(n=dr.exec(t)){r=new Date(0),o=parseInt(n[1],10)-1;var i=parseInt(n[2],10);return r.setUTCFullYear(e,o,i),r}if(n=hr.exec(t))return a=parseInt(n[1],10)-1,Dr(e,a);if(n=pr.exec(t)){a=parseInt(n[1],10)-1;var u=parseInt(n[2],10)-1;return Dr(e,a,u)}return null}(o.restDateString,o.year);if(a){var s,i=a.getTime(),u=0;return r.time&&(u=function(t){var e,n,r;if(e=_r.exec(t))return(n=parseFloat(e[1].replace(",",".")))%24*er;if(e=mr.exec(t))return n=parseInt(e[1],10),r=parseFloat(e[2].replace(",",".")),n%24*er+r*nr;if(e=gr.exec(t)){n=parseInt(e[1],10),r=parseInt(e[2],10);var o=parseFloat(e[3].replace(",","."));return n%24*er+r*nr+1e3*o}return null}(r.time)),r.timezone?s=(f=yr.exec(c=r.timezone))?0:(f=br.exec(c))?(l=60*parseInt(f[2],10),"+"===f[1]?-l:l):(f=xr.exec(c))?(l=60*parseInt(f[2],10)+parseInt(f[3],10),"+"===f[1]?-l:l):0:(s=new Date(i+u).getTimezoneOffset(),s=new Date(i+u+s*nr).getTimezoneOffset()),new Date(i+u+s*nr)}var c,f,l;return new Date(t)};var Cr=function(t,e){var n=wr(t),r=wr(e);return n.getFullYear()-r.getFullYear()};var Er=function(t,e){var n=wr(t),r=wr(e);return n.getTime()<r.getTime()};var Sr=function(t,e){var n=wr(t),r=wr(e);return n.getTime()>r.getTime()};var $r=function(t){var e=wr(t),n=e.getFullYear(),r=e.getMonth(),o=new Date(0);return o.setFullYear(n,r+1,0),o.setHours(0,0,0,0),o.getDate()};var Mr=function(t,e){var n=wr(t),r=Number(e),o=n.getMonth()+r,a=new Date(0);a.setFullYear(n.getFullYear(),o,1),a.setHours(0,0,0,0);var s=$r(a);return n.setMonth(o,Math.min(s,n.getDate())),n};var Tr=function(t,e){var n=Number(e);return Mr(t,12*n)};var jr=function(t){return wr(t).getFullYear()};var kr=function(t){return wr(t).getMonth()};var Or=function(t,e){var n=Number(e);return Mr(t,-n)};var Yr=function(t,e){var n=wr(t).getTime(),r=Number(e);return new Date(n+r)};var Fr=function(t,e){var n=Number(e);return Yr(t,1e3*n)},Ir=Math.ceil,Pr=Math.max;var Hr=function(t,e,n,r){for(var o=-1,a=Pr(Ir((e-t)/(n||1)),0),s=Array(a);a--;)s[r?a:++o]=t,t+=n;return s};var Nr=function(t,e){return t===e||t!=t&&e!=e},zr="object"==typeof Kn&&Kn&&Kn.Object===Object&&Kn,Rr="object"==typeof self&&self&&self.Object===Object&&self,Lr=(zr||Rr||Function("return this")()).Symbol,Ar=Object.prototype,Wr=Ar.hasOwnProperty,Br=Ar.toString,Gr=Lr?Lr.toStringTag:void 0;var Ur=function(t){var e=Wr.call(t,Gr),n=t[Gr];try{t[Gr]=void 0;var r=!0}catch(t){}var o=Br.call(t);return r&&(e?t[Gr]=n:delete t[Gr]),o},Xr=Object.prototype.toString;var Zr=function(t){return Xr.call(t)},Jr="[object Null]",qr="[object Undefined]",Qr=Lr?Lr.toStringTag:void 0;var Kr=function(t){return null==t?void 0===t?qr:Jr:Qr&&Qr in Object(t)?Ur(t):Zr(t)};var Vr=function(t){var e=typeof t;return null!=t&&("object"==e||"function"==e)},to="[object AsyncFunction]",eo="[object Function]",no="[object GeneratorFunction]",ro="[object Proxy]";var oo=function(t){if(!Vr(t))return!1;var e=Kr(t);return e==eo||e==no||e==to||e==ro},ao=9007199254740991;var so=function(t){return"number"==typeof t&&t>-1&&t%1==0&&t<=ao};var io=function(t){return null!=t&&so(t.length)&&!oo(t)},uo=9007199254740991,co=/^(?:0|[1-9]\d*)$/;var fo=function(t,e){var n=typeof t;return!!(e=null==e?uo:e)&&("number"==n||"symbol"!=n&&co.test(t))&&t>-1&&t%1==0&&t<e};var lo=function(t,e,n){if(!Vr(n))return!1;var r=typeof e;return!!("number"==r?io(n)&&fo(e,n.length):"string"==r&&e in n)&&Nr(n[e],t)};var ho=function(t){return null!=t&&"object"==typeof t},po="[object Symbol]";var _o=function(t){return"symbol"==typeof t||ho(t)&&Kr(t)==po},mo=NaN,go=/^\s+|\s+$/g,vo=/^[-+]0x[0-9a-f]+$/i,yo=/^0b[01]+$/i,bo=/^0o[0-7]+$/i,xo=parseInt;var Do=function(t){if("number"==typeof t)return t;if(_o(t))return mo;if(Vr(t)){var e="function"==typeof t.valueOf?t.valueOf():t;t=Vr(e)?e+"":e}if("string"!=typeof t)return 0===t?t:+t;t=t.replace(go,"");var n=yo.test(t);return n||bo.test(t)?xo(t.slice(2),n?2:8):vo.test(t)?mo:+t},wo=1/0,Co=1.7976931348623157e308;var Eo=function(t){return t?(t=Do(t))===wo||t===-wo?(t<0?-1:1)*Co:t==t?t:0:0===t?t:0};var So=function(t){return function(e,n,r){return r&&"number"!=typeof r&&lo(e,n,r)&&(n=r=void 0),e=Eo(e),void 0===n?(n=e,e=0):n=Eo(n),r=void 0===r?e<n?1:-1:Eo(r),Hr(e,n,r,t)}}();var $o=function(t,e){var n=wr(t),r=wr(e);return 12*(n.getFullYear()-r.getFullYear())+(n.getMonth()-r.getMonth())};var Mo=function(t,e){var n=wr(t).getTime(),r=wr(e).getTime();return n<r?-1:n>r?1:0};var To=function(t,e){var n=wr(t),r=wr(e),o=Mo(n,r),a=Math.abs($o(n,r));return n.setMonth(n.getMonth()-o*a),o*(a-(Mo(n,r)===-o))};var jo=function(t,e){var n=wr(t),r=Number(e);return n.setDate(r),n};var ko=function(t,e){var n=wr(t),r=Number(e);return n.setDate(n.getDate()+r),n};var Oo=function(t){return wr(t).getDate()};var Yo=function(t){return wr(t).getDay()};var Fo=function(t){var e=wr(t),n=new Date(0);return n.setFullYear(e.getFullYear(),0,1),n.setHours(0,0,0,0),n};var Io=function(t){var e=wr(t);return e.setHours(0,0,0,0),e},Po=6e4,Ho=864e5;var No=function(t,e){var n=Io(t),r=Io(e),o=n.getTime()-n.getTimezoneOffset()*Po,a=r.getTime()-r.getTimezoneOffset()*Po;return Math.round((o-a)/Ho)};var zo=function(t){var e=wr(t);return No(e,Fo(e))+1};var Ro=function(t,e){var n=e&&Number(e.weekStartsOn)||0,r=wr(t),o=r.getDay(),a=(o<n?7:0)+o-n;return r.setDate(r.getDate()-a),r.setHours(0,0,0,0),r};var Lo=function(t){return Ro(t,{weekStartsOn:1})};var Ao=function(t){var e=wr(t),n=e.getFullYear(),r=new Date(0);r.setFullYear(n+1,0,4),r.setHours(0,0,0,0);var o=Lo(r),a=new Date(0);a.setFullYear(n,0,4),a.setHours(0,0,0,0);var s=Lo(a);return e.getTime()>=o.getTime()?n+1:e.getTime()>=s.getTime()?n:n-1};var Wo=function(t){var e=Ao(t),n=new Date(0);return n.setFullYear(e,0,4),n.setHours(0,0,0,0),Lo(n)},Bo=6048e5;var Go=function(t){var e=wr(t),n=Lo(e).getTime()-Wo(e).getTime();return Math.round(n/Bo)+1};var Uo=function(t){if(tr(t))return!isNaN(t);throw new TypeError(toString.call(t)+" is not an instance of Date")};var Xo=["M","MM","Q","D","DD","DDD","DDDD","d","E","W","WW","YY","YYYY","GG","GGGG","H","HH","h","hh","m","mm","s","ss","S","SS","SSS","Z","ZZ","X","x"];var Zo=function(t){var e=[];for(var n in t)t.hasOwnProperty(n)&&e.push(n);var r=Xo.concat(e).sort().reverse();return new RegExp("(\\[[^\\[]*\\])|(\\\\)?("+r.join("|")+"|.)","g")};var Jo=function(){var t=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],e=["January","February","March","April","May","June","July","August","September","October","November","December"],n=["Su","Mo","Tu","We","Th","Fr","Sa"],r=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],o=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],a=["AM","PM"],s=["am","pm"],i=["a.m.","p.m."],u={MMM:function(e){return t[e.getMonth()]},MMMM:function(t){return e[t.getMonth()]},dd:function(t){return n[t.getDay()]},ddd:function(t){return r[t.getDay()]},dddd:function(t){return o[t.getDay()]},A:function(t){return t.getHours()/12>=1?a[1]:a[0]},a:function(t){return t.getHours()/12>=1?s[1]:s[0]},aa:function(t){return t.getHours()/12>=1?i[1]:i[0]}};return["M","D","DDD","d","Q","W"].forEach(function(t){u[t+"o"]=function(e,n){return function(t){var e=t%100;if(e>20||e<10)switch(e%10){case 1:return t+"st";case 2:return t+"nd";case 3:return t+"rd"}return t+"th"}(n[t](e))}}),{formatters:u,formattingTokensRegExp:Zo(u)}},qo={distanceInWords:function(){var t={lessThanXSeconds:{one:"less than a second",other:"less than {{count}} seconds"},xSeconds:{one:"1 second",other:"{{count}} seconds"},halfAMinute:"half a minute",lessThanXMinutes:{one:"less than a minute",other:"less than {{count}} minutes"},xMinutes:{one:"1 minute",other:"{{count}} minutes"},aboutXHours:{one:"about 1 hour",other:"about {{count}} hours"},xHours:{one:"1 hour",other:"{{count}} hours"},xDays:{one:"1 day",other:"{{count}} days"},aboutXMonths:{one:"about 1 month",other:"about {{count}} months"},xMonths:{one:"1 month",other:"{{count}} months"},aboutXYears:{one:"about 1 year",other:"about {{count}} years"},xYears:{one:"1 year",other:"{{count}} years"},overXYears:{one:"over 1 year",other:"over {{count}} years"},almostXYears:{one:"almost 1 year",other:"almost {{count}} years"}};return{localize:function(e,n,r){var o;return r=r||{},o="string"==typeof t[e]?t[e]:1===n?t[e].one:t[e].other.replace("{{count}}",n),r.addSuffix?r.comparison>0?"in "+o:o+" ago":o}}}(),format:Jo()};var Qo={M:function(t){return t.getMonth()+1},MM:function(t){return Vo(t.getMonth()+1,2)},Q:function(t){return Math.ceil((t.getMonth()+1)/3)},D:function(t){return t.getDate()},DD:function(t){return Vo(t.getDate(),2)},DDD:function(t){return zo(t)},DDDD:function(t){return Vo(zo(t),3)},d:function(t){return t.getDay()},E:function(t){return t.getDay()||7},W:function(t){return Go(t)},WW:function(t){return Vo(Go(t),2)},YY:function(t){return Vo(t.getFullYear(),4).substr(2)},YYYY:function(t){return Vo(t.getFullYear(),4)},GG:function(t){return String(Ao(t)).substr(2)},GGGG:function(t){return Ao(t)},H:function(t){return t.getHours()},HH:function(t){return Vo(t.getHours(),2)},h:function(t){var e=t.getHours();return 0===e?12:e>12?e%12:e},hh:function(t){return Vo(Qo.h(t),2)},m:function(t){return t.getMinutes()},mm:function(t){return Vo(t.getMinutes(),2)},s:function(t){return t.getSeconds()},ss:function(t){return Vo(t.getSeconds(),2)},S:function(t){return Math.floor(t.getMilliseconds()/100)},SS:function(t){return Vo(Math.floor(t.getMilliseconds()/10),2)},SSS:function(t){return Vo(t.getMilliseconds(),3)},Z:function(t){return Ko(t.getTimezoneOffset(),":")},ZZ:function(t){return Ko(t.getTimezoneOffset())},X:function(t){return Math.floor(t.getTime()/1e3)},x:function(t){return t.getTime()}};function Ko(t,e){e=e||"";var n=t>0?"-":"+",r=Math.abs(t),o=r%60;return n+Vo(Math.floor(r/60),2)+e+Vo(o,2)}function Vo(t,e){for(var n=Math.abs(t).toString();n.length<e;)n="0"+n;return n}var ta=function(t,e,n){var r=e?String(e):"YYYY-MM-DDTHH:mm:ss.SSSZ",o=(n||{}).locale,a=qo.format.formatters,s=qo.format.formattingTokensRegExp;o&&o.format&&o.format.formatters&&(a=o.format.formatters,o.format.formattingTokensRegExp&&(s=o.format.formattingTokensRegExp));var i=wr(t);return Uo(i)?function(t,e,n){var r,o,a=t.match(n),s=a.length;for(r=0;r<s;r++)a[r]=e[a[r]]||Qo[a[r]]||((o=a[r]).match(/\[[\s\S]/)?o.replace(/^\[|]$/g,""):o.replace(/\\/g,""));return function(t){for(var e="",n=0;n<s;n++)a[n]instanceof Function?e+=a[n](t,Qo):e+=a[n];return e}}(r,a,s)(i):"Invalid Date"};var ea=function(t,e){var n=wr(t),r=wr(e);return n.getTime()===r.getTime()},na=function(t){this._dateDate=t,this._date=Oo(t),this._day=Yo(t),this._selection=!1},ra={date:{configurable:!0},day:{configurable:!0}};ra.date.get=function(){return this._date},ra.day.get=function(){return this._day},na.prototype.isSelected=function(){return this._selection},na.prototype.select=function(){this._selection=!0},na.prototype.deselect=function(){this._selection=!1},na.prototype.toString=function(){return ta(this._dateDate,"YYYY-MM-DD")},na.prototype.isEqual=function(t){return ea(this._date,t.date)},Object.defineProperties(na.prototype,ra);var oa=function(t){this._month=kr(t);var e=jo(t,1),n=$r(t);this._dates=So(n).map(function(t){return new na(ko(e,t))})},aa={dates:{configurable:!0}};aa.dates.get=function(){return this._dates},oa.prototype.toEqual=function(t){return this._month===kr(t)},Object.defineProperties(oa.prototype,aa);var sa=function(t,e,n){this._year=t.getFullYear();var r=To(e,n)+1;this._months=So(r).map(function(e){return new oa(Mr(t,e))})},ia={months:{configurable:!0}};ia.months.get=function(){return this._months},sa.prototype.toEqual=function(t){return this._year===jr(t)},sa.prototype.find=function(t){return this._months.find(t)},Object.defineProperties(sa.prototype,ia);var ua=function(t){function e(e){t.call(this,e),this._date="",this._day="",this._pad=!0}return t&&(e.__proto__=t),(e.prototype=Object.create(t&&t.prototype)).constructor=e,e}(na),ca=function(t){function e(e,n){var r=this;t.call(this,e),this._calendar=n;var o=e.date,a=e.ref;if(this._hasRef()){this.ref.store.set({__refs__:this.ref.store.refs.concat([n])});var s=Mr(new Date(a.store.year,a.store.month),a.store.refs.length);this.set({years:a.store.years,year:jr(s),month:kr(s)})}else{var i=Cr(o.max,o.min)+1,u=So(i).map(function(t){return new sa(Tr(o.min,t),o.max,o.min)});this.set({years:u,year:jr(o.initial||o.min),month:kr(o.initial||o.min)})}this.compute("days",["template"],function(t){var e=t.dayOfTheWeek;return[e.sun,e.mon,e.tues,e.wed,e.thurs,e.fri,e.sat]}),this.compute("dates",["years","year","month"],function(t,e,n){var o=new Date(e,n),a=t.find(function(t){return t.toEqual(o)}).find(function(t){return t.toEqual(o)});if(void 0===a)throw new Error("month is undefined");for(var s=a.dates,i=s[0].day,u=0;u<i;u++)s.unshift(new ua);return Er(r.minDate,Fr(r.currentDate,1))&&Sr(Fr(r.currentDate,1),r.maxDate)?s.map(function(){return new ua}):s}),this.set({getDayState:this.getDayState})}t&&(e.__proto__=t),(e.prototype=Object.create(t&&t.prototype)).constructor=e;var n={refs:{configurable:!0},ref:{configurable:!0},years:{configurable:!0},year:{configurable:!0},month:{configurable:!0},dates:{configurable:!0},date:{configurable:!0},currentDate:{configurable:!0},minDate:{configurable:!0},maxDate:{configurable:!0},color:{configurable:!0}};return n.refs.get=function(){return this.get("__refs__")},n.ref.get=function(){return this.get("ref")},n.years.get=function(){return this._hasRef()?this.ref.store.get("years"):this.get("years")},n.year.get=function(){return this.get("year")},n.month.get=function(){return this.get("month")},n.dates.get=function(){return this.get("dates")},n.date.get=function(){return this.get("date")},n.currentDate.get=function(){return new Date(this.year,this.month)},n.minDate.get=function(){var t;return t=this._hasRef()?this.ref.store.date.min:this.date.min,new Date(jr(t),kr(t))},n.maxDate.get=function(){var t;return t=this._hasRef()?this.ref.store.date.max:this.date.max,new Date(jr(t),kr(t))},n.color.get=function(){return this.get("color")},e.prototype._hasRef=function(){return void 0!==this.ref},e.prototype._getRefsSize=function(){return this._hasRef()?this.ref.store.refs.length:this.refs.length},e.prototype._getFirstCalendar=function(){return this._hasRef()?this.ref:this._calendar},e.prototype._getLastCalendar=function(){return void 0===this.ref&&0===this.refs.length?this._calendar:void 0===this.ref&&this.refs.length>0?this.refs[this.refs.length-1]:this.ref.store.refs[this.ref.store.refs.length-1]},e.prototype.fire=function(t,e){this._hasRef()?this.ref.calendar.fire(t,e):this._calendar.calendar.fire(t,e)},e.prototype.update=function(){this.set({__key__:Math.random()/1e4+Math.random()})},e.prototype.updateDates=function(t){var e=this;void 0===t&&(t=!1),this.set({__key_dates__:Math.random()/1e4+Math.random()}),!t&&this._hasRef()?this.ref.store.updateDates(!0):!t&&this.refs.length>0&&setTimeout(function(){e.refs.forEach(function(t){t.store.updateDates(!0)})},30)},e.prototype.reset=function(t){(void 0===t&&(t=!1),t)||(this._hasRef()?this.ref.store.getSelectedDates():this.getSelectedDates()).forEach(function(t){t.deselect()});!t&&this._hasRef()?this.ref.store.reset(!0):t||(this.refs.forEach(function(t){t.store.reset(!0)}),this.updateDates())},e.prototype.restore=function(t){var e=!1;this.years.forEach(function(n){n.months.forEach(function(n){n.dates.forEach(function(n){t.includes(n.toString())&&(n.select(),e||(e=!0))})})}),e&&this.updateDates()},e.prototype.inRange=function(t,e){var n=new Date(t,e);return!Er(this.minDate,n)&&!Sr(n,this.maxDate)},e.prototype.selectDay=function(t){var e=this.getDayState(t),n=!1;this.dates.forEach(function(r){r instanceof ua||r.day===t&&(e?r.deselect():r.select(),n||(n=!0))}),n&&this.updateDates()},e.prototype.getDayState=function(t){return(this.dates||this.$dates).filter(function(e){return e.day===t}).every(function(t){return t.isSelected()})},e.prototype.getSelectedDates=function(){var t=[];return this.years.forEach(function(e){e.months.forEach(function(e){e.dates.forEach(function(e){e.isSelected()&&t.push(e)})})}),t},e.prototype.setPrevMonth=function(t,e){void 0===t&&(t=!1);var n=this._getRefsSize();if(void 0===e){var r=this._getFirstCalendar();e=Or(new Date(r.store.year,r.store.month),n+1)}if(Er(e,this.minDate))this.fire("onReachLowerLimit");else{var o=Or(new Date(this.year,this.month),n+1);this.set({year:jr(o),month:kr(o)}),!t&&this._hasRef()?this.ref.store.setPrevMonth(!0,e):t||this.refs.forEach(function(t){t.store.setPrevMonth(!0,e)})}},e.prototype.setNextMonth=function(t,e){var n=this;void 0===t&&(t=!1);var r=this._getRefsSize();if(void 0===e){var o=this._getLastCalendar();e=Mr(new Date(o.store.year,o.store.month),r+1)}if(Sr(e,this.maxDate))this.fire("onReachUpperLimit");else{var a=Mr(new Date(this.year,this.month),r+1);this.set({year:jr(a),month:kr(a)}),!t&&this._hasRef()?(this.ref.store.setNextMonth(!0,e),this.ref.store.refs.forEach(function(t){t!==n._calendar&&t.store.setNextMonth(!0,e)})):t||this.refs.forEach(function(t){t.store.setNextMonth(!0,e)})}},Object.defineProperties(e.prototype,n),e}(Vn),fa="object"==typeof Kn&&Kn&&Kn.Object===Object&&Kn,la="object"==typeof self&&self&&self.Object===Object&&self;fa||la||Function("return this")();function da(t){var e,n,r;Xn(this,t),this._state=jn({},t.data),this._fragment=(e=this._state,{c:function(){n=In("div"),r=Pn(e.day)},m:function(t,e){On(n,t,e),kn(r,n)},p:function(t,e){t.day&&(r.data=e.day)},u:function(){Yn(n)},d:Tn}),t.target&&(this._fragment.c(),this._fragment.m(t.target,t.anchor||null))}function ha(t,e){var n,r,o=t.date.date;return{c:function(){n=In("div"),r=Pn(o),this.h()},h:function(){Rn(n,"svelte-3754584703","")},m:function(t,e){On(n,t,e),kn(r,n)},p:function(t,e){t.date&&o!==(o=e.date.date)&&(r.data=o)},u:function(){Yn(n)},d:Tn}}function pa(t){var e;Xn(this,t),this._state=jn({},t.data),document.getElementById("svelte-3754584703-style")||((e=In("style")).id="svelte-3754584703-style",e.textContent="[svelte-3754584703].apocCalendar-Is_Hidden,[svelte-3754584703] .apocCalendar-Is_Hidden{visibility:hidden}",kn(e,document.head)),this._fragment=ha(this._state),t.target&&(this._fragment.c(),this._fragment.m(t.target,t.anchor||null))}function _a(t){var e=["apocCalendar-Component_DayCell"];return t&&e.push("apocCalendar-Is_Selected"),e.join(" ")}function ma(t,e){var n=["background: "+e.background.cell,"color: "+e.text];return console.log(t),t&&n.push("background: "+e.background.active),n.join(";")}function ga(t){var e=["apocCalendar-Component_DateCell"];return t instanceof ua&&e.push("apocCalendar-Is_Pad"),t.isSelected()&&e.push("apocCalendar-Is_Selected"),e.join(" ")}function va(t,e){var n=["color: "+e.text];return!t instanceof ua&&n.push("background: "+e.background.cell),t.isSelected()&&n.push("background: "+e.background.active),n.join(";")}function ya(t,e){for(var n,r,o=t.$days,a=[],s=0;s<o.length;s+=1)a[s]=ba(t,o,o[s],s,e);var i=t.$dates,u=[];for(s=0;s<i.length;s+=1)u[s]=xa(t,i,i[s],s,e);return{c:function(){n=In("ul");for(var t=0;t<a.length;t+=1)a[t].c();r=Hn();for(t=0;t<u.length;t+=1)u[t].c();this.h()},h:function(){Rn(n,"svelte-2668734080",""),n.className="apocCalendar-Component_DateTable"},m:function(t,e){On(n,t,e);for(var o=0;o<a.length;o+=1)a[o].m(n,null);kn(r,n);for(o=0;o<u.length;o+=1)u[o].m(n,null)},p:function(t,o){var s=o.$days;if(t.$getDayState||t.$__key_dates__||t.$color||t.$days){for(var i=0;i<s.length;i+=1)a[i]?a[i].p(t,o,s,s[i],i):(a[i]=ba(o,s,s[i],i,e),a[i].c(),a[i].m(n,r));for(;i<a.length;i+=1)a[i].u(),a[i].d();a.length=s.length}var c=o.$dates;if(t.$dates||t.$__key_dates__||t.$color){for(i=0;i<c.length;i+=1)u[i]?u[i].p(t,o,c,c[i],i):(u[i]=xa(o,c,c[i],i,e),u[i].c(),u[i].m(n,null));for(;i<u.length;i+=1)u[i].u(),u[i].d();u.length=c.length}},u:function(){Yn(n);for(var t=0;t<a.length;t+=1)a[t].u();for(t=0;t<u.length;t+=1)u[t].u()},d:function(){Fn(a),Fn(u)}}}function ba(t,e,n,r,o){var a,s,i,u=new da({root:o.root,data:{day:n}});return{c:function(){a=In("li"),u._fragment.c(),this.h()},h:function(){a.className=s=_a(t.$getDayState(r)),a.style.cssText=i=ma(t.$getDayState(r),t.$color),Nn(a,"click",Da),a._svelte={component:o,$days:e,i:r}},m:function(t,e){On(a,t,e),u._mount(a,null)},p:function(t,e,n,r,o){var c={};t.$days&&(c.day=r),u._set(c),(t.$getDayState||t.$__key_dates__)&&s!==(s=_a(e.$getDayState(o)))&&(a.className=s),(t.$getDayState||t.$color||t.$__key_dates__)&&i!==(i=ma(e.$getDayState(o),e.$color))&&(a.style.cssText=i),a._svelte.$days=n,a._svelte.i=o},u:function(){Yn(a)},d:function(){u.destroy(!1),zn(a,"click",Da)}}}function xa(t,e,n,r,o){var a,s,i,u=new pa({root:o.root,data:{date:n}});return{c:function(){a=In("li"),u._fragment.c(),this.h()},h:function(){a.className=s=ga(n),a.style.cssText=i=va(n,t.$color),Nn(a,"click",wa),Nn(a,"mouseenter",Ca),Nn(a,"mouseleave",Ea),a._svelte={component:o,$dates:e,date_index:r}},m:function(t,e){On(a,t,e),u._mount(a,null)},p:function(t,e,n,r,o){var c={};t.$dates&&(c.date=r),u._set(c),(t.$dates||t.$__key_dates__)&&s!==(s=ga(r))&&(a.className=s),(t.$dates||t.$color||t.$__key_dates__)&&i!==(i=va(r,e.$color))&&(a.style.cssText=i),a._svelte.$dates=n,a._svelte.date_index=o},u:function(){Yn(a)},d:function(){u.destroy(!1),zn(a,"click",wa),zn(a,"mouseenter",Ca),zn(a,"mouseleave",Ea)}}}function Da(t){var e=this._svelte.i;this._svelte.component.selectDay(e)}function wa(t){this._svelte.component.selectDate(this._svelte.$dates[this._svelte.date_index])}function Ca(t){this._svelte.component.handleDateMouseEnter(t)}function Ea(t){this._svelte.component.handleDateMouseLeave(t)}function Sa(t){var e;Xn(this,t),this._state=jn(this.store._init(["days","getDayState","__key_dates__","color","dates"]),t.data),this.store._add(this,["days","getDayState","__key_dates__","color","dates"]),this._handlers.destroy=[qn],document.getElementById("svelte-2668734080-style")||((e=In("style")).id="svelte-2668734080-style",e.textContent="[svelte-2668734080].apocCalendar-Component_DateTable,[svelte-2668734080] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-2668734080].apocCalendar-Component_DayCell,[svelte-2668734080] .apocCalendar-Component_DayCell,[svelte-2668734080].apocCalendar-Component_DateCell,[svelte-2668734080] .apocCalendar-Component_DateCell{font-size:.8em;width:3em;height:1.5em;cursor:pointer;background:#fff;margin:0}[svelte-2668734080].apocCalendar-Is_Pad,[svelte-2668734080] .apocCalendar-Is_Pad{background:transparent}",kn(e,document.head)),t.root||(this._oncreate=[],this._beforecreate=[],this._aftercreate=[]),this._fragment=ya(this._state,this),t.target&&(this._fragment.c(),this._fragment.m(t.target,t.anchor||null),this._lock=!0,Jn(this._beforecreate),Jn(this._oncreate),Jn(this._aftercreate),this._lock=!1)}function $a(t){var e=["apocCalendar-Component_Pager"];return e.push("right"===t?"apocCalendar-Is_Right":"apocCalendar-Is_Left"),e.join(" ")}jn(da.prototype,Qn),jn(pa.prototype,Qn),jn(Sa.prototype,{selectDay:function(t){this.store.selectDay(t)},selectDate:function(t){t instanceof ua||(t.isSelected()?t.deselect():t.select(),this.store.updateDates())},setActiveColorToBackground:function(t){Object.assign(t.style,{background:this.store.color.background.hover})},resetColorToBackground:function(t){Object.assign(t.style,{background:null})},handleDateMouseEnter:function(t){var e=t.target;e.classList.contains("apocCalendar-Is_Selected")||e.classList.contains("apocCalendar-Is_Pad")||this.setActiveColorToBackground(e)},handleDateMouseLeave:function(t){var e=t.target;e.classList.contains("apocCalendar-Is_Selected")||e.classList.contains("apocCalendar-Is_Pad")||this.resetColorToBackground(e)}},Qn);function Ma(t){Rn(t,"svelte-2048934756","")}function Ta(t,e){var n,r;function o(t){e.prev()}return{c:function(){(n=In("div")).innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>',this.h()},h:function(){Ma(n),n.className=r=$a(t.type),Nn(n,"click",o)},m:function(t,e){On(n,t,e)},p:function(t,e){t.type&&r!==(r=$a(e.type))&&(n.className=r)},u:function(){Yn(n)},d:function(){zn(n,"click",o)}}}function ja(t,e){var n,r;function o(t){e.next()}return{c:function(){(n=In("div")).innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>',this.h()},h:function(){Ma(n),n.className=r=$a(t.type),Nn(n,"click",o)},m:function(t,e){On(n,t,e)},p:function(t,e){t.type&&r!==(r=$a(e.type))&&(n.className=r)},u:function(){Yn(n)},d:function(){zn(n,"click",o)}}}function ka(t){var e,n,r,o,a,s,i;Xn(this,t),this._state=jn({type:"left"},t.data),document.getElementById("svelte-2048934756-style")||((e=In("style")).id="svelte-2048934756-style",e.textContent="[svelte-2048934756].apocCalendar-Component_Pager,[svelte-2048934756] .apocCalendar-Component_Pager{position:absolute;bottom:50%;transform:translateY(50%);cursor:pointer;border-radius:50%;background:#444;width:2em;height:2em;z-index:1}[svelte-2048934756].apocCalendar-Component_Pager svg,[svelte-2048934756] .apocCalendar-Component_Pager svg{position:absolute;bottom:50%;transform:translate(50%, 50%);width:1em;height:1em;stroke:#fff}[svelte-2048934756].apocCalendar-Is_Left,[svelte-2048934756] .apocCalendar-Is_Left{left:-1em}[svelte-2048934756].apocCalendar-Is_Left svg,[svelte-2048934756] .apocCalendar-Is_Left svg{right:calc(50% + .45em)}[svelte-2048934756].apocCalendar-Is_Right,[svelte-2048934756] .apocCalendar-Is_Right{right:-1em}[svelte-2048934756].apocCalendar-Is_Right svg,[svelte-2048934756] .apocCalendar-Is_Right svg{right:calc(50% - .45em)}",kn(e,document.head)),this._fragment=(r=this,s="left"===(n=this._state).type&&Ta(n,r),i="right"===n.type&&ja(n,r),{c:function(){s&&s.c(),o=Pn("\n\n"),i&&i.c(),a=Hn()},m:function(t,e){s&&s.m(t,e),On(o,t,e),i&&i.m(t,e),On(a,t,e)},p:function(t,e){"left"===e.type?s?s.p(t,e):((s=Ta(e,r)).c(),s.m(o.parentNode,o)):s&&(s.u(),s.d(),s=null),"right"===e.type?i?i.p(t,e):((i=ja(e,r)).c(),i.m(a.parentNode,a)):i&&(i.u(),i.d(),i=null)},u:function(){s&&s.u(),Yn(o),i&&i.u(),Yn(a)},d:function(){s&&s.d(),i&&i.d()}}),t.target&&(this._fragment.c(),this._fragment.m(t.target,t.anchor||null))}function Oa(t){return"\n\t\tbackground: "+t.background.table+";\n\t\tborder: 1px solid "+t.background.table+";\n\t"}function Ya(t){return"\n\t\tbackground: "+t.background.cell+";\n\t\tcolor: "+t.text+";\n\t"}function Fa(t,e){return t+"."+e}function Ia(t,e){var n,r,o,a,s,i,u,c,f=Fa(t.$year,t.$month+1),l=new Sa({root:e.root}),d=t.$pager.prev&&Pa(t,e),h=t.$pager.next&&Ha(t,e);return{c:function(){n=In("section"),r=In("header"),o=Pn(f),s=Pn("\n\t"),l._fragment.c(),i=Pn("\n\n\t"),d&&d.c(),u=Pn("\n\n\t"),h&&h.c(),this.h()},h:function(){Rn(n,"svelte-1797829316",""),r.className="apocCalendar-Component_Header",r.style.cssText=a=Ya(t.$color),n.className="apocCalendar-Component_Box",n.style.cssText=c=Oa(t.$color)},m:function(t,e){On(n,t,e),kn(r,n),kn(o,r),kn(s,n),l._mount(n,null),kn(i,n),d&&d.m(n,null),kn(u,n),h&&h.m(n,null)},p:function(t,s){(t.$year||t.$month)&&f!==(f=Fa(s.$year,s.$month+1))&&(o.data=f),t.$color&&a!==(a=Ya(s.$color))&&(r.style.cssText=a),s.$pager.prev?d||((d=Pa(s,e)).c(),d.m(n,u)):d&&(d.u(),d.d(),d=null),s.$pager.next?h||((h=Ha(s,e)).c(),h.m(n,null)):h&&(h.u(),h.d(),h=null),t.$color&&c!==(c=Oa(s.$color))&&(n.style.cssText=c)},u:function(){Yn(n),d&&d.u(),h&&h.u()},d:function(){l.destroy(!1),d&&d.d(),h&&h.d()}}}function Pa(t,e){var n=new ka({root:e.root});return{c:function(){n._fragment.c()},m:function(t,e){n._mount(t,e)},u:function(){n._unmount()},d:function(){n.destroy(!1)}}}function Ha(t,e){var n=new ka({root:e.root,data:{type:"right"}});return{c:function(){n._fragment.c()},m:function(t,e){n._mount(t,e)},u:function(){n._unmount()},d:function(){n.destroy(!1)}}}function Na(t){var e;Xn(this,t),this._state=jn(this.store._init(["color","year","month","pager"]),{},t.data),this.store._add(this,["color","year","month","pager"]),this._handlers.destroy=[qn],document.getElementById("svelte-1797829316-style")||((e=In("style")).id="svelte-1797829316-style",e.textContent="[svelte-1797829316].apocCalendar-Component_Box,[svelte-1797829316] .apocCalendar-Component_Box{position:relative;font-size:1em;box-sizing:border-box}[svelte-1797829316].apocCalendar-Component_Header,[svelte-1797829316] .apocCalendar-Component_Header{font-size:1em;font-weight:bold;line-height:2;margin-bottom:1px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}",kn(e,document.head)),t.root||(this._oncreate=[],this._beforecreate=[],this._aftercreate=[]),this._fragment=Ia(this._state,this),t.target&&(this._fragment.c(),this._fragment.m(t.target,t.anchor||null),this._lock=!0,Jn(this._beforecreate),Jn(this._oncreate),Jn(this._aftercreate),this._lock=!1)}jn(ka.prototype,{prev:function(){this.store.setPrevMonth()},next:function(){this.store.setNextMonth()}},Qn),jn(Na.prototype,Qn);var za=new Date,Ra={"date.initial":void 0,"date.min":za,"date.max":Mr(za,12),"date.pad":!0,"pager.next":!0,"pager.prev":!0,"pager.step":1,"template.head":"{year}.{month}","template.dayOfTheWeek":{sun:"Sun",mon:"Mon",tues:"Tues",wed:"Wed",thurs:"Thurs",fri:"Fri",sat:"Sat"},"color.text":"#222","color.background.table":"#444","color.background.cell":"#fcfcfc","color.background.hover":"#ccc","color.background.active":"#cb1b45",__refs__:[],ref:void 0},La=Object.assign||function(t){for(var e=arguments,n=1;n<arguments.length;n++){var r=e[n];for(var o in r)Object.prototype.hasOwnProperty.call(r,o)&&(t[o]=r[o])}return t},Aa=function(t,e){void 0===e&&(e=Ra),this.target=t,this.store=new ca(Mn(La({},Ra,e)),this),this.calendar=new Na({target:this.target,store:this.store}),this._prepareObserver()};Aa.prototype._prepareObserver=function(){var t=this;this.store.observe("__key_dates__",function(){var e=t.store.getSelectedDates();t.calendar.fire("onUpdateDates",e.map(function(t){return t.toString()}))})},Aa.prototype.on=function(t,e){this.calendar.on(t,e)},Aa.prototype.reset=function(){this.store.reset()},Aa.prototype.restore=function(t){this.store.restore(t)},module.exports=Aa});
-//# sourceMappingURL=apoc-calendar.umd.js.map
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.ApocCalendar = factory());
+}(this, (function () { 'use strict';
+
+var t = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : {};
+var e = "object" == typeof t && t && t.Object === Object && t;
+var r = {
+    default: e,
+    __moduleExports: e
+};
+var o = "object" == typeof self && self && self.Object === Object && self;
+var n = r && e || r || o || Function("return this")();
+var u = {
+    default: n,
+    __moduleExports: n
+};
+var a = u && n || u;
+var l = a.Symbol;
+var _ = {
+    default: l,
+    __moduleExports: l
+};
+var i = _ && l || _;
+var f = Object.prototype;
+var s = f.hasOwnProperty;
+var d = f.toString;
+var c = i ? i.toStringTag : void 0;
+var p = function (t) {
+    var e = s.call(t, c), r = t[c];
+    try {
+        t[c] = void 0;
+        var o = !0;
+    } catch (t) {}
+    var n = d.call(t);
+    return o && (e ? (t[c] = r) : delete t[c]), n;
+};
+var v = {
+    default: p,
+    __moduleExports: p
+};
+var h = Object.prototype.toString;
+var y = function (t) {
+    return h.call(t);
+};
+var m = {
+    default: y,
+    __moduleExports: y
+};
+var x = v && p || v;
+var E = m && y || m;
+var b = "[object Null]";
+var g = "[object Undefined]";
+var j = i ? i.toStringTag : void 0;
+var O = function (t) {
+    return null == t ? void 0 === t ? g : b : j && j in Object(t) ? x(t) : E(t);
+};
+var w = {
+    default: O,
+    __moduleExports: O
+};
+var z = function (t) {
+    var e = typeof t;
+    return null != t && ("object" == e || "function" == e);
+};
+var P = {
+    default: z,
+    __moduleExports: z
+};
+var S = w && O || w;
+var $ = P && z || P;
+var A = "[object AsyncFunction]";
+var F = "[object Function]";
+var k = "[object GeneratorFunction]";
+var C = "[object Proxy]";
+var T;
+var R = function (t) {
+    if (!$(t)) 
+        { return !1; }
+    var e = S(t);
+    return e == F || e == k || e == A || e == C;
+};
+var G = {
+    default: R,
+    __moduleExports: R
+};
+var I = a["__core-js_shared__"];
+var M = {
+    default: I,
+    __moduleExports: I
+};
+var N = M && I || M;
+var U = (T = /[^.]+$/.exec(N && N.keys && N.keys.IE_PROTO || "")) ? "Symbol(src)_1." + T : "";
+var q = function (t) {
+    return !(!U) && U in t;
+};
+var B = {
+    default: q,
+    __moduleExports: q
+};
+var D = Function.prototype.toString;
+var H = function (t) {
+    if (null != t) {
+        try {
+            return D.call(t);
+        } catch (t) {}
+        try {
+            return t + "";
+        } catch (t) {}
+    }
+    return "";
+};
+var J = {
+    default: H,
+    __moduleExports: H
+};
+var K = G && R || G;
+var L = B && q || B;
+var Q = J && H || J;
+var V = /^\[object .+?Constructor\]$/;
+var W = Function.prototype;
+var X = Object.prototype;
+var Y = RegExp("^" + W.toString.call(X.hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+var Z = function (t) {
+    return !(!$(t) || L(t)) && (K(t) ? Y : V).test(Q(t));
+};
+var tt = {
+    default: Z,
+    __moduleExports: Z
+};
+var et = function (t, e) {
+    return null == t ? void 0 : t[e];
+};
+var rt = {
+    default: et,
+    __moduleExports: et
+};
+var ot = tt && Z || tt;
+var nt = rt && et || rt;
+var ut = function (t, e) {
+    var r = nt(t, e);
+    return ot(r) ? r : void 0;
+};
+var at = {
+    default: ut,
+    __moduleExports: ut
+};
+var lt = at && ut || at;
+var _t = (function () {
+    try {
+        var t = lt(Object, "defineProperty");
+        return t({}, "", {}), t;
+    } catch (t) {}
+})();
+var it = {
+    default: _t,
+    __moduleExports: _t
+};
+var ft = it && _t || it;
+var st = function (t, e, r) {
+    "__proto__" == e && ft ? ft(t, e, {
+        configurable: !0,
+        enumerable: !0,
+        value: r,
+        writable: !0
+    }) : (t[e] = r);
+};
+var dt = {
+    default: st,
+    __moduleExports: st
+};
+var ct = function (t, e) {
+    return t === e || t != t && e != e;
+};
+var pt = {
+    default: ct,
+    __moduleExports: ct
+};
+var vt = dt && st || dt;
+var ht = pt && ct || pt;
+var yt = Object.prototype.hasOwnProperty;
+var mt = function (t, e, r) {
+    var o = t[e];
+    yt.call(t, e) && ht(o, r) && (void 0 !== r || e in t) || vt(t, e, r);
+};
+var xt = {
+    default: mt,
+    __moduleExports: mt
+};
+var Et = Array.isArray;
+var bt = {
+    default: Et,
+    __moduleExports: Et
+};
+var gt = function (t) {
+    return null != t && "object" == typeof t;
+};
+var jt = {
+    default: gt,
+    __moduleExports: gt
+};
+var Ot = jt && gt || jt;
+var wt = "[object Symbol]";
+var zt = function (t) {
+    return "symbol" == typeof t || Ot(t) && S(t) == wt;
+};
+var Pt = {
+    default: zt,
+    __moduleExports: zt
+};
+var St = bt && Et || bt;
+var $t = Pt && zt || Pt;
+var At = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
+var Ft = /^\w*$/;
+var kt = function (t, e) {
+    if (St(t)) 
+        { return !1; }
+    var r = typeof t;
+    return !("number" != r && "symbol" != r && "boolean" != r && null != t && !$t(t)) || Ft.test(t) || !At.test(t) || null != e && t in Object(e);
+};
+var Ct = {
+    default: kt,
+    __moduleExports: kt
+};
+var Tt = lt(Object, "create");
+var Rt = {
+    default: Tt,
+    __moduleExports: Tt
+};
+var Gt = Rt && Tt || Rt;
+var It = function () {
+    this.__data__ = Gt ? Gt(null) : {}, this.size = 0;
+};
+var Mt = {
+    default: It,
+    __moduleExports: It
+};
+var Nt = function (t) {
+    var e = this.has(t) && delete this.__data__[t];
+    return this.size -= e ? 1 : 0, e;
+};
+var Ut = {
+    default: Nt,
+    __moduleExports: Nt
+};
+var qt = "__lodash_hash_undefined__";
+var Bt = Object.prototype.hasOwnProperty;
+var Dt = function (t) {
+    var e = this.__data__;
+    if (Gt) {
+        var r = e[t];
+        return r === qt ? void 0 : r;
+    }
+    return Bt.call(e, t) ? e[t] : void 0;
+};
+var Ht = {
+    default: Dt,
+    __moduleExports: Dt
+};
+var Jt = Object.prototype.hasOwnProperty;
+var Kt = function (t) {
+    var e = this.__data__;
+    return Gt ? void 0 !== e[t] : Jt.call(e, t);
+};
+var Lt = {
+    default: Kt,
+    __moduleExports: Kt
+};
+var Qt = "__lodash_hash_undefined__";
+var Vt = function (t, e) {
+    var r = this.__data__;
+    return this.size += this.has(t) ? 0 : 1, r[t] = Gt && void 0 === e ? Qt : e, this;
+};
+var Wt = {
+    default: Vt,
+    __moduleExports: Vt
+};
+var Xt = Ut && Nt || Ut;
+var Yt = Ht && Dt || Ht;
+var Zt = Lt && Kt || Lt;
+var te = Wt && Vt || Wt;
+function ee(t) {
+    var this$1 = this;
+
+    var e = -1, r = null == t ? 0 : t.length;
+    for (this.clear(); ++e < r; ) {
+        var o = t[e];
+        this$1.set(o[0], o[1]);
+    }
+}
+
+ee.prototype.clear = Mt && It || Mt, ee.prototype.delete = Xt, ee.prototype.get = Yt, ee.prototype.has = Zt, ee.prototype.set = te;
+var re = ee;
+var oe = {
+    default: re,
+    __moduleExports: re
+};
+var ne = function () {
+    this.__data__ = [], this.size = 0;
+};
+var ue = {
+    default: ne,
+    __moduleExports: ne
+};
+var ae = function (t, e) {
+    for (var r = t.length;r--; ) 
+        { if (ht(t[r][0], e)) 
+        { return r; } }
+    return -1;
+};
+var le = {
+    default: ae,
+    __moduleExports: ae
+};
+var _e = le && ae || le;
+var ie = Array.prototype.splice;
+var fe = function (t) {
+    var e = this.__data__, r = _e(e, t);
+    return !(r < 0 || (r == e.length - 1 ? e.pop() : ie.call(e, r, 1), --this.size, 0));
+};
+var se = {
+    default: fe,
+    __moduleExports: fe
+};
+var de = function (t) {
+    var e = this.__data__, r = _e(e, t);
+    return r < 0 ? void 0 : e[r][1];
+};
+var ce = {
+    default: de,
+    __moduleExports: de
+};
+var pe = function (t) {
+    return _e(this.__data__, t) > -1;
+};
+var ve = {
+    default: pe,
+    __moduleExports: pe
+};
+var he = function (t, e) {
+    var r = this.__data__, o = _e(r, t);
+    return o < 0 ? (++this.size, r.push([t,e])) : (r[o][1] = e), this;
+};
+var ye = {
+    default: he,
+    __moduleExports: he
+};
+var me = se && fe || se;
+var xe = ce && de || ce;
+var Ee = ve && pe || ve;
+var be = ye && he || ye;
+function ge(t) {
+    var this$1 = this;
+
+    var e = -1, r = null == t ? 0 : t.length;
+    for (this.clear(); ++e < r; ) {
+        var o = t[e];
+        this$1.set(o[0], o[1]);
+    }
+}
+
+ge.prototype.clear = ue && ne || ue, ge.prototype.delete = me, ge.prototype.get = xe, ge.prototype.has = Ee, ge.prototype.set = be;
+var je = ge;
+var Oe = {
+    default: je,
+    __moduleExports: je
+};
+var we = lt(a, "Map");
+var ze = {
+    default: we,
+    __moduleExports: we
+};
+var Pe = oe && re || oe;
+var Se = Oe && je || Oe;
+var $e = ze && we || ze;
+var Ae = function () {
+    this.size = 0, this.__data__ = {
+        hash: new Pe(),
+        map: new ($e || Se)(),
+        string: new Pe()
+    };
+};
+var Fe = {
+    default: Ae,
+    __moduleExports: Ae
+};
+var ke = function (t) {
+    var e = typeof t;
+    return "string" == e || "number" == e || "symbol" == e || "boolean" == e ? "__proto__" !== t : null === t;
+};
+var Ce = {
+    default: ke,
+    __moduleExports: ke
+};
+var Te = Ce && ke || Ce;
+var Re = function (t, e) {
+    var r = t.__data__;
+    return Te(e) ? r["string" == typeof e ? "string" : "hash"] : r.map;
+};
+var Ge = {
+    default: Re,
+    __moduleExports: Re
+};
+var Ie = Ge && Re || Ge;
+var Me = function (t) {
+    var e = Ie(this, t).delete(t);
+    return this.size -= e ? 1 : 0, e;
+};
+var Ne = {
+    default: Me,
+    __moduleExports: Me
+};
+var Ue = function (t) {
+    return Ie(this, t).get(t);
+};
+var qe = {
+    default: Ue,
+    __moduleExports: Ue
+};
+var Be = function (t) {
+    return Ie(this, t).has(t);
+};
+var De = {
+    default: Be,
+    __moduleExports: Be
+};
+var He = function (t, e) {
+    var r = Ie(this, t), o = r.size;
+    return r.set(t, e), this.size += r.size == o ? 0 : 1, this;
+};
+var Je = {
+    default: He,
+    __moduleExports: He
+};
+var Ke = Ne && Me || Ne;
+var Le = qe && Ue || qe;
+var Qe = De && Be || De;
+var Ve = Je && He || Je;
+function We(t) {
+    var this$1 = this;
+
+    var e = -1, r = null == t ? 0 : t.length;
+    for (this.clear(); ++e < r; ) {
+        var o = t[e];
+        this$1.set(o[0], o[1]);
+    }
+}
+
+We.prototype.clear = Fe && Ae || Fe, We.prototype.delete = Ke, We.prototype.get = Le, We.prototype.has = Qe, We.prototype.set = Ve;
+var Xe = {
+    default: We,
+    __moduleExports: We
+};
+var Ye = Xe && We || Xe;
+var Ze = "Expected a function";
+function tr(t, e) {
+    if ("function" != typeof t || null != e && "function" != typeof e) 
+        { throw new TypeError(Ze); }
+    var r = function () {
+        var o = arguments, n = e ? e.apply(this, o) : o[0], u = r.cache;
+        if (u.has(n)) 
+            { return u.get(n); }
+        var a = t.apply(this, o);
+        return r.cache = u.set(n, a) || u, a;
+    };
+    return r.cache = new (tr.Cache || Ye)(), r;
+}
+
+tr.Cache = Ye;
+var er = {
+    default: tr,
+    __moduleExports: tr
+};
+var rr = er && tr || er;
+var or = 500;
+var nr = function (t) {
+    var e = rr(t, function (t) {
+        return r.size === or && r.clear(), t;
+    }), r = e.cache;
+    return e;
+};
+var ur = {
+    default: nr,
+    __moduleExports: nr
+};
+var ar = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+var lr = /\\(\\)?/g;
+var _r = (ur && nr || ur)(function (t) {
+    var e = [];
+    return 46 === t.charCodeAt(0) && e.push(""), t.replace(ar, function (t, r, o, n) {
+        e.push(o ? n.replace(lr, "$1") : r || t);
+    }), e;
+});
+var ir = {
+    default: _r,
+    __moduleExports: _r
+};
+var fr = function (t, e) {
+    for (var r = -1, o = null == t ? 0 : t.length, n = Array(o);++r < o; ) 
+        { n[r] = e(t[r], r, t); }
+    return n;
+};
+var sr = {
+    default: fr,
+    __moduleExports: fr
+};
+var dr = sr && fr || sr;
+var cr = 1 / 0;
+var pr = i ? i.prototype : void 0;
+var vr = pr ? pr.toString : void 0;
+var hr = function t(e) {
+    if ("string" == typeof e) 
+        { return e; }
+    if (St(e)) 
+        { return dr(e, t) + ""; }
+    if ($t(e)) 
+        { return vr ? vr.call(e) : ""; }
+    var r = e + "";
+    return "0" == r && 1 / e == -cr ? "-0" : r;
+};
+var yr = {
+    default: hr,
+    __moduleExports: hr
+};
+var mr = yr && hr || yr;
+var xr = function (t) {
+    return null == t ? "" : mr(t);
+};
+var Er = {
+    default: xr,
+    __moduleExports: xr
+};
+var br = Ct && kt || Ct;
+var gr = ir && _r || ir;
+var jr = Er && xr || Er;
+var Or = function (t, e) {
+    return St(t) ? t : br(t, e) ? [t] : gr(jr(t));
+};
+var wr = {
+    default: Or,
+    __moduleExports: Or
+};
+var zr = 9007199254740991;
+var Pr = /^(?:0|[1-9]\d*)$/;
+var Sr = function (t, e) {
+    var r = typeof t;
+    return !(!(e = null == e ? zr : e)) && ("number" == r || "symbol" != r && Pr.test(t)) && t > -1 && t % 1 == 0 && t < e;
+};
+var $r = {
+    default: Sr,
+    __moduleExports: Sr
+};
+var Ar = 1 / 0;
+var Fr = function (t) {
+    if ("string" == typeof t || $t(t)) 
+        { return t; }
+    var e = t + "";
+    return "0" == e && 1 / t == -Ar ? "-0" : e;
+};
+var kr = {
+    default: Fr,
+    __moduleExports: Fr
+};
+var Cr = xt && mt || xt;
+var Tr = wr && Or || wr;
+var Rr = $r && Sr || $r;
+var Gr = kr && Fr || kr;
+var Ir = function (t, e, r, o) {
+    if (!$(t)) 
+        { return t; }
+    for (var n = -1, u = (e = Tr(e, t)).length, a = u - 1, l = t;null != l && ++n < u; ) {
+        var _ = Gr(e[n]), i = r;
+        if (n != a) {
+            var f = l[_];
+            void 0 === (i = o ? o(f, _, l) : void 0) && (i = $(f) ? f : Rr(e[n + 1]) ? [] : {});
+        }
+        Cr(l, _, i), l = l[_];
+    }
+    return t;
+};
+var Mr = {
+    default: Ir,
+    __moduleExports: Ir
+};
+var Nr = Mr && Ir || Mr;
+var Ur = function (t, e, r) {
+    return null == t ? t : Nr(t, e, r);
+};
+var Dr = function (t) {
+    return (function (t) {
+        return Object.keys(t).reduce(function (e, r) {
+            return Ur(e, r, t[r]);
+        }, {});
+    })(t);
+};
+
+function noop() {}
+
+function assign(target) {
+    var arguments$1 = arguments;
+
+    var k, source, i = 1, len = arguments.length;
+    for (; i < len; i++) {
+        source = arguments$1[i];
+        for (k in source) 
+            { target[k] = source[k]; }
+    }
+    return target;
+}
+
+function appendNode(node, target) {
+    target.appendChild(node);
+}
+
+function insertNode(node, target, anchor) {
+    target.insertBefore(node, anchor);
+}
+
+function detachNode(node) {
+    node.parentNode.removeChild(node);
+}
+
+function destroyEach(iterations) {
+    for (var i = 0;i < iterations.length; i += 1) {
+        if (iterations[i]) 
+            { iterations[i].d(); }
+    }
+}
+
+function createElement(name) {
+    return document.createElement(name);
+}
+
+function createText(data) {
+    return document.createTextNode(data);
+}
+
+function createComment() {
+    return document.createComment('');
+}
+
+function addListener(node, event, handler) {
+    node.addEventListener(event, handler, false);
+}
+
+function removeListener(node, event, handler) {
+    node.removeEventListener(event, handler, false);
+}
+
+function setAttribute(node, attribute, value) {
+    node.setAttribute(attribute, value);
+}
+
+function blankObject() {
+    return Object.create(null);
+}
+
+function destroy(detach) {
+    this.destroy = noop;
+    this.fire('destroy');
+    this.set = (this.get = noop);
+    if (detach !== false) 
+        { this._fragment.u(); }
+    this._fragment.d();
+    this._fragment = (this._state = null);
+}
+
+function _differs(a, b) {
+    return a != a ? b == b : a !== b || (a && typeof a === 'object' || typeof a === 'function');
+}
+
+function _differsImmutable(a, b) {
+    return a != a ? b == b : a !== b;
+}
+
+function dispatchObservers(component, group, changed, newState, oldState) {
+    for (var key in group) {
+        if (!changed[key]) 
+            { continue; }
+        var newValue = newState[key];
+        var oldValue = oldState[key];
+        var callbacks = group[key];
+        if (!callbacks) 
+            { continue; }
+        for (var i = 0;i < callbacks.length; i += 1) {
+            var callback = callbacks[i];
+            if (callback.__calling) 
+                { continue; }
+            callback.__calling = true;
+            callback.call(component, newValue, oldValue);
+            callback.__calling = false;
+        }
+    }
+}
+
+function fire(eventName, data) {
+    var this$1 = this;
+
+    var handlers = eventName in this._handlers && this._handlers[eventName].slice();
+    if (!handlers) 
+        { return; }
+    for (var i = 0;i < handlers.length; i += 1) {
+        handlers[i].call(this$1, data);
+    }
+}
+
+function get(key) {
+    return key ? this._state[key] : this._state;
+}
+
+function init(component, options) {
+    component._observers = {
+        pre: blankObject(),
+        post: blankObject()
+    };
+    component._handlers = blankObject();
+    component._bind = options._bind;
+    component.options = options;
+    component.root = options.root || component;
+    component.store = component.root.store || options.store;
+}
+
+function observe(key, callback, options) {
+    var group = options && options.defer ? this._observers.post : this._observers.pre;
+    (group[key] || (group[key] = [])).push(callback);
+    if (!options || options.init !== false) {
+        callback.__calling = true;
+        callback.call(this, this._state[key]);
+        callback.__calling = false;
+    }
+    return {
+        cancel: function () {
+            var index = group[key].indexOf(callback);
+            if (~index) 
+                { group[key].splice(index, 1); }
+        }
+    };
+}
+
+function on(eventName, handler) {
+    if (eventName === 'teardown') 
+        { return this.on('destroy', handler); }
+    var handlers = this._handlers[eventName] || (this._handlers[eventName] = []);
+    handlers.push(handler);
+    return {
+        cancel: function () {
+            var index = handlers.indexOf(handler);
+            if (~index) 
+                { handlers.splice(index, 1); }
+        }
+    };
+}
+
+function set(newState) {
+    this._set(assign({}, newState));
+    if (this.root._lock) 
+        { return; }
+    this.root._lock = true;
+    callAll(this.root._beforecreate);
+    callAll(this.root._oncreate);
+    callAll(this.root._aftercreate);
+    this.root._lock = false;
+}
+
+function _set(newState) {
+    var this$1 = this;
+
+    var oldState = this._state, changed = {}, dirty = false;
+    for (var key in newState) {
+        if (this$1._differs(newState[key], oldState[key])) 
+            { changed[key] = (dirty = true); }
+    }
+    if (!dirty) 
+        { return; }
+    this._state = assign({}, oldState, newState);
+    this._recompute(changed, this._state);
+    if (this._bind) 
+        { this._bind(changed, this._state); }
+    if (this._fragment) {
+        dispatchObservers(this, this._observers.pre, changed, this._state, oldState);
+        this._fragment.p(changed, this._state);
+        dispatchObservers(this, this._observers.post, changed, this._state, oldState);
+    }
+}
+
+function callAll(fns) {
+    while (fns && fns.length) 
+        { fns.shift()(); }
+}
+
+function _mount(target, anchor) {
+    this._fragment.m(target, anchor);
+}
+
+function _unmount() {
+    if (this._fragment) 
+        { this._fragment.u(); }
+}
+
+function removeFromStore() {
+    this.store._remove(this);
+}
+
+var proto = {
+    destroy: destroy,
+    get: get,
+    fire: fire,
+    observe: observe,
+    on: on,
+    set: set,
+    teardown: destroy,
+    _recompute: noop,
+    _set: _set,
+    _mount: _mount,
+    _unmount: _unmount,
+    _differs: _differs
+};
+
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+
+
+
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var pupa = createCommonjsModule(function (module) {
+    module.exports = (function (tpl, data) {
+        if (typeof tpl !== 'string') {
+            throw new TypeError(("Expected a string in the first argument, got " + (typeof tpl)));
+        }
+        if (typeof data !== 'object') {
+            throw new TypeError(("Expected an Object/Array in the second argument, got " + (typeof data)));
+        }
+        var re = /{(.*?)}/g;
+        return tpl.replace(re, function (_, key) {
+            var ret = data;
+            for (var i = 0, list = key.split('.'); i < list.length; i += 1) {
+                var prop = list[i];
+
+                ret = ret ? ret[prop] : '';
+            }
+            return ret || '';
+        });
+    });
+});
+
+function Store(state, options) {
+    this._observers = {
+        pre: blankObject(),
+        post: blankObject()
+    };
+    this._changeHandlers = [];
+    this._dependents = [];
+    this._computed = blankObject();
+    this._sortedComputedProperties = [];
+    this._state = assign({}, state);
+    this._differs = options && options.immutable ? _differsImmutable : _differs;
+}
+
+assign(Store.prototype, {
+    _add: function (component, props) {
+        this._dependents.push({
+            component: component,
+            props: props
+        });
+    },
+    _init: function (props) {
+        var this$1 = this;
+
+        var state = {};
+        for (var i = 0;i < props.length; i += 1) {
+            var prop = props[i];
+            state['$' + prop] = this$1._state[prop];
+        }
+        return state;
+    },
+    _remove: function (component) {
+        var this$1 = this;
+
+        var i = this._dependents.length;
+        while (i--) {
+            if (this$1._dependents[i].component === component) {
+                this$1._dependents.splice(i, 1);
+                return;
+            }
+        }
+    },
+    _sortComputedProperties: function () {
+        var this$1 = this;
+
+        var computed = this._computed;
+        var sorted = this._sortedComputedProperties = [];
+        var cycles;
+        var visited = blankObject();
+        function visit(key) {
+            if (cycles[key]) {
+                throw new Error('Cyclical dependency detected');
+            }
+            if (visited[key]) 
+                { return; }
+            visited[key] = true;
+            var c = computed[key];
+            if (c) {
+                cycles[key] = true;
+                c.deps.forEach(visit);
+                sorted.push(c);
+            }
+        }
+        
+        for (var key in this$1._computed) {
+            cycles = blankObject();
+            visit(key);
+        }
+    },
+    compute: function (key, deps, fn) {
+        var store = this;
+        var value;
+        var c = {
+            deps: deps,
+            update: function (state, changed, dirty) {
+                var values = deps.map(function (dep) {
+                    if (dep in changed) 
+                        { dirty = true; }
+                    return state[dep];
+                });
+                if (dirty) {
+                    var newValue = fn.apply(null, values);
+                    if (store._differs(newValue, value)) {
+                        value = newValue;
+                        changed[key] = true;
+                        state[key] = value;
+                    }
+                }
+            }
+        };
+        c.update(this._state, {}, true);
+        this._computed[key] = c;
+        this._sortComputedProperties();
+    },
+    get: get,
+    observe: observe,
+    onchange: function (callback) {
+        this._changeHandlers.push(callback);
+        return {
+            cancel: function () {
+                var index = this._changeHandlers.indexOf(callback);
+                if (~index) 
+                    { this._changeHandlers.splice(index, 1); }
+            }
+        };
+    },
+    set: function (newState) {
+        var this$1 = this;
+
+        var oldState = this._state, changed = this._changed = {}, dirty = false;
+        for (var key in newState) {
+            if (this$1._computed[key]) 
+                { throw new Error("'" + key + "' is a read-only property"); }
+            if (this$1._differs(newState[key], oldState[key])) 
+                { changed[key] = (dirty = true); }
+        }
+        if (!dirty) 
+            { return; }
+        this._state = assign({}, oldState, newState);
+        for (var i = 0;i < this._sortedComputedProperties.length; i += 1) {
+            this$1._sortedComputedProperties[i].update(this$1._state, changed);
+        }
+        for (var i = 0;i < this._changeHandlers.length; i += 1) {
+            this$1._changeHandlers[i](this$1._state, changed);
+        }
+        dispatchObservers(this, this._observers.pre, changed, this._state, oldState);
+        var dependents = this._dependents.slice();
+        for (var i = 0;i < dependents.length; i += 1) {
+            var dependent = dependents[i];
+            var componentState = {};
+            dirty = false;
+            for (var j = 0;j < dependent.props.length; j += 1) {
+                var prop = dependent.props[j];
+                if (prop in changed) {
+                    componentState['$' + prop] = this$1._state[prop];
+                    dirty = true;
+                }
+            }
+            if (dirty) 
+                { dependent.component.set(componentState); }
+        }
+        dispatchObservers(this, this._observers.post, changed, this._state, oldState);
+    }
+});
+
+function isDate(argument) {
+    return argument instanceof Date;
+}
+
+var is_date = isDate;
+
+var MILLISECONDS_IN_HOUR = 3600000;
+var MILLISECONDS_IN_MINUTE = 60000;
+var DEFAULT_ADDITIONAL_DIGITS = 2;
+var parseTokenDateTimeDelimeter = /[T ]/;
+var parseTokenPlainTime = /:/;
+var parseTokenYY = /^(\d{2})$/;
+var parseTokensYYY = [/^([+-]\d{2})$/,/^([+-]\d{3})$/,/^([+-]\d{4})$/];
+var parseTokenYYYY = /^(\d{4})/;
+var parseTokensYYYYY = [/^([+-]\d{4})/,/^([+-]\d{5})/,/^([+-]\d{6})/];
+var parseTokenMM = /^-(\d{2})$/;
+var parseTokenDDD = /^-?(\d{3})$/;
+var parseTokenMMDD = /^-?(\d{2})-?(\d{2})$/;
+var parseTokenWww = /^-?W(\d{2})$/;
+var parseTokenWwwD = /^-?W(\d{2})-?(\d{1})$/;
+var parseTokenHH = /^(\d{2}([.,]\d*)?)$/;
+var parseTokenHHMM = /^(\d{2}):?(\d{2}([.,]\d*)?)$/;
+var parseTokenHHMMSS = /^(\d{2}):?(\d{2}):?(\d{2}([.,]\d*)?)$/;
+var parseTokenTimezone = /([Z+-].*)$/;
+var parseTokenTimezoneZ = /^(Z)$/;
+var parseTokenTimezoneHH = /^([+-])(\d{2})$/;
+var parseTokenTimezoneHHMM = /^([+-])(\d{2}):?(\d{2})$/;
+function parse(argument, dirtyOptions) {
+    if (is_date(argument)) {
+        return new Date(argument.getTime());
+    } else if (typeof argument !== 'string') {
+        return new Date(argument);
+    }
+    var options = dirtyOptions || {};
+    var additionalDigits = options.additionalDigits;
+    if (additionalDigits == null) {
+        additionalDigits = DEFAULT_ADDITIONAL_DIGITS;
+    } else {
+        additionalDigits = Number(additionalDigits);
+    }
+    var dateStrings = splitDateString(argument);
+    var parseYearResult = parseYear(dateStrings.date, additionalDigits);
+    var year = parseYearResult.year;
+    var restDateString = parseYearResult.restDateString;
+    var date = parseDate(restDateString, year);
+    if (date) {
+        var timestamp = date.getTime();
+        var time = 0;
+        var offset;
+        if (dateStrings.time) {
+            time = parseTime(dateStrings.time);
+        }
+        if (dateStrings.timezone) {
+            offset = parseTimezone(dateStrings.timezone);
+        } else {
+            offset = new Date(timestamp + time).getTimezoneOffset();
+            offset = new Date(timestamp + time + offset * MILLISECONDS_IN_MINUTE).getTimezoneOffset();
+        }
+        return new Date(timestamp + time + offset * MILLISECONDS_IN_MINUTE);
+    } else {
+        return new Date(argument);
+    }
+}
+
+function splitDateString(dateString) {
+    var dateStrings = {};
+    var array = dateString.split(parseTokenDateTimeDelimeter);
+    var timeString;
+    if (parseTokenPlainTime.test(array[0])) {
+        dateStrings.date = null;
+        timeString = array[0];
+    } else {
+        dateStrings.date = array[0];
+        timeString = array[1];
+    }
+    if (timeString) {
+        var token = parseTokenTimezone.exec(timeString);
+        if (token) {
+            dateStrings.time = timeString.replace(token[1], '');
+            dateStrings.timezone = token[1];
+        } else {
+            dateStrings.time = timeString;
+        }
+    }
+    return dateStrings;
+}
+
+function parseYear(dateString, additionalDigits) {
+    var parseTokenYYY = parseTokensYYY[additionalDigits];
+    var parseTokenYYYYY = parseTokensYYYYY[additionalDigits];
+    var token;
+    token = parseTokenYYYY.exec(dateString) || parseTokenYYYYY.exec(dateString);
+    if (token) {
+        var yearString = token[1];
+        return {
+            year: parseInt(yearString, 10),
+            restDateString: dateString.slice(yearString.length)
+        };
+    }
+    token = parseTokenYY.exec(dateString) || parseTokenYYY.exec(dateString);
+    if (token) {
+        var centuryString = token[1];
+        return {
+            year: parseInt(centuryString, 10) * 100,
+            restDateString: dateString.slice(centuryString.length)
+        };
+    }
+    return {
+        year: null
+    };
+}
+
+function parseDate(dateString, year) {
+    if (year === null) {
+        return null;
+    }
+    var token;
+    var date;
+    var month;
+    var week;
+    if (dateString.length === 0) {
+        date = new Date(0);
+        date.setUTCFullYear(year);
+        return date;
+    }
+    token = parseTokenMM.exec(dateString);
+    if (token) {
+        date = new Date(0);
+        month = parseInt(token[1], 10) - 1;
+        date.setUTCFullYear(year, month);
+        return date;
+    }
+    token = parseTokenDDD.exec(dateString);
+    if (token) {
+        date = new Date(0);
+        var dayOfYear = parseInt(token[1], 10);
+        date.setUTCFullYear(year, 0, dayOfYear);
+        return date;
+    }
+    token = parseTokenMMDD.exec(dateString);
+    if (token) {
+        date = new Date(0);
+        month = parseInt(token[1], 10) - 1;
+        var day = parseInt(token[2], 10);
+        date.setUTCFullYear(year, month, day);
+        return date;
+    }
+    token = parseTokenWww.exec(dateString);
+    if (token) {
+        week = parseInt(token[1], 10) - 1;
+        return dayOfISOYear(year, week);
+    }
+    token = parseTokenWwwD.exec(dateString);
+    if (token) {
+        week = parseInt(token[1], 10) - 1;
+        var dayOfWeek = parseInt(token[2], 10) - 1;
+        return dayOfISOYear(year, week, dayOfWeek);
+    }
+    return null;
+}
+
+function parseTime(timeString) {
+    var token;
+    var hours;
+    var minutes;
+    token = parseTokenHH.exec(timeString);
+    if (token) {
+        hours = parseFloat(token[1].replace(',', '.'));
+        return hours % 24 * MILLISECONDS_IN_HOUR;
+    }
+    token = parseTokenHHMM.exec(timeString);
+    if (token) {
+        hours = parseInt(token[1], 10);
+        minutes = parseFloat(token[2].replace(',', '.'));
+        return hours % 24 * MILLISECONDS_IN_HOUR + minutes * MILLISECONDS_IN_MINUTE;
+    }
+    token = parseTokenHHMMSS.exec(timeString);
+    if (token) {
+        hours = parseInt(token[1], 10);
+        minutes = parseInt(token[2], 10);
+        var seconds = parseFloat(token[3].replace(',', '.'));
+        return hours % 24 * MILLISECONDS_IN_HOUR + minutes * MILLISECONDS_IN_MINUTE + seconds * 1000;
+    }
+    return null;
+}
+
+function parseTimezone(timezoneString) {
+    var token;
+    var absoluteOffset;
+    token = parseTokenTimezoneZ.exec(timezoneString);
+    if (token) {
+        return 0;
+    }
+    token = parseTokenTimezoneHH.exec(timezoneString);
+    if (token) {
+        absoluteOffset = parseInt(token[2], 10) * 60;
+        return token[1] === '+' ? -absoluteOffset : absoluteOffset;
+    }
+    token = parseTokenTimezoneHHMM.exec(timezoneString);
+    if (token) {
+        absoluteOffset = parseInt(token[2], 10) * 60 + parseInt(token[3], 10);
+        return token[1] === '+' ? -absoluteOffset : absoluteOffset;
+    }
+    return 0;
+}
+
+function dayOfISOYear(isoYear, week, day) {
+    week = week || 0;
+    day = day || 0;
+    var date = new Date(0);
+    date.setUTCFullYear(isoYear, 0, 4);
+    var fourthOfJanuaryDay = date.getUTCDay() || 7;
+    var diff = week * 7 + day + 1 - fourthOfJanuaryDay;
+    date.setUTCDate(date.getUTCDate() + diff);
+    return date;
+}
+
+var parse_1 = parse;
+
+function differenceInCalendarYears(dirtyDateLeft, dirtyDateRight) {
+    var dateLeft = parse_1(dirtyDateLeft);
+    var dateRight = parse_1(dirtyDateRight);
+    return dateLeft.getFullYear() - dateRight.getFullYear();
+}
+
+var difference_in_calendar_years = differenceInCalendarYears;
+
+function isBefore(dirtyDate, dirtyDateToCompare) {
+    var date = parse_1(dirtyDate);
+    var dateToCompare = parse_1(dirtyDateToCompare);
+    return date.getTime() < dateToCompare.getTime();
+}
+
+var is_before = isBefore;
+
+function isAfter(dirtyDate, dirtyDateToCompare) {
+    var date = parse_1(dirtyDate);
+    var dateToCompare = parse_1(dirtyDateToCompare);
+    return date.getTime() > dateToCompare.getTime();
+}
+
+var is_after = isAfter;
+
+function getDaysInMonth(dirtyDate) {
+    var date = parse_1(dirtyDate);
+    var year = date.getFullYear();
+    var monthIndex = date.getMonth();
+    var lastDayOfMonth = new Date(0);
+    lastDayOfMonth.setFullYear(year, monthIndex + 1, 0);
+    lastDayOfMonth.setHours(0, 0, 0, 0);
+    return lastDayOfMonth.getDate();
+}
+
+var get_days_in_month = getDaysInMonth;
+
+function addMonths(dirtyDate, dirtyAmount) {
+    var date = parse_1(dirtyDate);
+    var amount = Number(dirtyAmount);
+    var desiredMonth = date.getMonth() + amount;
+    var dateWithDesiredMonth = new Date(0);
+    dateWithDesiredMonth.setFullYear(date.getFullYear(), desiredMonth, 1);
+    dateWithDesiredMonth.setHours(0, 0, 0, 0);
+    var daysInMonth = get_days_in_month(dateWithDesiredMonth);
+    date.setMonth(desiredMonth, Math.min(daysInMonth, date.getDate()));
+    return date;
+}
+
+var add_months = addMonths;
+
+function addYears(dirtyDate, dirtyAmount) {
+    var amount = Number(dirtyAmount);
+    return add_months(dirtyDate, amount * 12);
+}
+
+var add_years = addYears;
+
+function getYear(dirtyDate) {
+    var date = parse_1(dirtyDate);
+    var year = date.getFullYear();
+    return year;
+}
+
+var get_year = getYear;
+
+function getMonth(dirtyDate) {
+    var date = parse_1(dirtyDate);
+    var month = date.getMonth();
+    return month;
+}
+
+var get_month = getMonth;
+
+function subMonths(dirtyDate, dirtyAmount) {
+    var amount = Number(dirtyAmount);
+    return add_months(dirtyDate, -amount);
+}
+
+var sub_months = subMonths;
+
+function addMilliseconds(dirtyDate, dirtyAmount) {
+    var timestamp = parse_1(dirtyDate).getTime();
+    var amount = Number(dirtyAmount);
+    return new Date(timestamp + amount);
+}
+
+var add_milliseconds = addMilliseconds;
+
+function addSeconds(dirtyDate, dirtyAmount) {
+    var amount = Number(dirtyAmount);
+    return add_milliseconds(dirtyDate, amount * 1000);
+}
+
+var add_seconds = addSeconds;
+
+var nativeCeil = Math.ceil;
+var nativeMax = Math.max;
+function baseRange(start, end, step, fromRight) {
+    var index = -1, length = nativeMax(nativeCeil((end - start) / (step || 1)), 0), result = Array(length);
+    while (length--) {
+        result[fromRight ? length : ++index] = start;
+        start += step;
+    }
+    return result;
+}
+
+var _baseRange = baseRange;
+
+function eq(value, other) {
+    return value === other || value !== value && other !== other;
+}
+
+var eq_1 = eq;
+
+var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+var _freeGlobal = freeGlobal;
+
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+var root = _freeGlobal || freeSelf || Function('return this')();
+var _root = root;
+
+var Symbol$1 = _root.Symbol;
+var _Symbol = Symbol$1;
+
+var objectProto = Object.prototype;
+var hasOwnProperty = objectProto.hasOwnProperty;
+var nativeObjectToString = objectProto.toString;
+var symToStringTag = _Symbol ? _Symbol.toStringTag : undefined;
+function getRawTag(value) {
+    var isOwn = hasOwnProperty.call(value, symToStringTag), tag = value[symToStringTag];
+    try {
+        value[symToStringTag] = undefined;
+        var unmasked = true;
+    } catch (e) {}
+    var result = nativeObjectToString.call(value);
+    if (unmasked) {
+        if (isOwn) {
+            value[symToStringTag] = tag;
+        } else {
+            delete value[symToStringTag];
+        }
+    }
+    return result;
+}
+
+var _getRawTag = getRawTag;
+
+var objectProto$1 = Object.prototype;
+var nativeObjectToString$1 = objectProto$1.toString;
+function objectToString(value) {
+    return nativeObjectToString$1.call(value);
+}
+
+var _objectToString = objectToString;
+
+var nullTag = '[object Null]';
+var undefinedTag = '[object Undefined]';
+var symToStringTag$1 = _Symbol ? _Symbol.toStringTag : undefined;
+function baseGetTag(value) {
+    if (value == null) {
+        return value === undefined ? undefinedTag : nullTag;
+    }
+    return symToStringTag$1 && symToStringTag$1 in Object(value) ? _getRawTag(value) : _objectToString(value);
+}
+
+var _baseGetTag = baseGetTag;
+
+function isObject(value) {
+    var type = typeof value;
+    return value != null && (type == 'object' || type == 'function');
+}
+
+var isObject_1 = isObject;
+
+var asyncTag = '[object AsyncFunction]';
+var funcTag = '[object Function]';
+var genTag = '[object GeneratorFunction]';
+var proxyTag = '[object Proxy]';
+function isFunction(value) {
+    if (!isObject_1(value)) {
+        return false;
+    }
+    var tag = _baseGetTag(value);
+    return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+}
+
+var isFunction_1 = isFunction;
+
+var MAX_SAFE_INTEGER = 9007199254740991;
+function isLength(value) {
+    return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+
+var isLength_1 = isLength;
+
+function isArrayLike(value) {
+    return value != null && isLength_1(value.length) && !isFunction_1(value);
+}
+
+var isArrayLike_1 = isArrayLike;
+
+var MAX_SAFE_INTEGER$1 = 9007199254740991;
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+function isIndex(value, length) {
+    var type = typeof value;
+    length = length == null ? MAX_SAFE_INTEGER$1 : length;
+    return !(!length) && (type == 'number' || type != 'symbol' && reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
+}
+
+var _isIndex = isIndex;
+
+function isIterateeCall(value, index, object) {
+    if (!isObject_1(object)) {
+        return false;
+    }
+    var type = typeof index;
+    if (type == 'number' ? isArrayLike_1(object) && _isIndex(index, object.length) : type == 'string' && index in object) {
+        return eq_1(object[index], value);
+    }
+    return false;
+}
+
+var _isIterateeCall = isIterateeCall;
+
+function isObjectLike(value) {
+    return value != null && typeof value == 'object';
+}
+
+var isObjectLike_1 = isObjectLike;
+
+var symbolTag = '[object Symbol]';
+function isSymbol(value) {
+    return typeof value == 'symbol' || isObjectLike_1(value) && _baseGetTag(value) == symbolTag;
+}
+
+var isSymbol_1 = isSymbol;
+
+var NAN = 0 / 0;
+var reTrim = /^\s+|\s+$/g;
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+var reIsBinary = /^0b[01]+$/i;
+var reIsOctal = /^0o[0-7]+$/i;
+var freeParseInt = parseInt;
+function toNumber$1(value) {
+    if (typeof value == 'number') {
+        return value;
+    }
+    if (isSymbol_1(value)) {
+        return NAN;
+    }
+    if (isObject_1(value)) {
+        var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+        value = isObject_1(other) ? other + '' : other;
+    }
+    if (typeof value != 'string') {
+        return value === 0 ? value : +value;
+    }
+    value = value.replace(reTrim, '');
+    var isBinary = reIsBinary.test(value);
+    return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+}
+
+var toNumber_1 = toNumber$1;
+
+var INFINITY = 1 / 0;
+var MAX_INTEGER = 1.7976931348623157e+308;
+function toFinite(value) {
+    if (!value) {
+        return value === 0 ? value : 0;
+    }
+    value = toNumber_1(value);
+    if (value === INFINITY || value === -INFINITY) {
+        var sign = value < 0 ? -1 : 1;
+        return sign * MAX_INTEGER;
+    }
+    return value === value ? value : 0;
+}
+
+var toFinite_1 = toFinite;
+
+function createRange(fromRight) {
+    return function (start, end, step) {
+        if (step && typeof step != 'number' && _isIterateeCall(start, end, step)) {
+            end = (step = undefined);
+        }
+        start = toFinite_1(start);
+        if (end === undefined) {
+            end = start;
+            start = 0;
+        } else {
+            end = toFinite_1(end);
+        }
+        step = step === undefined ? start < end ? 1 : -1 : toFinite_1(step);
+        return _baseRange(start, end, step, fromRight);
+    };
+}
+
+var _createRange = createRange;
+
+var range = _createRange();
+var range_1 = range;
+
+function differenceInCalendarMonths(dirtyDateLeft, dirtyDateRight) {
+    var dateLeft = parse_1(dirtyDateLeft);
+    var dateRight = parse_1(dirtyDateRight);
+    var yearDiff = dateLeft.getFullYear() - dateRight.getFullYear();
+    var monthDiff = dateLeft.getMonth() - dateRight.getMonth();
+    return yearDiff * 12 + monthDiff;
+}
+
+var difference_in_calendar_months = differenceInCalendarMonths;
+
+function compareAsc(dirtyDateLeft, dirtyDateRight) {
+    var dateLeft = parse_1(dirtyDateLeft);
+    var timeLeft = dateLeft.getTime();
+    var dateRight = parse_1(dirtyDateRight);
+    var timeRight = dateRight.getTime();
+    if (timeLeft < timeRight) {
+        return -1;
+    } else if (timeLeft > timeRight) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+var compare_asc = compareAsc;
+
+function differenceInMonths(dirtyDateLeft, dirtyDateRight) {
+    var dateLeft = parse_1(dirtyDateLeft);
+    var dateRight = parse_1(dirtyDateRight);
+    var sign = compare_asc(dateLeft, dateRight);
+    var difference = Math.abs(difference_in_calendar_months(dateLeft, dateRight));
+    dateLeft.setMonth(dateLeft.getMonth() - sign * difference);
+    var isLastMonthNotFull = compare_asc(dateLeft, dateRight) === -sign;
+    return sign * (difference - isLastMonthNotFull);
+}
+
+var difference_in_months = differenceInMonths;
+
+function setDate(dirtyDate, dirtyDayOfMonth) {
+    var date = parse_1(dirtyDate);
+    var dayOfMonth = Number(dirtyDayOfMonth);
+    date.setDate(dayOfMonth);
+    return date;
+}
+
+var set_date = setDate;
+
+function addDays(dirtyDate, dirtyAmount) {
+    var date = parse_1(dirtyDate);
+    var amount = Number(dirtyAmount);
+    date.setDate(date.getDate() + amount);
+    return date;
+}
+
+var add_days = addDays;
+
+function getDate(dirtyDate) {
+    var date = parse_1(dirtyDate);
+    var dayOfMonth = date.getDate();
+    return dayOfMonth;
+}
+
+var get_date = getDate;
+
+function getDay(dirtyDate) {
+    var date = parse_1(dirtyDate);
+    var day = date.getDay();
+    return day;
+}
+
+var get_day = getDay;
+
+function startOfYear(dirtyDate) {
+    var cleanDate = parse_1(dirtyDate);
+    var date = new Date(0);
+    date.setFullYear(cleanDate.getFullYear(), 0, 1);
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
+
+var start_of_year = startOfYear;
+
+function startOfDay(dirtyDate) {
+    var date = parse_1(dirtyDate);
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
+
+var start_of_day = startOfDay;
+
+var MILLISECONDS_IN_MINUTE$1 = 60000;
+var MILLISECONDS_IN_DAY = 86400000;
+function differenceInCalendarDays(dirtyDateLeft, dirtyDateRight) {
+    var startOfDayLeft = start_of_day(dirtyDateLeft);
+    var startOfDayRight = start_of_day(dirtyDateRight);
+    var timestampLeft = startOfDayLeft.getTime() - startOfDayLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$1;
+    var timestampRight = startOfDayRight.getTime() - startOfDayRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE$1;
+    return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_DAY);
+}
+
+var difference_in_calendar_days = differenceInCalendarDays;
+
+function getDayOfYear(dirtyDate) {
+    var date = parse_1(dirtyDate);
+    var diff = difference_in_calendar_days(date, start_of_year(date));
+    var dayOfYear = diff + 1;
+    return dayOfYear;
+}
+
+var get_day_of_year = getDayOfYear;
+
+function startOfWeek(dirtyDate, dirtyOptions) {
+    var weekStartsOn = dirtyOptions ? Number(dirtyOptions.weekStartsOn) || 0 : 0;
+    var date = parse_1(dirtyDate);
+    var day = date.getDay();
+    var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+    date.setDate(date.getDate() - diff);
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
+
+var start_of_week = startOfWeek;
+
+function startOfISOWeek(dirtyDate) {
+    return start_of_week(dirtyDate, {
+        weekStartsOn: 1
+    });
+}
+
+var start_of_iso_week = startOfISOWeek;
+
+function getISOYear(dirtyDate) {
+    var date = parse_1(dirtyDate);
+    var year = date.getFullYear();
+    var fourthOfJanuaryOfNextYear = new Date(0);
+    fourthOfJanuaryOfNextYear.setFullYear(year + 1, 0, 4);
+    fourthOfJanuaryOfNextYear.setHours(0, 0, 0, 0);
+    var startOfNextYear = start_of_iso_week(fourthOfJanuaryOfNextYear);
+    var fourthOfJanuaryOfThisYear = new Date(0);
+    fourthOfJanuaryOfThisYear.setFullYear(year, 0, 4);
+    fourthOfJanuaryOfThisYear.setHours(0, 0, 0, 0);
+    var startOfThisYear = start_of_iso_week(fourthOfJanuaryOfThisYear);
+    if (date.getTime() >= startOfNextYear.getTime()) {
+        return year + 1;
+    } else if (date.getTime() >= startOfThisYear.getTime()) {
+        return year;
+    } else {
+        return year - 1;
+    }
+}
+
+var get_iso_year = getISOYear;
+
+function startOfISOYear(dirtyDate) {
+    var year = get_iso_year(dirtyDate);
+    var fourthOfJanuary = new Date(0);
+    fourthOfJanuary.setFullYear(year, 0, 4);
+    fourthOfJanuary.setHours(0, 0, 0, 0);
+    var date = start_of_iso_week(fourthOfJanuary);
+    return date;
+}
+
+var start_of_iso_year = startOfISOYear;
+
+var MILLISECONDS_IN_WEEK = 604800000;
+function getISOWeek(dirtyDate) {
+    var date = parse_1(dirtyDate);
+    var diff = start_of_iso_week(date).getTime() - start_of_iso_year(date).getTime();
+    return Math.round(diff / MILLISECONDS_IN_WEEK) + 1;
+}
+
+var get_iso_week = getISOWeek;
+
+function isValid(dirtyDate) {
+    if (is_date(dirtyDate)) {
+        return !isNaN(dirtyDate);
+    } else {
+        throw new TypeError(toString.call(dirtyDate) + ' is not an instance of Date');
+    }
+}
+
+var is_valid = isValid;
+
+function buildDistanceInWordsLocale() {
+    var distanceInWordsLocale = {
+        lessThanXSeconds: {
+            one: 'less than a second',
+            other: 'less than {{count}} seconds'
+        },
+        xSeconds: {
+            one: '1 second',
+            other: '{{count}} seconds'
+        },
+        halfAMinute: 'half a minute',
+        lessThanXMinutes: {
+            one: 'less than a minute',
+            other: 'less than {{count}} minutes'
+        },
+        xMinutes: {
+            one: '1 minute',
+            other: '{{count}} minutes'
+        },
+        aboutXHours: {
+            one: 'about 1 hour',
+            other: 'about {{count}} hours'
+        },
+        xHours: {
+            one: '1 hour',
+            other: '{{count}} hours'
+        },
+        xDays: {
+            one: '1 day',
+            other: '{{count}} days'
+        },
+        aboutXMonths: {
+            one: 'about 1 month',
+            other: 'about {{count}} months'
+        },
+        xMonths: {
+            one: '1 month',
+            other: '{{count}} months'
+        },
+        aboutXYears: {
+            one: 'about 1 year',
+            other: 'about {{count}} years'
+        },
+        xYears: {
+            one: '1 year',
+            other: '{{count}} years'
+        },
+        overXYears: {
+            one: 'over 1 year',
+            other: 'over {{count}} years'
+        },
+        almostXYears: {
+            one: 'almost 1 year',
+            other: 'almost {{count}} years'
+        }
+    };
+    function localize(token, count, options) {
+        options = options || {};
+        var result;
+        if (typeof distanceInWordsLocale[token] === 'string') {
+            result = distanceInWordsLocale[token];
+        } else if (count === 1) {
+            result = distanceInWordsLocale[token].one;
+        } else {
+            result = distanceInWordsLocale[token].other.replace('{{count}}', count);
+        }
+        if (options.addSuffix) {
+            if (options.comparison > 0) {
+                return 'in ' + result;
+            } else {
+                return result + ' ago';
+            }
+        }
+        return result;
+    }
+    
+    return {
+        localize: localize
+    };
+}
+
+var build_distance_in_words_locale = buildDistanceInWordsLocale;
+
+var commonFormatterKeys = ['M','MM','Q','D','DD','DDD','DDDD','d','E','W','WW','YY',
+    'YYYY','GG','GGGG','H','HH','h','hh','m','mm','s','ss','S','SS','SSS','Z','ZZ',
+    'X','x'];
+function buildFormattingTokensRegExp(formatters) {
+    var formatterKeys = [];
+    for (var key in formatters) {
+        if (formatters.hasOwnProperty(key)) {
+            formatterKeys.push(key);
+        }
+    }
+    var formattingTokens = commonFormatterKeys.concat(formatterKeys).sort().reverse();
+    var formattingTokensRegExp = new RegExp('(\\[[^\\[]*\\])|(\\\\)?' + '(' + formattingTokens.join('|') + '|.)', 'g');
+    return formattingTokensRegExp;
+}
+
+var build_formatting_tokens_reg_exp = buildFormattingTokensRegExp;
+
+function buildFormatLocale() {
+    var months3char = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct',
+        'Nov','Dec'];
+    var monthsFull = ['January','February','March','April','May','June','July','August',
+        'September','October','November','December'];
+    var weekdays2char = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+    var weekdays3char = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var weekdaysFull = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday',
+        'Saturday'];
+    var meridiemUppercase = ['AM','PM'];
+    var meridiemLowercase = ['am','pm'];
+    var meridiemFull = ['a.m.','p.m.'];
+    var formatters = {
+        'MMM': function (date) {
+            return months3char[date.getMonth()];
+        },
+        'MMMM': function (date) {
+            return monthsFull[date.getMonth()];
+        },
+        'dd': function (date) {
+            return weekdays2char[date.getDay()];
+        },
+        'ddd': function (date) {
+            return weekdays3char[date.getDay()];
+        },
+        'dddd': function (date) {
+            return weekdaysFull[date.getDay()];
+        },
+        'A': function (date) {
+            return date.getHours() / 12 >= 1 ? meridiemUppercase[1] : meridiemUppercase[0];
+        },
+        'a': function (date) {
+            return date.getHours() / 12 >= 1 ? meridiemLowercase[1] : meridiemLowercase[0];
+        },
+        'aa': function (date) {
+            return date.getHours() / 12 >= 1 ? meridiemFull[1] : meridiemFull[0];
+        }
+    };
+    var ordinalFormatters = ['M','D','DDD','d','Q','W'];
+    ordinalFormatters.forEach(function (formatterToken) {
+        formatters[formatterToken + 'o'] = function (date, formatters) {
+            return ordinal(formatters[formatterToken](date));
+        };
+    });
+    return {
+        formatters: formatters,
+        formattingTokensRegExp: build_formatting_tokens_reg_exp(formatters)
+    };
+}
+
+function ordinal(number) {
+    var rem100 = number % 100;
+    if (rem100 > 20 || rem100 < 10) {
+        switch (rem100 % 10) {
+            case 1:
+                return number + 'st';
+            case 2:
+                return number + 'nd';
+            case 3:
+                return number + 'rd';
+        }
+    }
+    return number + 'th';
+}
+
+var build_format_locale = buildFormatLocale;
+
+var en = {
+    distanceInWords: build_distance_in_words_locale(),
+    format: build_format_locale()
+};
+
+function format(dirtyDate, dirtyFormatStr, dirtyOptions) {
+    var formatStr = dirtyFormatStr ? String(dirtyFormatStr) : 'YYYY-MM-DDTHH:mm:ss.SSSZ';
+    var options = dirtyOptions || {};
+    var locale = options.locale;
+    var localeFormatters = en.format.formatters;
+    var formattingTokensRegExp = en.format.formattingTokensRegExp;
+    if (locale && locale.format && locale.format.formatters) {
+        localeFormatters = locale.format.formatters;
+        if (locale.format.formattingTokensRegExp) {
+            formattingTokensRegExp = locale.format.formattingTokensRegExp;
+        }
+    }
+    var date = parse_1(dirtyDate);
+    if (!is_valid(date)) {
+        return 'Invalid Date';
+    }
+    var formatFn = buildFormatFn(formatStr, localeFormatters, formattingTokensRegExp);
+    return formatFn(date);
+}
+
+var formatters = {
+    'M': function (date) {
+        return date.getMonth() + 1;
+    },
+    'MM': function (date) {
+        return addLeadingZeros(date.getMonth() + 1, 2);
+    },
+    'Q': function (date) {
+        return Math.ceil((date.getMonth() + 1) / 3);
+    },
+    'D': function (date) {
+        return date.getDate();
+    },
+    'DD': function (date) {
+        return addLeadingZeros(date.getDate(), 2);
+    },
+    'DDD': function (date) {
+        return get_day_of_year(date);
+    },
+    'DDDD': function (date) {
+        return addLeadingZeros(get_day_of_year(date), 3);
+    },
+    'd': function (date) {
+        return date.getDay();
+    },
+    'E': function (date) {
+        return date.getDay() || 7;
+    },
+    'W': function (date) {
+        return get_iso_week(date);
+    },
+    'WW': function (date) {
+        return addLeadingZeros(get_iso_week(date), 2);
+    },
+    'YY': function (date) {
+        return addLeadingZeros(date.getFullYear(), 4).substr(2);
+    },
+    'YYYY': function (date) {
+        return addLeadingZeros(date.getFullYear(), 4);
+    },
+    'GG': function (date) {
+        return String(get_iso_year(date)).substr(2);
+    },
+    'GGGG': function (date) {
+        return get_iso_year(date);
+    },
+    'H': function (date) {
+        return date.getHours();
+    },
+    'HH': function (date) {
+        return addLeadingZeros(date.getHours(), 2);
+    },
+    'h': function (date) {
+        var hours = date.getHours();
+        if (hours === 0) {
+            return 12;
+        } else if (hours > 12) {
+            return hours % 12;
+        } else {
+            return hours;
+        }
+    },
+    'hh': function (date) {
+        return addLeadingZeros(formatters['h'](date), 2);
+    },
+    'm': function (date) {
+        return date.getMinutes();
+    },
+    'mm': function (date) {
+        return addLeadingZeros(date.getMinutes(), 2);
+    },
+    's': function (date) {
+        return date.getSeconds();
+    },
+    'ss': function (date) {
+        return addLeadingZeros(date.getSeconds(), 2);
+    },
+    'S': function (date) {
+        return Math.floor(date.getMilliseconds() / 100);
+    },
+    'SS': function (date) {
+        return addLeadingZeros(Math.floor(date.getMilliseconds() / 10), 2);
+    },
+    'SSS': function (date) {
+        return addLeadingZeros(date.getMilliseconds(), 3);
+    },
+    'Z': function (date) {
+        return formatTimezone(date.getTimezoneOffset(), ':');
+    },
+    'ZZ': function (date) {
+        return formatTimezone(date.getTimezoneOffset());
+    },
+    'X': function (date) {
+        return Math.floor(date.getTime() / 1000);
+    },
+    'x': function (date) {
+        return date.getTime();
+    }
+};
+function buildFormatFn(formatStr, localeFormatters, formattingTokensRegExp) {
+    var array = formatStr.match(formattingTokensRegExp);
+    var length = array.length;
+    var i;
+    var formatter;
+    for (i = 0; i < length; i++) {
+        formatter = localeFormatters[array[i]] || formatters[array[i]];
+        if (formatter) {
+            array[i] = formatter;
+        } else {
+            array[i] = removeFormattingTokens(array[i]);
+        }
+    }
+    return function (date) {
+        var output = '';
+        for (var i = 0;i < length; i++) {
+            if (array[i] instanceof Function) {
+                output += array[i](date, formatters);
+            } else {
+                output += array[i];
+            }
+        }
+        return output;
+    };
+}
+
+function removeFormattingTokens(input) {
+    if (input.match(/\[[\s\S]/)) {
+        return input.replace(/^\[|]$/g, '');
+    }
+    return input.replace(/\\/g, '');
+}
+
+function formatTimezone(offset, delimeter) {
+    delimeter = delimeter || '';
+    var sign = offset > 0 ? '-' : '+';
+    var absOffset = Math.abs(offset);
+    var hours = Math.floor(absOffset / 60);
+    var minutes = absOffset % 60;
+    return sign + addLeadingZeros(hours, 2) + delimeter + addLeadingZeros(minutes, 2);
+}
+
+function addLeadingZeros(number, targetLength) {
+    var output = Math.abs(number).toString();
+    while (output.length < targetLength) {
+        output = '0' + output;
+    }
+    return output;
+}
+
+var format_1 = format;
+
+function isEqual(dirtyLeftDate, dirtyRightDate) {
+    var dateLeft = parse_1(dirtyLeftDate);
+    var dateRight = parse_1(dirtyRightDate);
+    return dateLeft.getTime() === dateRight.getTime();
+}
+
+var is_equal = isEqual;
+
+var CalendarDate = function CalendarDate(date) {
+    this._dateDate = date;
+    this._date = get_date(date);
+    this._day = get_day(date);
+    this._selection = false;
+};
+
+var prototypeAccessors = { date: { configurable: true },day: { configurable: true } };
+prototypeAccessors.date.get = function () {
+    return this._date;
+};
+prototypeAccessors.day.get = function () {
+    return this._day;
+};
+CalendarDate.prototype.isSelected = function isSelected () {
+    return this._selection;
+};
+
+CalendarDate.prototype.select = function select () {
+    this._selection = true;
+};
+CalendarDate.prototype.deselect = function deselect () {
+    this._selection = false;
+};
+CalendarDate.prototype.toString = function toString () {
+    return format_1(this._dateDate, 'YYYY-MM-DD');
+};
+CalendarDate.prototype.isEqual = function isEqual$1 (calendarDate) {
+    return is_equal(this._date, calendarDate.date);
+};
+
+Object.defineProperties( CalendarDate.prototype, prototypeAccessors );
+
+var CalendarMonth = function CalendarMonth(date) {
+    this._month = get_month(date);
+    var baseDate = set_date(date, 1);
+    var daysInMonth = get_days_in_month(date);
+    this._dates = range_1(daysInMonth).map(function (amount) { return new CalendarDate(add_days(baseDate, amount)); });
+};
+
+var prototypeAccessors$1 = { dates: { configurable: true } };
+prototypeAccessors$1.dates.get = function () {
+    return this._dates;
+};
+
+CalendarMonth.prototype.toEqual = function toEqual (date) {
+    return this._month === get_month(date);
+};
+
+Object.defineProperties( CalendarMonth.prototype, prototypeAccessors$1 );
+
+var CalendarYear = function CalendarYear(date, maxDate, minDate) {
+    this._year = date.getFullYear();
+    var diff = difference_in_months(maxDate, minDate) + 1;
+    this._months = range_1(diff).map(function (amount) { return new CalendarMonth(add_months(date, amount)); });
+};
+
+var prototypeAccessors$2 = { months: { configurable: true } };
+prototypeAccessors$2.months.get = function () {
+    return this._months;
+};
+
+CalendarYear.prototype.toEqual = function toEqual (date) {
+    return this._year === get_year(date);
+};
+CalendarYear.prototype.find = function find (iteratorFn) {
+    var result = this._months.find(iteratorFn);
+    return result;
+};
+
+Object.defineProperties( CalendarYear.prototype, prototypeAccessors$2 );
+
+var DatePad = (function (CalendarDate$$1) {
+    function DatePad(date) {
+        CalendarDate$$1.call(this, date);
+        this._date = '';
+        this._day = '';
+        this._pad = true;
+    }
+
+    if ( CalendarDate$$1 ) DatePad.__proto__ = CalendarDate$$1;
+    DatePad.prototype = Object.create( CalendarDate$$1 && CalendarDate$$1.prototype );
+    DatePad.prototype.constructor = DatePad;
+
+    return DatePad;
+}(CalendarDate));
+
+var CalendarStore = (function (Store$$1) {
+    function CalendarStore(initialState, calendar) {
+        var this$1 = this;
+
+        Store$$1.call(this, initialState);
+        this._calendar = calendar;
+        var date = initialState.date;
+        var ref = initialState.ref;
+        if (this._hasRef()) {
+            this.ref.store.set({
+                __refs__: this.ref.store.refs.concat( [calendar])
+            });
+            var date$1 = add_months(new Date(ref.store.year, ref.store.month), ref.store.refs.length);
+            this.set({
+                years: ref.store.years,
+                year: get_year(date$1),
+                month: get_month(date$1)
+            });
+        } else {
+            var diff = difference_in_calendar_years(date.max, date.min) + 1;
+            var years = range_1(diff).map(function (amount) { return new CalendarYear(add_years(date.min, amount), date.max, date.min); });
+            this.set({
+                years: years,
+                year: get_year(date.initial || date.min),
+                month: get_month(date.initial || date.min)
+            });
+        }
+        this.compute('days', ['template'], function (ref) {
+            var dayOfTheWeek = ref.dayOfTheWeek;
+
+            return [dayOfTheWeek.sun,
+            dayOfTheWeek.mon,dayOfTheWeek.tues,dayOfTheWeek.wed,dayOfTheWeek.thurs,
+            dayOfTheWeek.fri,dayOfTheWeek.sat];
+        });
+        this.compute('dates', ['years','year','month'], function (years, currentYear, currentMonth) {
+            var current = new Date(currentYear, currentMonth);
+            var year = years.find(function (year) { return year.toEqual(current); });
+            var month = year.find(function (month) { return month.toEqual(current); });
+            if (typeof month === 'undefined') {
+                throw new Error('month is undefined');
+            }
+            var dates = month.dates;
+            var ref = dates[0];
+            var day = ref.day;
+            for (var i = 0;i < day; i++) {
+                dates.unshift(new DatePad());
+            }
+            if (is_before(this$1.minDate, add_seconds(this$1.currentDate, 1)) && is_after(add_seconds(this$1.currentDate, 1), this$1.maxDate)) {
+                return dates.map(function () { return new DatePad(); });
+            }
+            return dates;
+        });
+        this.set({
+            getDayState: this.getDayState
+        });
+    }
+
+    if ( Store$$1 ) CalendarStore.__proto__ = Store$$1;
+    CalendarStore.prototype = Object.create( Store$$1 && Store$$1.prototype );
+    CalendarStore.prototype.constructor = CalendarStore;
+
+    var prototypeAccessors = { refs: { configurable: true },ref: { configurable: true },years: { configurable: true },year: { configurable: true },month: { configurable: true },dates: { configurable: true },date: { configurable: true },currentDate: { configurable: true },minDate: { configurable: true },maxDate: { configurable: true },color: { configurable: true } };
+    prototypeAccessors.refs.get = function () {
+        return this.get('__refs__');
+    };
+    prototypeAccessors.ref.get = function () {
+        return this.get('ref');
+    };
+    prototypeAccessors.years.get = function () {
+        if (this._hasRef()) {
+            return this.ref.store.get('years');
+        }
+        return this.get('years');
+    };
+    prototypeAccessors.year.get = function () {
+        return this.get('year');
+    };
+    prototypeAccessors.month.get = function () {
+        return this.get('month');
+    };
+    prototypeAccessors.dates.get = function () {
+        return this.get('dates');
+    };
+    prototypeAccessors.date.get = function () {
+        return this.get('date');
+    };
+    prototypeAccessors.currentDate.get = function () {
+        return new Date(this.year, this.month);
+    };
+    prototypeAccessors.minDate.get = function () {
+        var date;
+        if (this._hasRef()) {
+            date = this.ref.store.date.min;
+        } else {
+            date = this.date.min;
+        }
+        return new Date(get_year(date), get_month(date));
+    };
+    prototypeAccessors.maxDate.get = function () {
+        var date;
+        if (this._hasRef()) {
+            date = this.ref.store.date.max;
+        } else {
+            date = this.date.max;
+        }
+        return new Date(get_year(date), get_month(date));
+    };
+    prototypeAccessors.color.get = function () {
+        return this.get('color');
+    };
+    CalendarStore.prototype._hasRef = function _hasRef () {
+        return typeof this.ref !== 'undefined';
+    };
+    CalendarStore.prototype._getRefsSize = function _getRefsSize () {
+        if (!this._hasRef()) {
+            return this.refs.length;
+        }
+        return this.ref.store.refs.length;
+    };
+    CalendarStore.prototype._getFirstCalendar = function _getFirstCalendar () {
+        if (!this._hasRef()) {
+            return this._calendar;
+        }
+        return this.ref;
+    };
+    CalendarStore.prototype._getLastCalendar = function _getLastCalendar () {
+        if (typeof this.ref === 'undefined' && this.refs.length === 0) {
+            return this._calendar;
+        } else if (typeof this.ref === 'undefined' && this.refs.length > 0) {
+            return this.refs[this.refs.length - 1];
+        } else if (typeof this.ref !== 'undefined' && this.refs.length > 0) {
+            return this.ref.store.refs[this.ref.store.refs.length - 1];
+        }
+        return this.ref.store.refs[this.ref.store.refs.length - 1];
+    };
+    CalendarStore.prototype.fire = function fire (name, value) {
+        if (this._hasRef()) {
+            this.ref.calendar.fire(name, value);
+        } else {
+            this._calendar.calendar.fire(name, value);
+        }
+    };
+    CalendarStore.prototype.update = function update () {
+        this.set({
+            __key__: Math.random() / 10000 + Math.random()
+        });
+    };
+    CalendarStore.prototype.updateDates = function updateDates (fromRef) {
+        var this$1 = this;
+        if ( fromRef === void 0 ) fromRef = false;
+
+        this.set({
+            __key_dates__: Math.random() / 10000 + Math.random()
+        });
+        if (!fromRef && this._hasRef()) {
+            this.ref.store.updateDates(true);
+        } else if (!fromRef && this.refs.length > 0) {
+            setTimeout(function () {
+                this$1.refs.forEach(function (calendar) {
+                    calendar.store.updateDates(true);
+                });
+            }, 30);
+        }
+    };
+    CalendarStore.prototype.reset = function reset (fromRef) {
+        if ( fromRef === void 0 ) fromRef = false;
+
+        if (!fromRef) {
+            var dates;
+            if (this._hasRef()) {
+                dates = this.ref.store.getSelectedDates();
+            } else {
+                dates = this.getSelectedDates();
+            }
+            dates.forEach(function (date) {
+                date.deselect();
+            });
+        }
+        if (!fromRef && this._hasRef()) {
+            this.ref.store.reset(true);
+        } else if (!fromRef) {
+            this.refs.forEach(function (calendar) {
+                calendar.store.reset(true);
+            });
+            this.updateDates();
+        }
+    };
+    CalendarStore.prototype.restore = function restore (dates) {
+        var updated = false;
+        this.years.forEach(function (year) {
+            year.months.forEach(function (month) {
+                month.dates.forEach(function (date) {
+                    if (dates.includes(date.toString())) {
+                        date.select();
+                        if (!updated) {
+                            updated = true;
+                        }
+                    }
+                });
+            });
+        });
+        if (updated) {
+            this.updateDates();
+        }
+    };
+    CalendarStore.prototype.inRange = function inRange (year, month) {
+        var current = new Date(year, month);
+        return !is_before(this.minDate, current) && !is_after(current, this.maxDate);
+    };
+    CalendarStore.prototype.selectDay = function selectDay (day) {
+        var state = this.getDayState(day);
+        var updated = false;
+        this.dates.forEach(function (date) {
+            if (date instanceof DatePad) {
+                return;
+            }
+            if (date.day === day) {
+                if (state) {
+                    date.deselect();
+                } else {
+                    date.select();
+                }
+                if (!updated) {
+                    updated = true;
+                }
+            }
+        });
+        if (updated) {
+            this.updateDates();
+        }
+    };
+    CalendarStore.prototype.getDayState = function getDayState (day) {
+        return (this.dates || this.$dates).filter(function (date) { return date.day === day; }).every(function (date) { return date.isSelected(); });
+    };
+    CalendarStore.prototype.getSelectedDates = function getSelectedDates () {
+        var result = [];
+        this.years.forEach(function (year) {
+            year.months.forEach(function (month) {
+                month.dates.forEach(function (date) {
+                    if (date.isSelected()) {
+                        result.push(date);
+                    }
+                });
+            });
+        });
+        return result;
+    };
+    CalendarStore.prototype.setPrevMonth = function setPrevMonth (fromRef, provisionalPrevDate) {
+        if ( fromRef === void 0 ) fromRef = false;
+
+        var size = this._getRefsSize();
+        if (typeof provisionalPrevDate === 'undefined') {
+            var firstCalendar = this._getFirstCalendar();
+            provisionalPrevDate = sub_months(new Date(firstCalendar.store.year, firstCalendar.store.month), size + 1);
+        }
+        if (is_before(provisionalPrevDate, this.minDate)) {
+            this.fire('onReachLowerLimit');
+            return;
+        }
+        var prevDate = sub_months(new Date(this.year, this.month), size + 1);
+        this.set({
+            year: get_year(prevDate),
+            month: get_month(prevDate)
+        });
+        if (!fromRef && this._hasRef()) {
+            this.ref.store.setPrevMonth(true, provisionalPrevDate);
+        } else if (!fromRef) {
+            this.refs.forEach(function (calendar) {
+                calendar.store.setPrevMonth(true, provisionalPrevDate);
+            });
+        }
+    };
+    CalendarStore.prototype.setNextMonth = function setNextMonth (fromRef, provisionalNextDate) {
+        var this$1 = this;
+        if ( fromRef === void 0 ) fromRef = false;
+
+        var size = this._getRefsSize();
+        if (typeof provisionalNextDate === 'undefined') {
+            var lastCalendar = this._getLastCalendar();
+            provisionalNextDate = add_months(new Date(lastCalendar.store.year, lastCalendar.store.month), size + 1);
+        }
+        if (is_after(provisionalNextDate, this.maxDate)) {
+            this.fire('onReachUpperLimit');
+            return;
+        }
+        var nextDate = add_months(new Date(this.year, this.month), size + 1);
+        this.set({
+            year: get_year(nextDate),
+            month: get_month(nextDate)
+        });
+        if (!fromRef && this._hasRef()) {
+            this.ref.store.setNextMonth(true, provisionalNextDate);
+            this.ref.store.refs.forEach(function (calendar) {
+                if (calendar !== this$1._calendar) {
+                    calendar.store.setNextMonth(true, provisionalNextDate);
+                }
+            });
+        } else if (!fromRef) {
+            this.refs.forEach(function (calendar) {
+                calendar.store.setNextMonth(true, provisionalNextDate);
+            });
+        }
+    };
+
+    Object.defineProperties( CalendarStore.prototype, prototypeAccessors );
+
+    return CalendarStore;
+}(Store));
+
+var freeGlobal$2 = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+var freeSelf$1 = typeof self == 'object' && self && self.Object === Object && self;
+var root$2 = freeGlobal$2 || freeSelf$1 || Function('return this')();
+
+function create_main_fragment(state, component) {
+    var div, text;
+    return {
+        c: function create() {
+            div = createElement("div");
+            text = createText(state.day);
+        },
+        m: function mount(target, anchor) {
+            insertNode(div, target, anchor);
+            appendNode(text, div);
+        },
+        p: function update(changed, state) {
+            if (changed.day) {
+                text.data = state.day;
+            }
+        },
+        u: function unmount() {
+            detachNode(div);
+        },
+        d: noop
+    };
+}
+
+function Day_cell(options) {
+    init(this, options);
+    this._state = assign({}, options.data);
+    this._fragment = create_main_fragment(this._state, this);
+    if (options.target) {
+        this._fragment.c();
+        this._fragment.m(options.target, options.anchor || null);
+    }
+}
+
+assign(Day_cell.prototype, proto);
+
+function encapsulateStyles(node) {
+    setAttribute(node, "svelte-3754584703", "");
+}
+
+function add_css() {
+    var style = createElement("style");
+    style.id = 'svelte-3754584703-style';
+    style.textContent = "[svelte-3754584703].apocCalendar-Is_Hidden,[svelte-3754584703] .apocCalendar-Is_Hidden{visibility:hidden}";
+    appendNode(style, document.head);
+}
+
+function create_main_fragment$1(state, component) {
+    var div, text_value = state.date.date, text;
+    return {
+        c: function create() {
+            div = createElement("div");
+            text = createText(text_value);
+            this.h();
+        },
+        h: function hydrate() {
+            encapsulateStyles(div);
+        },
+        m: function mount(target, anchor) {
+            insertNode(div, target, anchor);
+            appendNode(text, div);
+        },
+        p: function update(changed, state) {
+            if (changed.date && text_value !== (text_value = state.date.date)) {
+                text.data = text_value;
+            }
+        },
+        u: function unmount() {
+            detachNode(div);
+        },
+        d: noop
+    };
+}
+
+function Date_cell(options) {
+    init(this, options);
+    this._state = assign({}, options.data);
+    if (!document.getElementById("svelte-3754584703-style")) 
+        { add_css(); }
+    this._fragment = create_main_fragment$1(this._state, this);
+    if (options.target) {
+        this._fragment.c();
+        this._fragment.m(options.target, options.anchor || null);
+    }
+}
+
+assign(Date_cell.prototype, proto);
+
+function getDayCellClass(active) {
+    var classnames = ['apocCalendar-Component_DayCell'];
+    if (active) {
+        classnames.push('apocCalendar-Is_Selected');
+    }
+    return classnames.join(' ');
+}
+
+
+function getDayCellStyle(active, color) {
+    var styles = [("background: " + (color.background.cell)),("color: " + (color.text))];
+    console.log(active);
+    if (active) {
+        styles.push(("background: " + (color.background.active)));
+    }
+    return styles.join(';');
+}
+
+
+function getDateCellClass(date) {
+    var classnames = ['apocCalendar-Component_DateCell'];
+    if (date instanceof DatePad) {
+        classnames.push('apocCalendar-Is_Pad');
+    }
+    if (date.isSelected()) {
+        classnames.push('apocCalendar-Is_Selected');
+    }
+    return classnames.join(' ');
+}
+
+
+function getDateCellStyle(date, color) {
+    var styles = [("color: " + (color.text))];
+    if (!date instanceof DatePad) {
+        styles.push(("background: " + (color.background.cell)));
+    }
+    if (date.isSelected()) {
+        styles.push(("background: " + (color.background.active)));
+    }
+    return styles.join(';');
+}
+
+
+var methods = {
+    selectDay: function selectDay(day) {
+        this.store.selectDay(day);
+    },
+    selectDate: function selectDate(date) {
+        if (date instanceof DatePad) {
+            return;
+        }
+        if (date.isSelected()) {
+            date.deselect();
+        } else {
+            date.select();
+        }
+        this.store.updateDates();
+    },
+    setActiveColorToBackground: function setActiveColorToBackground(el) {
+        Object.assign(el.style, {
+            background: this.store.color.background.hover
+        });
+    },
+    resetColorToBackground: function resetColorToBackground(el) {
+        Object.assign(el.style, {
+            background: null
+        });
+    },
+    handleDateMouseEnter: function handleDateMouseEnter(ev) {
+        var el = ev.target;
+        if (!el.classList.contains('apocCalendar-Is_Selected') && !el.classList.contains('apocCalendar-Is_Pad')) {
+            this.setActiveColorToBackground(el);
+        }
+    },
+    handleDateMouseLeave: function handleDateMouseLeave(ev) {
+        var el = ev.target;
+        if (!el.classList.contains('apocCalendar-Is_Selected') && !el.classList.contains('apocCalendar-Is_Pad')) {
+            this.resetColorToBackground(el);
+        }
+    }
+};
+function encapsulateStyles$1(node) {
+    setAttribute(node, "svelte-2668734080", "");
+}
+
+function add_css$1() {
+    var style = createElement("style");
+    style.id = 'svelte-2668734080-style';
+    style.textContent = "[svelte-2668734080].apocCalendar-Component_DateTable,[svelte-2668734080] .apocCalendar-Component_DateTable{display:-ms-grid;display:grid;-ms-grid-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-auto-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-gap:1px;list-style:none;padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;z-index:2}[svelte-2668734080].apocCalendar-Component_DayCell,[svelte-2668734080] .apocCalendar-Component_DayCell,[svelte-2668734080].apocCalendar-Component_DateCell,[svelte-2668734080] .apocCalendar-Component_DateCell{font-size:.8em;width:3em;height:1.5em;cursor:pointer;background:#fff;margin:0}[svelte-2668734080].apocCalendar-Is_Pad,[svelte-2668734080] .apocCalendar-Is_Pad{background:transparent}";
+    appendNode(style, document.head);
+}
+
+function create_main_fragment$2(state, component) {
+    var ul, each_anchor;
+    var $days = state.$days;
+    var each_blocks = [];
+    for (var i = 0;i < $days.length; i += 1) {
+        each_blocks[i] = create_each_block(state, $days, $days[i], i, component);
+    }
+    var $dates = state.$dates;
+    var each_1_blocks = [];
+    for (var i = 0;i < $dates.length; i += 1) {
+        each_1_blocks[i] = create_each_block_1(state, $dates, $dates[i], i, component);
+    }
+    return {
+        c: function create() {
+            ul = createElement("ul");
+            for (var i = 0;i < each_blocks.length; i += 1) {
+                each_blocks[i].c();
+            }
+            each_anchor = createComment();
+            for (var i = 0;i < each_1_blocks.length; i += 1) {
+                each_1_blocks[i].c();
+            }
+            this.h();
+        },
+        h: function hydrate() {
+            encapsulateStyles$1(ul);
+            ul.className = "apocCalendar-Component_DateTable";
+        },
+        m: function mount(target, anchor) {
+            insertNode(ul, target, anchor);
+            for (var i = 0;i < each_blocks.length; i += 1) {
+                each_blocks[i].m(ul, null);
+            }
+            appendNode(each_anchor, ul);
+            for (var i = 0;i < each_1_blocks.length; i += 1) {
+                each_1_blocks[i].m(ul, null);
+            }
+        },
+        p: function update(changed, state) {
+            var $days = state.$days;
+            if (changed.$getDayState || changed.$__key_dates__ || changed.$color || changed.$days) {
+                for (var i = 0;i < $days.length; i += 1) {
+                    if (each_blocks[i]) {
+                        each_blocks[i].p(changed, state, $days, $days[i], i);
+                    } else {
+                        each_blocks[i] = create_each_block(state, $days, $days[i], i, component);
+                        each_blocks[i].c();
+                        each_blocks[i].m(ul, each_anchor);
+                    }
+                }
+                for (; i < each_blocks.length; i += 1) {
+                    each_blocks[i].u();
+                    each_blocks[i].d();
+                }
+                each_blocks.length = $days.length;
+            }
+            var $dates = state.$dates;
+            if (changed.$dates || changed.$__key_dates__ || changed.$color) {
+                for (var i = 0;i < $dates.length; i += 1) {
+                    if (each_1_blocks[i]) {
+                        each_1_blocks[i].p(changed, state, $dates, $dates[i], i);
+                    } else {
+                        each_1_blocks[i] = create_each_block_1(state, $dates, $dates[i], i, component);
+                        each_1_blocks[i].c();
+                        each_1_blocks[i].m(ul, null);
+                    }
+                }
+                for (; i < each_1_blocks.length; i += 1) {
+                    each_1_blocks[i].u();
+                    each_1_blocks[i].d();
+                }
+                each_1_blocks.length = $dates.length;
+            }
+        },
+        u: function unmount() {
+            detachNode(ul);
+            for (var i = 0;i < each_blocks.length; i += 1) {
+                each_blocks[i].u();
+            }
+            for (var i = 0;i < each_1_blocks.length; i += 1) {
+                each_1_blocks[i].u();
+            }
+        },
+        d: function destroy$$1() {
+            destroyEach(each_blocks);
+            destroyEach(each_1_blocks);
+        }
+    };
+}
+
+function create_each_block(state, $days, day, i, component) {
+    var li, li_class_value, li_style_value;
+    var daycell = new Day_cell({
+        root: component.root,
+        data: {
+            day: day
+        }
+    });
+    return {
+        c: function create() {
+            li = createElement("li");
+            daycell._fragment.c();
+            this.h();
+        },
+        h: function hydrate() {
+            li.className = (li_class_value = getDayCellClass(state.$getDayState(i), state.$__key_dates__));
+            li.style.cssText = (li_style_value = getDayCellStyle(state.$getDayState(i), state.$color, state.$__key_dates__));
+            addListener(li, "click", click_handler);
+            li._svelte = {
+                component: component,
+                $days: $days,
+                i: i
+            };
+        },
+        m: function mount(target, anchor) {
+            insertNode(li, target, anchor);
+            daycell._mount(li, null);
+        },
+        p: function update(changed, state, $days, day, i) {
+            var daycell_changes = {};
+            if (changed.$days) 
+                { daycell_changes.day = day; }
+            daycell._set(daycell_changes);
+            if ((changed.$getDayState || changed.$__key_dates__) && li_class_value !== (li_class_value = getDayCellClass(state.$getDayState(i), state.$__key_dates__))) {
+                li.className = li_class_value;
+            }
+            if ((changed.$getDayState || changed.$color || changed.$__key_dates__) && li_style_value !== (li_style_value = getDayCellStyle(state.$getDayState(i), state.$color, state.$__key_dates__))) {
+                li.style.cssText = li_style_value;
+            }
+            li._svelte.$days = $days;
+            li._svelte.i = i;
+        },
+        u: function unmount() {
+            detachNode(li);
+        },
+        d: function destroy$$1() {
+            daycell.destroy(false);
+            removeListener(li, "click", click_handler);
+        }
+    };
+}
+
+function create_each_block_1(state, $dates, date, date_index, component) {
+    var li, li_class_value, li_style_value;
+    var datecell = new Date_cell({
+        root: component.root,
+        data: {
+            date: date
+        }
+    });
+    return {
+        c: function create() {
+            li = createElement("li");
+            datecell._fragment.c();
+            this.h();
+        },
+        h: function hydrate() {
+            li.className = (li_class_value = getDateCellClass(date, state.$__key_dates__));
+            li.style.cssText = (li_style_value = getDateCellStyle(date, state.$color, state.$__key_dates__));
+            addListener(li, "click", click_handler_1);
+            addListener(li, "mouseenter", mouseenter_handler);
+            addListener(li, "mouseleave", mouseleave_handler);
+            li._svelte = {
+                component: component,
+                $dates: $dates,
+                date_index: date_index
+            };
+        },
+        m: function mount(target, anchor) {
+            insertNode(li, target, anchor);
+            datecell._mount(li, null);
+        },
+        p: function update(changed, state, $dates, date, date_index) {
+            var datecell_changes = {};
+            if (changed.$dates) 
+                { datecell_changes.date = date; }
+            datecell._set(datecell_changes);
+            if ((changed.$dates || changed.$__key_dates__) && li_class_value !== (li_class_value = getDateCellClass(date, state.$__key_dates__))) {
+                li.className = li_class_value;
+            }
+            if ((changed.$dates || changed.$color || changed.$__key_dates__) && li_style_value !== (li_style_value = getDateCellStyle(date, state.$color, state.$__key_dates__))) {
+                li.style.cssText = li_style_value;
+            }
+            li._svelte.$dates = $dates;
+            li._svelte.date_index = date_index;
+        },
+        u: function unmount() {
+            detachNode(li);
+        },
+        d: function destroy$$1() {
+            datecell.destroy(false);
+            removeListener(li, "click", click_handler_1);
+            removeListener(li, "mouseenter", mouseenter_handler);
+            removeListener(li, "mouseleave", mouseleave_handler);
+        }
+    };
+}
+
+function click_handler(event) {
+    var component = this._svelte.component;
+    var $days = this._svelte.$days, i = this._svelte.i, day = $days[i];
+    component.selectDay(i);
+}
+
+function click_handler_1(event) {
+    var component = this._svelte.component;
+    var $dates = this._svelte.$dates, date_index = this._svelte.date_index, date = $dates[date_index];
+    component.selectDate(date);
+}
+
+function mouseenter_handler(event) {
+    var component = this._svelte.component;
+    component.handleDateMouseEnter(event);
+}
+
+function mouseleave_handler(event) {
+    var component = this._svelte.component;
+    component.handleDateMouseLeave(event);
+}
+
+function Month$1(options) {
+    init(this, options);
+    this._state = assign(this.store._init(["days","getDayState","__key_dates__","color",
+        "dates"]), options.data);
+    this.store._add(this, ["days","getDayState","__key_dates__","color","dates"]);
+    this._handlers.destroy = [removeFromStore];
+    if (!document.getElementById("svelte-2668734080-style")) 
+        { add_css$1(); }
+    if (!options.root) {
+        this._oncreate = [];
+        this._beforecreate = [];
+        this._aftercreate = [];
+    }
+    this._fragment = create_main_fragment$2(this._state, this);
+    if (options.target) {
+        this._fragment.c();
+        this._fragment.m(options.target, options.anchor || null);
+        this._lock = true;
+        callAll(this._beforecreate);
+        callAll(this._oncreate);
+        callAll(this._aftercreate);
+        this._lock = false;
+    }
+}
+
+assign(Month$1.prototype, methods, proto);
+
+function data() {
+    return {
+        type: 'left'
+    };
+}
+
+
+function getClass$2(type) {
+    var classnames = ['apocCalendar-Component_Pager'];
+    if (type === 'right') {
+        classnames.push('apocCalendar-Is_Right');
+    } else {
+        classnames.push('apocCalendar-Is_Left');
+    }
+    return classnames.join(' ');
+}
+
+
+var methods$1 = {
+    prev: function prev() {
+        this.store.setPrevMonth();
+    },
+    next: function next() {
+        this.store.setNextMonth();
+    }
+};
+function encapsulateStyles$2(node) {
+    setAttribute(node, "svelte-2048934756", "");
+}
+
+function add_css$2() {
+    var style = createElement("style");
+    style.id = 'svelte-2048934756-style';
+    style.textContent = "[svelte-2048934756].apocCalendar-Component_Pager,[svelte-2048934756] .apocCalendar-Component_Pager{position:absolute;bottom:50%;transform:translateY(50%);cursor:pointer;border-radius:50%;background:#444;width:2em;height:2em;z-index:1}[svelte-2048934756].apocCalendar-Component_Pager svg,[svelte-2048934756] .apocCalendar-Component_Pager svg{position:absolute;bottom:50%;transform:translate(50%, 50%);width:1em;height:1em;stroke:#fff}[svelte-2048934756].apocCalendar-Is_Left,[svelte-2048934756] .apocCalendar-Is_Left{left:-1em}[svelte-2048934756].apocCalendar-Is_Left svg,[svelte-2048934756] .apocCalendar-Is_Left svg{right:calc(50% + .45em)}[svelte-2048934756].apocCalendar-Is_Right,[svelte-2048934756] .apocCalendar-Is_Right{right:-1em}[svelte-2048934756].apocCalendar-Is_Right svg,[svelte-2048934756] .apocCalendar-Is_Right svg{right:calc(50% - .45em)}";
+    appendNode(style, document.head);
+}
+
+function create_main_fragment$3(state, component) {
+    var text, if_block_1_anchor;
+    var if_block = state.type === 'left' && create_if_block(state, component);
+    var if_block_1 = state.type === 'right' && create_if_block_1(state, component);
+    return {
+        c: function create() {
+            if (if_block) 
+                { if_block.c(); }
+            text = createText("\n\n");
+            if (if_block_1) 
+                { if_block_1.c(); }
+            if_block_1_anchor = createComment();
+        },
+        m: function mount(target, anchor) {
+            if (if_block) 
+                { if_block.m(target, anchor); }
+            insertNode(text, target, anchor);
+            if (if_block_1) 
+                { if_block_1.m(target, anchor); }
+            insertNode(if_block_1_anchor, target, anchor);
+        },
+        p: function update(changed, state) {
+            if (state.type === 'left') {
+                if (if_block) {
+                    if_block.p(changed, state);
+                } else {
+                    if_block = create_if_block(state, component);
+                    if_block.c();
+                    if_block.m(text.parentNode, text);
+                }
+            } else if (if_block) {
+                if_block.u();
+                if_block.d();
+                if_block = null;
+            }
+            if (state.type === 'right') {
+                if (if_block_1) {
+                    if_block_1.p(changed, state);
+                } else {
+                    if_block_1 = create_if_block_1(state, component);
+                    if_block_1.c();
+                    if_block_1.m(if_block_1_anchor.parentNode, if_block_1_anchor);
+                }
+            } else if (if_block_1) {
+                if_block_1.u();
+                if_block_1.d();
+                if_block_1 = null;
+            }
+        },
+        u: function unmount() {
+            if (if_block) 
+                { if_block.u(); }
+            detachNode(text);
+            if (if_block_1) 
+                { if_block_1.u(); }
+            detachNode(if_block_1_anchor);
+        },
+        d: function destroy$$1() {
+            if (if_block) 
+                { if_block.d(); }
+            if (if_block_1) 
+                { if_block_1.d(); }
+        }
+    };
+}
+
+function create_if_block(state, component) {
+    var div, div_class_value;
+    function click_handler(event) {
+        component.prev();
+    }
+    
+    return {
+        c: function create() {
+            div = createElement("div");
+            div.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-left\"><polyline points=\"15 18 9 12 15 6\"></polyline></svg>";
+            this.h();
+        },
+        h: function hydrate() {
+            encapsulateStyles$2(div);
+            div.className = (div_class_value = getClass$2(state.type));
+            addListener(div, "click", click_handler);
+        },
+        m: function mount(target, anchor) {
+            insertNode(div, target, anchor);
+        },
+        p: function update(changed, state) {
+            if (changed.type && div_class_value !== (div_class_value = getClass$2(state.type))) {
+                div.className = div_class_value;
+            }
+        },
+        u: function unmount() {
+            detachNode(div);
+        },
+        d: function destroy$$1() {
+            removeListener(div, "click", click_handler);
+        }
+    };
+}
+
+function create_if_block_1(state, component) {
+    var div, div_class_value;
+    function click_handler(event) {
+        component.next();
+    }
+    
+    return {
+        c: function create() {
+            div = createElement("div");
+            div.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg>";
+            this.h();
+        },
+        h: function hydrate() {
+            encapsulateStyles$2(div);
+            div.className = (div_class_value = getClass$2(state.type));
+            addListener(div, "click", click_handler);
+        },
+        m: function mount(target, anchor) {
+            insertNode(div, target, anchor);
+        },
+        p: function update(changed, state) {
+            if (changed.type && div_class_value !== (div_class_value = getClass$2(state.type))) {
+                div.className = div_class_value;
+            }
+        },
+        u: function unmount() {
+            detachNode(div);
+        },
+        d: function destroy$$1() {
+            removeListener(div, "click", click_handler);
+        }
+    };
+}
+
+function Pager(options) {
+    init(this, options);
+    this._state = assign(data(), options.data);
+    if (!document.getElementById("svelte-2048934756-style")) 
+        { add_css$2(); }
+    this._fragment = create_main_fragment$3(this._state, this);
+    if (options.target) {
+        this._fragment.c();
+        this._fragment.m(options.target, options.anchor || null);
+    }
+}
+
+assign(Pager.prototype, methods$1, proto);
+
+function data$1() {
+    return {};
+}
+
+
+function getBoxStyles(color) {
+    return ("\n\t\tbackground: " + (color.background.table) + ";\n\t\tborder: 1px solid " + (color.background.table) + ";\n\t");
+}
+
+
+function getheaderStyles(color) {
+    return ("\n\t\tbackground: " + (color.background.cell) + ";\n\t\tcolor: " + (color.text) + ";\n\t");
+}
+
+
+function head(year, month) {
+    return (year + "." + month);
+}
+
+function encapsulateStyles$3(node) {
+    setAttribute(node, "svelte-1797829316", "");
+}
+
+function add_css$3() {
+    var style = createElement("style");
+    style.id = 'svelte-1797829316-style';
+    style.textContent = "[svelte-1797829316].apocCalendar-Component_Box,[svelte-1797829316] .apocCalendar-Component_Box{position:relative;font-size:1em;box-sizing:border-box}[svelte-1797829316].apocCalendar-Component_Header,[svelte-1797829316] .apocCalendar-Component_Header{font-size:1em;font-weight:bold;line-height:2;margin-bottom:1px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}";
+    appendNode(style, document.head);
+}
+
+function create_main_fragment$4(state, component) {
+    var section, header, text_value = head(state.$year, state.$month + 1), text, header_style_value, text_1, text_2, text_3, section_style_value;
+    var month = new Month$1({
+        root: component.root
+    });
+    var if_block = state.$pager.prev && create_if_block$1(state, component);
+    var if_block_1 = state.$pager.next && create_if_block_1$1(state, component);
+    return {
+        c: function create() {
+            section = createElement("section");
+            header = createElement("header");
+            text = createText(text_value);
+            text_1 = createText("\n\t");
+            month._fragment.c();
+            text_2 = createText("\n\n\t");
+            if (if_block) 
+                { if_block.c(); }
+            text_3 = createText("\n\n\t");
+            if (if_block_1) 
+                { if_block_1.c(); }
+            this.h();
+        },
+        h: function hydrate() {
+            encapsulateStyles$3(section);
+            header.className = "apocCalendar-Component_Header";
+            header.style.cssText = (header_style_value = getheaderStyles(state.$color));
+            section.className = "apocCalendar-Component_Box";
+            section.style.cssText = (section_style_value = getBoxStyles(state.$color));
+        },
+        m: function mount(target, anchor) {
+            insertNode(section, target, anchor);
+            appendNode(header, section);
+            appendNode(text, header);
+            appendNode(text_1, section);
+            month._mount(section, null);
+            appendNode(text_2, section);
+            if (if_block) 
+                { if_block.m(section, null); }
+            appendNode(text_3, section);
+            if (if_block_1) 
+                { if_block_1.m(section, null); }
+        },
+        p: function update(changed, state) {
+            if ((changed.$year || changed.$month) && text_value !== (text_value = head(state.$year, state.$month + 1))) {
+                text.data = text_value;
+            }
+            if (changed.$color && header_style_value !== (header_style_value = getheaderStyles(state.$color))) {
+                header.style.cssText = header_style_value;
+            }
+            if (state.$pager.prev) {
+                if (!if_block) {
+                    if_block = create_if_block$1(state, component);
+                    if_block.c();
+                    if_block.m(section, text_3);
+                }
+            } else if (if_block) {
+                if_block.u();
+                if_block.d();
+                if_block = null;
+            }
+            if (state.$pager.next) {
+                if (!if_block_1) {
+                    if_block_1 = create_if_block_1$1(state, component);
+                    if_block_1.c();
+                    if_block_1.m(section, null);
+                }
+            } else if (if_block_1) {
+                if_block_1.u();
+                if_block_1.d();
+                if_block_1 = null;
+            }
+            if (changed.$color && section_style_value !== (section_style_value = getBoxStyles(state.$color))) {
+                section.style.cssText = section_style_value;
+            }
+        },
+        u: function unmount() {
+            detachNode(section);
+            if (if_block) 
+                { if_block.u(); }
+            if (if_block_1) 
+                { if_block_1.u(); }
+        },
+        d: function destroy$$1() {
+            month.destroy(false);
+            if (if_block) 
+                { if_block.d(); }
+            if (if_block_1) 
+                { if_block_1.d(); }
+        }
+    };
+}
+
+function create_if_block$1(state, component) {
+    var pager = new Pager({
+        root: component.root
+    });
+    return {
+        c: function create() {
+            pager._fragment.c();
+        },
+        m: function mount(target, anchor) {
+            pager._mount(target, anchor);
+        },
+        u: function unmount() {
+            pager._unmount();
+        },
+        d: function destroy$$1() {
+            pager.destroy(false);
+        }
+    };
+}
+
+function create_if_block_1$1(state, component) {
+    var pager = new Pager({
+        root: component.root,
+        data: {
+            type: "right"
+        }
+    });
+    return {
+        c: function create() {
+            pager._fragment.c();
+        },
+        m: function mount(target, anchor) {
+            pager._mount(target, anchor);
+        },
+        u: function unmount() {
+            pager._unmount();
+        },
+        d: function destroy$$1() {
+            pager.destroy(false);
+        }
+    };
+}
+
+function Calendar(options) {
+    init(this, options);
+    this._state = assign(this.store._init(["color","year","month","pager"]), data$1(), options.data);
+    this.store._add(this, ["color","year","month","pager"]);
+    this._handlers.destroy = [removeFromStore];
+    if (!document.getElementById("svelte-1797829316-style")) 
+        { add_css$3(); }
+    if (!options.root) {
+        this._oncreate = [];
+        this._beforecreate = [];
+        this._aftercreate = [];
+    }
+    this._fragment = create_main_fragment$4(this._state, this);
+    if (options.target) {
+        this._fragment.c();
+        this._fragment.m(options.target, options.anchor || null);
+        this._lock = true;
+        callAll(this._beforecreate);
+        callAll(this._oncreate);
+        callAll(this._aftercreate);
+        this._lock = false;
+    }
+}
+
+assign(Calendar.prototype, proto);
+
+var TODAY_DATE = new Date();
+var initialState = {
+    'date.initial': undefined,
+    'date.min': TODAY_DATE,
+    'date.max': add_months(TODAY_DATE, 12),
+    'date.pad': true,
+    'pager.next': true,
+    'pager.prev': true,
+    'pager.step': 1,
+    'template.head': '{year}.{month}',
+    'template.dayOfTheWeek': {
+        sun: 'Sun',
+        mon: 'Mon',
+        tues: 'Tues',
+        wed: 'Wed',
+        thurs: 'Thurs',
+        fri: 'Fri',
+        sat: 'Sat'
+    },
+    'color.text': '#222',
+    'color.background.table': '#444',
+    'color.background.cell': '#fcfcfc',
+    'color.background.hover': '#ccc',
+    'color.background.active': '#cb1b45',
+    __refs__: [],
+    ref: undefined
+};
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+var ApocCalendar = function ApocCalendar(target, initialState$$1) {
+    if ( initialState$$1 === void 0 ) initialState$$1 = initialState;
+
+    this.target = target;
+    this.store = new CalendarStore(Dr(_extends({}, initialState, initialState$$1)), this);
+    this.calendar = new Calendar({
+        target: this.target,
+        store: this.store
+    });
+    this._prepareObserver();
+};
+ApocCalendar.prototype._prepareObserver = function _prepareObserver () {
+        var this$1 = this;
+
+    this.store.observe('__key_dates__', function () {
+        var dates = this$1.store.getSelectedDates();
+        this$1.calendar.fire('onUpdateDates', dates.map(function (date) { return date.toString(); }));
+    });
+};
+ApocCalendar.prototype.on = function on (name, cb) {
+    this.calendar.on(name, cb);
+};
+ApocCalendar.prototype.reset = function reset () {
+    this.store.reset();
+};
+ApocCalendar.prototype.restore = function restore (dates) {
+    this.store.restore(dates);
+};
+
+return ApocCalendar;
+
+})));

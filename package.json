@@ -16,7 +16,7 @@
     "prepare": "yarn build",
     "build": "yarn build:rollup && yarn build:microbundle",
     "build:rollup": "mkdir -p dist; NODE_ENV='production' node prod.js",
-    "build:microbundle": "microbundle build -i .apoc-calendar.js"
+    "build:microbundle": "microbundle build -i .apoc-calendar.js --name ApocCalendar"
   },
   "repository": "nju33/apoc-calendar",
   "keywords": [],

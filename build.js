@@ -48,25 +48,9 @@ function bundle() {
     rollup(rollupConfig).then(bundle => {
       rollupConfig.cache = bundle;
 
-      // ['iife', 'es', 'umd'].forEach(async format => {
-      ['cjs', 'umd'].forEach(async format => {
+      ['es', 'umd'].forEach(async format => {
         switch (format) {
-          // case 'iife': {
-          //   const opts = {
-          //     name: MODULE_NAME,
-          //     globals,
-          //     format,
-          //     banner: rollupConfig.banner,
-          //   };
-          //   const destPath = './dist/apoc-calendar.iife.js';
-          //   try {
-          //     const result = await bundle.generate(opts);
-          //     fs.writeFileSync(destPath, result.code);
-          //   } catch (err) {
-          //     reject(err);
-          //   }
-          //   break;
-          // }
+          /** using in dev time */
           case 'umd': {
             const opts = {
               name: MODULE_NAME,
@@ -82,7 +66,8 @@ function bundle() {
             }
             break;
           }
-          case 'cjs':
+          /** create es to build that through the microbundle */
+          case 'es':
           default: {
             const opts = {
               globals,
