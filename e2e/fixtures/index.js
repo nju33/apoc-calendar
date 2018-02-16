@@ -10,6 +10,8 @@
       'date.max': dateFns.addMonths(now, 13),
       'pager.next': false,
 
+      'template.head': '{year}年{month}月',
+
       'color.background': '#40a8e2',
       'color.header.background': '#40a8e2',
       'color.header.text': '#fff',

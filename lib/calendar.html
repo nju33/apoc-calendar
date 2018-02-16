@@ -5,7 +5,7 @@
 	<header
 		class="apocCalendar-Component_Header"
 		style="{{getheaderStyles($color)}}"
-	>{{head($year, $month + 1)}}</header>
+	>{{head($template.head, $year, $month + 1)}}</header>
 	<Month />
 
 	{{#if $pager.prev}}
@@ -45,8 +45,8 @@ export default {
 				color: ${color.header.text};
 			`;
 		},
-		head: (year, month) => {
-			return `${year}.${month}`;
+		head: (template, year, month) => {
+			return pupa(template, {year, month});
 		},
 	},
 };
