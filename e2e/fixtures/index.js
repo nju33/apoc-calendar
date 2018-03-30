@@ -3,11 +3,12 @@
 /* eslint-disable no-undef */
 
 (function () {
-  const now = new Date();
+  const min = new Date();
+  const max = dateFns.addMonths(min, 13);
   // eslint-disable-next-line
   var multiLeft = new ApocCalendar(document.getElementById('multi-left'), {
-    'date.min': now,
-    'date.max': dateFns.addMonths(now, 13),
+    'date.min': min,
+    'date.max': max,
     'pager.next': false,
 
     'color.background': '#40a8e2',
