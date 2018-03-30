@@ -3,11 +3,13 @@
 /* eslint-disable no-undef */
 
 (function () {
-  const now = new Date();
+  // const now = new Date();
   // eslint-disable-next-line
   var multiLeft = new ApocCalendar(document.getElementById('multi-left'), {
-    'date.min': now,
-    'date.max': dateFns.addMonths(now, 13),
+    // 'date.min': now,
+    // 'date.max': dateFns.addMonths(now, 13),
+    'date.min': new Date('2018-03-01'),
+    'date.max': new Date('2019-03-01'),
     'pager.next': false,
 
     'color.background': '#40a8e2',
@@ -30,14 +32,14 @@
   var multiRight = new ApocCalendar(document.getElementById('multi-right'), {
     ref: multiLeft,
     'pager.prev': false,
-    'pager.next': false,
+    // 'pager.next': false,
   });
 
   // eslint-disable-next-line
-  var multiRight2 = new ApocCalendar(document.getElementById('multi-right2'), {
-    ref: multiLeft,
-    'pager.prev': false,
-  });
+  // var multiRight2 = new ApocCalendar(document.getElementById('multi-right2'), {
+  //   ref: multiLeft,
+  //   'pager.prev': false,
+  // });
 
   // eslint-disable-next-line
   multiLeft.on('onUpdateDates', function (dates) {
@@ -58,6 +60,6 @@
     multiLeft.reset();
   });
 
-  console.log(multiLeft);
-  multiLeft.restore(['2018-02-15', '2018-04-04']);
+  // console.log(multiLeft);
+  // multiLeft.restore(['2018-02-15', '2018-04-04']);
 })();
